@@ -1,0 +1,75 @@
+/*
+ * Conversion controls.
+ *
+ * Sits directly under the status line and above the pages, so the answer to
+ * "can this thing also convert?" is visible without scrolling. Monochrome like
+ * everything else — the accent belongs to the network badge alone.
+ */
+
+.exportbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs);
+  padding-block: var(--space-sm);
+  border-block-end: 1px solid var(--rule);
+  margin-block-end: var(--space-lg);
+}
+
+.exportbar-label {
+  font-family: var(--font-ui);
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-inline-end: var(--space-2xs);
+}
+
+.exportbar-button {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--paper-raised);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-sm);
+  padding: 0.375rem 0.75rem;
+  cursor: pointer;
+  /* Compositor-friendly properties only; no layout-bound transitions. */
+  transition:
+    background var(--dur-fast) var(--ease-out-expo),
+    box-shadow var(--dur-fast) var(--ease-out-expo),
+    transform var(--dur-fast) var(--ease-out-expo);
+}
+
+.exportbar-button:hover:not(:disabled) {
+  background: var(--paper-hover);
+  box-shadow: var(--lift-1);
+}
+
+.exportbar-button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.exportbar-button:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+}
+
+.exportbar-button:disabled {
+  /* Every button greys out during a conversion, so the cursor has to explain
+     why the one you did not click is also unavailable. */
+  opacity: 0.45;
+  cursor: progress;
+}
+
+.exportbar-note {
+  flex-basis: 100%;
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  line-height: var(--leading-body);
+  color: var(--ink-faint);
+  text-wrap: pretty;
+}

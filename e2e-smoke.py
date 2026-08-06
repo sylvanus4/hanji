@@ -5,8 +5,11 @@ loads, that lazy chunks resolve, or that pages render. It drives a real Chromium
 against the production build and asserts on what appears on screen.
 """
 
+import os
 import re
 import sys
+import tempfile
+import zipfile
 from playwright.sync_api import sync_playwright
 
 URL = "http://localhost:4173/"
@@ -111,6 +114,70 @@ with sync_playwright() as p:
           f'-> "{page.inner_text(".netbadge").strip()}"')
 
     check("no uncaught page errors", not errors, f"-> {errors[:2]}")
+
+    # --- conversions ---
+    #
+    # Asserting on the produced bytes, not on the button having been clicked. A
+    # converter that emits a plausible-looking file which no application can
+    # open is worse than one that fails loudly.
+    conv = browser.new_page(accept_downloads=True)
+    conv.on(
+        "request",
+        lambda r: foreign.append(r.url)
+        if not r.url.startswith("http://localhost:4173")
+        and not r.url.startswith("blob:")
+        and not r.url.startswith("data:")
+        else None,
+    )
+    conv.goto(URL, wait_until="networkidle")
+
+    def convert(path, target_id):
+        conv.set_input_files("input[type=file]", path)
+        conv.wait_for_selector(
+            f".exportbar-button[data-target={target_id}]", timeout=60000
+        )
+        with conv.expect_download(timeout=180000) as handle:
+            conv.click(f".exportbar-button[data-target={target_id}]")
+        # Keep the produced suffix: the app dispatches on extension, so a file
+        # saved without one cannot be fed back in.
+        download = handle.value
+        suffix = os.path.splitext(download.suggested_filename)[1]
+        out = os.path.join(tempfile.gettempdir(), f"hanji-e2e-{target_id}{suffix}")
+        download.save_as(out)
+        return out
+
+    hwpx = convert(HWP, "hwpx")
+    entries = zipfile.ZipFile(hwpx).namelist() if zipfile.is_zipfile(hwpx) else []
+    check(
+        "HWP converts to a structurally valid HWPX",
+        "mimetype" in entries and any(e.startswith("Contents/") for e in entries),
+        f"-> {entries[:4]}",
+    )
+
+    out = convert(HWP, "pdf")
+    with open(out, "rb") as fh:
+        check("HWP converts to a PDF", fh.read(5) == b"%PDF-")
+
+    out = convert(HWP, "png")
+    entries = zipfile.ZipFile(out).namelist() if zipfile.is_zipfile(out) else []
+    check("HWP converts to one PNG per page", len(entries) == 2, f"-> {len(entries)} entries")
+
+    out = convert(PDF, "png")
+    entries = zipfile.ZipFile(out).namelist() if zipfile.is_zipfile(out) else []
+    check("PDF converts to one PNG per page", len(entries) == 2, f"-> {len(entries)} entries")
+
+    # The output has to be openable, so feed the converted HWPX straight back in.
+    conv.set_input_files("input[type=file]", hwpx)
+    conv.wait_for_selector(".viewer img.page", timeout=90000)
+    conv.wait_for_timeout(2500)
+    check(
+        "the converted HWPX reopens",
+        conv.locator(".viewer img.page").count() == 2,
+        f"-> {conv.locator('.viewer img.page').count()} pages",
+    )
+    conv.close()
+
+    check("conversions sent nothing either", len(foreign) == 0, f"-> {foreign[:3]}")
 
     page.screenshot(path="/tmp/hanji-shot-final.png", full_page=False)
     page.set_input_files('input[type=file]', HWP)

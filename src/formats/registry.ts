@@ -7,6 +7,8 @@
  * for a Korean word-processor parser. Nothing here is imported at module scope.
  */
 
+import type { ConversionTarget } from "../convert/types";
+
 export interface RenderContext {
   /** Where pages/canvases should be appended. */
   host: HTMLElement;
@@ -18,6 +20,12 @@ export interface FormatHandler {
   /** Human label shown in the UI. */
   label: string;
   render: (file: File, ctx: RenderContext) => Promise<void>;
+  /**
+   * What this file can be turned into. Building the list must stay cheap — it
+   * runs on every open — so the expensive work belongs inside each target's
+   * `run`, not here.
+   */
+  conversions?: (file: File) => ConversionTarget[];
 }
 
 type Loader = () => Promise<FormatHandler>;

@@ -1,0 +1,79 @@
+/**
+ * The row of conversion buttons shown once a document is open.
+ *
+ * Deliberately not a dropdown. The available conversions are the second half of
+ * what this app is for, and burying them behind a menu would make the product
+ * look like a viewer that happens to export.
+ */
+
+import type { ConversionTarget } from "../../convert/types";
+import { saveBlob } from "../../convert/save";
+
+export interface ExportBarOptions {
+  host: HTMLElement;
+  targets: ConversionTarget[];
+  report: (message: string) => void;
+}
+
+export function mountExportBar({
+  host,
+  targets,
+  report,
+}: ExportBarOptions): void {
+  if (targets.length === 0) return;
+
+  const bar = document.createElement("div");
+  bar.className = "exportbar";
+
+  const label = document.createElement("span");
+  label.className = "exportbar-label";
+  label.textContent = "Save as";
+  bar.append(label);
+
+  for (const target of targets) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "exportbar-button";
+    button.dataset.target = target.id;
+    button.textContent = target.label;
+    if (target.note) button.title = target.note;
+
+    button.addEventListener("click", async () => {
+      // Every button is disabled, not just the clicked one: these conversions
+      // re-parse the document and compete for the same memory, and two large
+      // exports at once is the fastest way to lose a mobile tab.
+      const buttons = [...bar.querySelectorAll("button")];
+      for (const b of buttons) b.disabled = true;
+      const original = button.textContent;
+      button.textContent = "Working…";
+
+      try {
+        const result = await target.run({ report });
+        saveBlob(result.blob, result.name);
+        report(`Saved ${result.name}`);
+        bar.dataset.lastSaved = result.name;
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        report(`Could not convert: ${message}`);
+        console.error(error);
+      } finally {
+        button.textContent = original;
+        for (const b of buttons) b.disabled = false;
+      }
+    });
+
+    bar.append(button);
+  }
+
+  const notes = targets.filter((t) => t.note);
+  if (notes.length > 0) {
+    const footnote = document.createElement("p");
+    footnote.className = "exportbar-note";
+    footnote.textContent = notes
+      .map((t) => `${t.label}: ${t.note}`)
+      .join(" · ");
+    bar.append(footnote);
+  }
+
+  host.append(bar);
+}

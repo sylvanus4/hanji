@@ -8,6 +8,7 @@
 
 import "./styles/global.css";
 import "./components/netbadge/netbadge.css";
+import "./components/exportbar/exportbar.css";
 
 import { armNetworkWatch, mountNetBadge } from "./components/netbadge/netbadge";
 
@@ -45,19 +46,27 @@ function emptyState(): void {
   `;
 }
 
-function shell(): { viewer: HTMLElement; status: HTMLElement } {
+function shell(): {
+  viewer: HTMLElement;
+  status: HTMLElement;
+  toolbar: HTMLElement;
+} {
   stage!.innerHTML = `
     <div class="viewer">
       <p class="viewer-status" id="status" aria-live="polite"></p>
+      <div class="viewer-toolbar" id="toolbar"></div>
     </div>
   `;
   const viewer = stage!.querySelector<HTMLElement>(".viewer")!;
-  const status = viewer.querySelector<HTMLElement>("#status")!;
-  return { viewer, status };
+  return {
+    viewer,
+    status: viewer.querySelector<HTMLElement>("#status")!,
+    toolbar: viewer.querySelector<HTMLElement>("#toolbar")!,
+  };
 }
 
 async function open(file: File): Promise<void> {
-  const { viewer, status } = shell();
+  const { viewer, status, toolbar } = shell();
   const report = (message: string) => {
     status.textContent = message;
   };
@@ -67,6 +76,12 @@ async function open(file: File): Promise<void> {
   try {
     const handler = await resolveHandler(file);
     await handler.render(file, { host: viewer, report });
+
+    // Mounted only after a successful render: offering to convert a document
+    // that failed to open would be offering something we cannot deliver.
+    const targets = handler.conversions?.(file) ?? [];
+    const { mountExportBar } = await import("./components/exportbar/exportbar");
+    mountExportBar({ host: toolbar, targets, report });
   } catch (error) {
     const message =
       error instanceof UnsupportedFormatError

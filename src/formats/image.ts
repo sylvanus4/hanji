@@ -8,6 +8,9 @@
  */
 
 import type { FormatHandler, RenderContext } from "./registry";
+import { baseName, type ConversionTarget } from "../convert/types";
+import { canvasToBlob, RASTER_EXT, type RasterType } from "../convert/raster";
+import { extensionOf } from "./registry";
 
 async function render(file: File, ctx: RenderContext): Promise<void> {
   ctx.report("Decoding…");
@@ -33,4 +36,64 @@ async function render(file: File, ctx: RenderContext): Promise<void> {
   }
 }
 
-export const handler: FormatHandler = { label: "Image", render };
+/**
+ * Decode to a canvas so the browser's own encoders can re-emit it.
+ *
+ * SVG is the interesting case: it decodes at its intrinsic size, so converting
+ * a vector file to PNG produces whatever the document declares rather than an
+ * arbitrary raster size.
+ */
+async function toCanvas(file: File, type: RasterType): Promise<HTMLCanvasElement> {
+  const url = URL.createObjectURL(file);
+  try {
+    const img = new Image();
+    img.decoding = "async";
+    img.src = url;
+    await img.decode();
+
+    const canvas = document.createElement("canvas");
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    const context = canvas.getContext("2d");
+    if (!context) throw new Error("This browser refused a 2D canvas context.");
+
+    // Formats without alpha would otherwise render transparency as black.
+    if (type !== "image/png") {
+      context.fillStyle = "#ffffff";
+      context.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    context.drawImage(img, 0, 0);
+    return canvas;
+  } finally {
+    URL.revokeObjectURL(url);
+  }
+}
+
+function conversions(file: File): ConversionTarget[] {
+  const stem = baseName(file.name);
+  const ext = extensionOf(file.name);
+
+  const targets: [RasterType, string][] = [
+    ["image/png", "PNG"],
+    ["image/jpeg", "JPEG"],
+    ["image/webp", "WebP"],
+  ];
+
+  return targets
+    // Offering "PNG" while viewing a PNG is noise.
+    .filter(([type]) => RASTER_EXT[type] !== ext && !(type === "image/jpeg" && ext === "jpeg"))
+    .map(([type, label]) => ({
+      id: RASTER_EXT[type],
+      label,
+      run: async ({ report }) => {
+        report(`Encoding as ${label}…`);
+        const canvas = await toCanvas(file, type);
+        const blob = await canvasToBlob(canvas, type);
+        canvas.width = 0;
+        canvas.height = 0;
+        return { name: `${stem}.${RASTER_EXT[type]}`, blob };
+      },
+    }));
+}
+
+export const handler: FormatHandler = { label: "Image", render, conversions };
