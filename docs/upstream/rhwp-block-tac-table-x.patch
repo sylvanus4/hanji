@@ -1,0 +1,24 @@
+diff --git a/src/renderer/layout.rs b/src/renderer/layout.rs
+index bca9308b4..3ec7295e4 100644
+--- a/src/renderer/layout.rs
++++ b/src/renderer/layout.rs
+@@ -9548,8 +9548,17 @@ fn compute_tac_leading_width(
+             }
+             Some(_) => break,
+             None => {
+-                // block 취급 TAC: 전체 run 합산
+-                width += estimate_text_width(effective_full, &style);
++                // block 취급 TAC: 전체 run 합산.
++                //
++                // 단 탭(U+0009)만으로 이루어진 run 은 제외한다. 이 분기가 노리는
++                // 것은 한컴이 표 폭만큼 채워 넣은 *필러*(U+F081C 등 PUA)이고,
++                // 탭은 그와 달리 문단 들여쓰기라 표의 inline leading 이 아니다.
++                // 탭을 합산하면 line 0 = "\t\t" 인 블록 TAC 표가 탭 폭(기본
++                // 탭스톱 2개 = 1인치)만큼 우측으로 밀려 단 밖으로 넘친다.
++                // (지방직 9급 시험지 등 문항 지문 박스에서 재현)
++                if !effective_full.chars().all(|c| c == '\t') {
++                    width += estimate_text_width(effective_full, &style);
++                }
+                 char_pos += run_len;
+             }
+         }

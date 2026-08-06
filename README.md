@@ -29,13 +29,22 @@ Measured on a real 2-page Korean civil-service exam paper: HWP parsed in ~50 ms 
 Initial page weight is under 5 kB gzipped; every engine is a dynamic import that only downloads
 when you actually open a file of that kind.
 
-## Known limitation, stated up front
+## Hangul fidelity
 
-The Hangul engine's WASM build clips the right-hand column of two-column layouts and overlaps
-boxed passages. The native rhwp CLI renders the same file correctly, and the defect is identical
-on rhwp 0.7.19 and 0.8.2, which points at a CLI/WASM render-path divergence rather than a version
-regression. **Multi-column Hangul documents are approximate right now.** Details and the
-reproduction are in [docs/DECISIONS.md](docs/DECISIONS.md).
+Two-column Hangul documents used to render badly here. Both causes are now identified.
+
+The first was ours: `@rhwp/core` requires the page to provide a `globalThis.measureTextWidth`
+callback, because WASM cannot see browser fonts and needs it to decide line breaks. We had not
+installed it, so text was mismeasured and columns overran. Fixed.
+
+The second is an upstream regression, bisected to rhwp commit `10c36e23` (first shipped in
+v0.7.6): a block-level table preceded by tabs is displaced by the tab width, pushing boxed
+passages out of their column. It reproduces in rhwp's own CLI with no browser involved. We carry a
+patch for it and have reported it upstream — see [docs/DECISIONS.md](docs/DECISIONS.md) for the
+bisect and the measurements.
+
+We have no Hancom reference renderer, so "correct" here means *matches rhwp before the regression
+and stays inside the page*. Building a real fidelity corpus for Hangul documents is on the roadmap.
 
 ## Develop
 

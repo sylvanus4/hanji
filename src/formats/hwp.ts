@@ -1,17 +1,48 @@
 /**
  * HWP / HWPX / HML rendering, via the rhwp WASM engine.
  *
- * Known fidelity caveat, measured 2026-08-06 against a real Korean civil-service
- * exam paper: the WASM build (verified identical on 0.7.19 and 0.8.2) clips the
- * right-hand column of a two-column layout and overlaps boxed passages, while the
- * native rhwp CLI at v0.7.2 renders the same file correctly. Because both WASM
- * versions are pixel-identical to each other, this looks like a divergence
- * between the CLI and WASM render paths rather than a version regression, but
- * that is not yet confirmed. Until it is, multi-column documents must be treated
- * as approximate and the UI says so. See docs/DECISIONS.md.
+ * The engine has no access to browser fonts, so it calls back out to
+ * `globalThis.measureTextWidth` for every glyph it cannot satisfy from its own
+ * embedded metrics, and uses the answer to decide line breaks and justification.
+ * Omitting that global does not throw — it silently degrades layout, which is
+ * how we spent a day blaming rhwp for clipped columns. See installMeasureBridge.
  */
 
 import type { FormatHandler, RenderContext } from "./registry";
+import { loadKoreanFallbackFonts } from "./hwp-fonts";
+
+/**
+ * Text-measurement bridge required by the engine, per @rhwp/core's README.
+ *
+ * Must be installed *before* WASM init, not merely before first render: the
+ * engine captures the binding during initialisation.
+ *
+ * The canvas and its font string are cached because this is called once per
+ * distinct glyph per font — thousands of times for a dense page — and assigning
+ * `ctx.font` forces a font re-resolve even when the value is unchanged.
+ */
+function installMeasureBridge(): void {
+  if ("measureTextWidth" in globalThis) return;
+
+  let ctx: CanvasRenderingContext2D | null = null;
+  let lastFont = "";
+
+  Object.defineProperty(globalThis, "measureTextWidth", {
+    value: (font: string, text: string): number => {
+      if (!ctx) {
+        ctx = document.createElement("canvas").getContext("2d");
+        if (!ctx) return 0;
+      }
+      if (font !== lastFont) {
+        ctx.font = font;
+        lastFont = font;
+      }
+      return ctx.measureText(text).width;
+    },
+    writable: false,
+    configurable: false,
+  });
+}
 
 let ready: Promise<typeof import("@rhwp/core")> | null = null;
 
@@ -19,7 +50,14 @@ let ready: Promise<typeof import("@rhwp/core")> | null = null;
 function engine(): Promise<typeof import("@rhwp/core")> {
   if (!ready) {
     ready = (async () => {
-      const mod = await import("@rhwp/core");
+      installMeasureBridge();
+      // Fonts before init, not merely before render: the engine measures during
+      // layout, and a face that arrives later cannot retroactively fix a line
+      // break that was already decided against the substituted metrics.
+      const [mod] = await Promise.all([
+        import("@rhwp/core"),
+        loadKoreanFallbackFonts(),
+      ]);
       await mod.default();
       return mod;
     })();

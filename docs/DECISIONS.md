@@ -56,29 +56,65 @@ explicitly-labelled surface — it does not get to quietly relax this.
 
 ---
 
-## D4 — Hangul multi-column rendering is currently approximate
+## D4 — The Hangul rendering defect was two bugs, one of them ours
 
-**Evidence, measured 2026-08-06** against a real 2-page Korean civil-service exam paper
-(`행정학개론(지방행정 포함)(지방9급)-D.hwp`):
+**Superseded the original entry**, which guessed at a CLI/WASM render-path divergence. Building
+the CLI at matching tags disproved that. There were two independent causes.
 
-| Path | Result |
+### D4a — We never installed the engine's text-measurement callback (our bug)
+
+`@rhwp/core` has no access to browser fonts, so it calls out to `globalThis.measureTextWidth` and
+uses the answer to decide line breaks and justification. Its README carries a section titled
+"필수 설정: measureTextWidth" saying the global must be registered *before* WASM init. We had not
+read it.
+
+Omitting it does not throw. The engine falls back to its embedded metrics, silently mismeasures
+every glyph it lacks, and the right-hand column overruns the page. That symptom was what got
+written up here as an upstream defect.
+
+Fixed in `src/formats/hwp.ts` (`installMeasureBridge`), which resolved the column clipping
+outright. The Korean fallback fonts in `src/formats/hwp-fonts.ts` were added at the same time; the
+README recommends loading them from the Google Fonts CDN, which our CSP and our no-upload claim
+both forbid, so they are self-hosted. Measurably they changed nothing on this document, but they
+matter for documents whose fonts fall outside the engine's embedded metrics.
+
+**Lesson worth more than the fix:** we recorded a defect against a dependency without reading that
+dependency's README. A missing host contract and a library bug present identically.
+
+### D4b — Block-level table x-offset, a genuine upstream regression
+
+With the bridge installed, one defect remained: every boxed passage was displaced right by exactly
+117.3px — one inch at this page's 117.4 px/inch. Table *widths* were correct (421.41 in every
+build); only x differed.
+
+Bisected across 358 commits to `10c36e23` ("Task #146: TAC 표 선행 텍스트 폭을 inline x 좌표에
+반영", 2026-04-23), first released in **v0.7.6**. Good at v0.7.3, bad from v0.7.6 through v0.8.2.
+
+| Build | Table x |
 |---|---|
-| rhwp CLI v0.7.2 (native Rust) | Correct. Two-column layout, boxed passages and circled numerals all intact. Page number left blank. |
-| `@rhwp/core` 0.7.19 (WASM) | Right-hand column clipped at the page edge; boxed passages overlap body text. Page number correctly filled. |
-| `@rhwp/core` 0.8.2 (WASM) | Byte-for-byte the same defect as 0.7.19. |
+| CLI v0.7.3 | 22.7 / 495.1 (correct) |
+| CLI v0.7.6 → v0.8.2 | 139.7 / 612.1 |
+| WASM 0.8.2 | 140.0 / 612.5 |
 
-Because the two WASM versions are pixel-identical to one another and only the CLI differs, this
-looks like a divergence between the CLI and WASM render paths rather than a version regression.
-That is **not yet confirmed** — the CLI is v0.7.2 while the npm builds start at 0.7.11, so a
-regression introduced in between cannot be ruled out without building the CLI at a matching tag.
+CLI and WASM agree at the same version, which is what settles the original question: this is a
+**version regression, not a path divergence.** It also reproduces in the CLI alone, so the bug
+report needs no browser.
 
-rhwp's own README declines to treat Hancom's PDF output as ground truth, so no fidelity baseline
-exists for this ecosystem at all. Establishing one is on the roadmap and is arguably worth more
-to users than the viewer itself.
+Cause: for a TAC table classified as *block*, `compute_tac_leading_width` sums every run on line 0
+and adds it to the table's x. That is right when a table genuinely follows text inline, and the
+branch exists to support Hancom's table-width filler glyphs (U+F081C). But here line 0 is two tabs
+(`U+0009 U+0009`, 117.00px) — paragraph indentation, not leading text — so the table is pushed a
+tab-stop pair out of its column.
 
-**Action.** Build the CLI at the latest tag, render the same file, isolate the cause, and file an
-upstream issue with the reproduction. Until then the README and the UI say multi-column output is
-approximate rather than pretending otherwise.
+Our fix skips tab-only runs in that branch. Verified: table x returns to 24.5 / 497.0 and the
+rightmost rect edge returns to 971.4, inside the 971.36px page, from 1034.0 before.
+
+**Open caveat.** We have no Hancom oracle, so we cannot prove what the *correct* offset is — only
+that a table must not leave its column, and that this file rendered correctly before `10c36e23`.
+The upstream report says exactly that and leaves the semantics to the maintainer.
+
+rhwp's README declines to treat Hancom's PDF as ground truth, so no fidelity baseline exists for
+this ecosystem. Building one remains on the roadmap and is plausibly worth more than the viewer.
 
 ---
 
