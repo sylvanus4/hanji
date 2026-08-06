@@ -1,0 +1,116 @@
+/*
+ * hanji design tokens — editorial monochrome on warm paper.
+ *
+ * Direction: the document is the subject, the tool is the margin. Ink and paper
+ * carry the whole interface; exactly one accent exists and it is spent on the
+ * network-zero badge, because that badge is the product's entire claim.
+ * Never add a second accent. If something needs emphasis, use scale or weight.
+ */
+
+:root {
+  /* ---- surface: warm paper, not clinical white ---- */
+  --paper: oklch(98.6% 0.004 85);
+  --paper-sunk: oklch(96.2% 0.005 85);
+  --paper-raised: oklch(100% 0 0);
+  --paper-hover: oklch(94.4% 0.006 85);
+
+  /* ---- ink ---- */
+  --ink: oklch(21% 0.008 75);
+  --ink-soft: oklch(46% 0.006 75);
+  --ink-faint: oklch(66% 0.005 75);
+  --rule: oklch(89% 0.005 85);
+  --rule-strong: oklch(80% 0.006 85);
+
+  /* ---- the one accent. reserved for the no-upload proof. ---- */
+  --seal: oklch(52% 0.17 152);
+  --seal-wash: oklch(52% 0.17 152 / 0.10);
+
+  /* ---- states ---- */
+  --alarm: oklch(53% 0.20 27);
+  --alarm-wash: oklch(53% 0.20 27 / 0.10);
+
+  /* ---- type ---- */
+  --font-display: "Instrument Serif", "Nanum Myeongjo", ui-serif, Georgia, serif;
+  --font-ui: Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --text-2xs: 0.6875rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-display: clamp(2.25rem, 1.4rem + 3.6vw, 4.5rem);
+
+  --leading-tight: 1.15;
+  --leading-body: 1.6;
+  --tracking-label: 0.09em;
+
+  /* ---- space ---- */
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.25rem;
+  --space-2xl: 3.5rem;
+
+  /* ---- radius: nearly square. this is a paper tool, not a bubble. ---- */
+  --radius-xs: 2px;
+  --radius-sm: 3px;
+  --radius-md: 5px;
+
+  /* ---- elevation: paper lift, never glow ---- */
+  --lift-1: 0 1px 2px oklch(21% 0.008 75 / 0.06);
+  --lift-2: 0 2px 6px oklch(21% 0.008 75 / 0.08), 0 1px 2px oklch(21% 0.008 75 / 0.05);
+  --lift-3: 0 8px 24px oklch(21% 0.008 75 / 0.10), 0 2px 6px oklch(21% 0.008 75 / 0.06);
+
+  /* ---- motion: compositor-only properties, named easings only ---- */
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 380ms;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+
+  /* ---- focus ---- */
+  --ring: 0 0 0 2px var(--paper), 0 0 0 4px var(--ink);
+
+  /* ---- layout ---- */
+  --tray-width: 16rem;
+  --panel-width: 19rem;
+  --bar-height: 3rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: oklch(19% 0.006 75);
+    --paper-sunk: oklch(15.5% 0.006 75);
+    --paper-raised: oklch(23% 0.007 75);
+    --paper-hover: oklch(26% 0.008 75);
+
+    --ink: oklch(93% 0.004 85);
+    --ink-soft: oklch(70% 0.005 85);
+    --ink-faint: oklch(52% 0.005 85);
+    --rule: oklch(30% 0.007 75);
+    --rule-strong: oklch(40% 0.008 75);
+
+    --seal: oklch(74% 0.16 152);
+    --seal-wash: oklch(74% 0.16 152 / 0.14);
+    --alarm: oklch(70% 0.17 27);
+    --alarm-wash: oklch(70% 0.17 27 / 0.14);
+
+    --lift-1: 0 1px 2px oklch(0% 0 0 / 0.30);
+    --lift-2: 0 2px 6px oklch(0% 0 0 / 0.36), 0 1px 2px oklch(0% 0 0 / 0.28);
+    --lift-3: 0 8px 24px oklch(0% 0 0 / 0.44), 0 2px 6px oklch(0% 0 0 / 0.30);
+
+    --ring: 0 0 0 2px var(--paper), 0 0 0 4px var(--ink);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 1ms;
+    --dur-base: 1ms;
+    --dur-slow: 1ms;
+  }
+}

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>hanji — documents that stay on your device</title>
+    <meta
+      name="description"
+      content="Open, convert and lightly edit Hangul (HWP/HWPX), PDF and image files entirely in your browser. Files are never uploaded."
+    />
+    <meta name="color-scheme" content="light dark" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="bar">
+        <h1 class="wordmark">hanji<small>local only</small></h1>
+        <div class="bar-spacer"></div>
+        <button id="open-file" class="button" type="button">Open a file</button>
+        <div id="badge-host"></div>
+      </header>
+      <main class="stage" id="stage"></main>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

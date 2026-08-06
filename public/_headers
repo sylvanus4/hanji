@@ -1,0 +1,16 @@
+## Cloudflare Pages response headers.
+## COOP/COEP make the page cross-origin isolated, which unlocks SharedArrayBuffer
+## and therefore multi-threaded WASM. GitHub Pages cannot set these at all — that
+## is the reason this project targets Cloudflare Pages. See docs/DECISIONS.md.
+/*
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Embedder-Policy: require-corp
+  Cross-Origin-Resource-Policy: same-origin
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  ## No connect-src beyond 'self': the app must not be able to phone home even by accident.
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable

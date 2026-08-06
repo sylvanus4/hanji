@@ -1,0 +1,23 @@
+{
+  "name": "hanji",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local-first document viewer and converter. Files never leave your device.",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@rhwp/core": "^0.8.2",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^5.4.149"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5"
+  }
+}

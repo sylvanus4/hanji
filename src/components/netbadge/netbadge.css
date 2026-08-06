@@ -1,0 +1,58 @@
+/*
+ * The badge earns the only accent in the system. Resting state is a quiet seal,
+ * not a celebration; it turns loud only if the claim is ever violated, because
+ * that is the one moment the user genuinely needs to look.
+ */
+
+.netbadge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px var(--space-xs);
+  border-radius: var(--radius-xs);
+  border: 1px solid transparent;
+  transition:
+    color var(--dur-base) var(--ease-out-expo),
+    background-color var(--dur-base) var(--ease-out-expo),
+    border-color var(--dur-base) var(--ease-out-expo);
+}
+
+.netbadge::before {
+  content: "";
+  inline-size: 5px;
+  block-size: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.netbadge[data-state="clean"] {
+  color: var(--seal);
+  background: var(--seal-wash);
+  border-color: color-mix(in oklch, var(--seal) 28%, transparent);
+}
+
+.netbadge[data-state="breached"] {
+  color: var(--alarm);
+  background: var(--alarm-wash);
+  border-color: color-mix(in oklch, var(--alarm) 40%, transparent);
+}
+
+.netbadge[data-state="breached"]::before {
+  animation: netbadge-alarm 1.1s var(--ease-out-expo) infinite;
+}
+
+@keyframes netbadge-alarm {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.75);
+  }
+}

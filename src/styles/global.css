@@ -1,0 +1,238 @@
+@import "./tokens.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+  border-radius: var(--radius-xs);
+}
+
+/* Utility used by anything that is visually hidden but must stay in the a11y tree. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- app frame ---------- */
+
+.app {
+  display: grid;
+  grid-template-rows: var(--bar-height) 1fr;
+  height: 100dvh;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding-inline: var(--space-lg);
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.wordmark small {
+  font-family: var(--font-ui);
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--ink-faint);
+  margin-inline-start: var(--space-sm);
+}
+
+.bar-spacer {
+  flex: 1;
+}
+
+/* ---------- button ---------- */
+
+.button {
+  font-family: inherit;
+  font-size: var(--text-sm);
+  color: var(--ink);
+  background: var(--paper-raised);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2xs) var(--space-md);
+  min-height: 2rem;
+  cursor: pointer;
+  box-shadow: var(--lift-1);
+  transition:
+    background-color var(--dur-fast) var(--ease-out-expo),
+    border-color var(--dur-fast) var(--ease-out-expo),
+    box-shadow var(--dur-fast) var(--ease-out-expo),
+    transform var(--dur-fast) var(--ease-spring);
+}
+
+.button:hover {
+  background: var(--paper-hover);
+  border-color: var(--ink-faint);
+  box-shadow: var(--lift-2);
+  transform: translateY(-1px);
+}
+
+.button:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: var(--lift-1);
+}
+
+.button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.stage {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ---------- empty state: the drop target IS the page ---------- */
+
+.empty {
+  height: 100%;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: var(--space-md);
+  padding: var(--space-2xl);
+  text-align: center;
+}
+
+.empty-title {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
+  margin: 0;
+  max-inline-size: 18ch;
+}
+
+.empty-sub {
+  color: var(--ink-soft);
+  margin: 0;
+  max-inline-size: 46ch;
+}
+
+.empty-formats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  justify-content: center;
+  margin-top: var(--space-md);
+}
+
+.chip {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-xs);
+  padding: 2px var(--space-xs);
+}
+
+/* ---------- drag affordance ---------- */
+
+.stage[data-dragging="true"]::after {
+  content: "";
+  position: absolute;
+  inset: var(--space-md);
+  border: 2px dashed var(--ink);
+  border-radius: var(--radius-md);
+  pointer-events: none;
+  animation: drop-in var(--dur-base) var(--ease-out-expo);
+}
+
+@keyframes drop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ---------- viewer ---------- */
+
+.viewer {
+  height: 100%;
+  overflow: auto;
+  padding: var(--space-lg);
+  background: var(--paper-sunk);
+  display: grid;
+  gap: var(--space-lg);
+  justify-items: center;
+  align-content: start;
+}
+
+.page {
+  background: var(--paper-raised);
+  box-shadow: var(--lift-2);
+  border-radius: var(--radius-xs);
+  max-inline-size: 100%;
+  height: auto;
+  display: block;
+}
+
+.viewer-status {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ink-faint);
+}
+
+.viewer-error {
+  font-size: var(--text-base);
+  color: var(--alarm);
+  background: var(--alarm-wash);
+  border: 1px solid var(--alarm);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md) var(--space-lg);
+  max-inline-size: 60ch;
+}
+
+@media (max-width: 640px) {
+  .bar {
+    padding-inline: var(--space-md);
+  }
+  .viewer {
+    padding: var(--space-sm);
+  }
+}
