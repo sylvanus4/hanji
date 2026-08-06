@@ -23,6 +23,10 @@ export function mountDropzone({
   const input = document.createElement("input");
   input.type = "file";
   input.className = "sr-only";
+  // The input is visually hidden and driven by the toolbar button, so it needs
+  // its own accessible name — a screen reader reaching it directly would
+  // otherwise hear an unlabelled file control.
+  input.setAttribute("aria-label", "Choose a document to open");
   input.accept = accept.map((e) => `.${e}`).join(",");
   input.addEventListener("change", () => {
     const file = input.files?.[0];

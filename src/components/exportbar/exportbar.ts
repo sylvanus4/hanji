@@ -24,10 +24,15 @@ export function mountExportBar({
 
   const bar = document.createElement("div");
   bar.className = "exportbar";
+  // A labelled group, so a screen reader announces what this row of buttons is
+  // for before reading the buttons themselves.
+  bar.setAttribute("role", "group");
+  bar.setAttribute("aria-label", "Convert and save this document");
 
   const label = document.createElement("span");
   label.className = "exportbar-label";
   label.textContent = "Save as";
+  label.setAttribute("aria-hidden", "true");
   bar.append(label);
 
   for (const target of targets) {
@@ -46,6 +51,7 @@ export function mountExportBar({
       for (const b of buttons) b.disabled = true;
       const original = button.textContent;
       button.textContent = "Working…";
+      bar.setAttribute("aria-busy", "true");
 
       try {
         const result = await target.run({ report });
@@ -59,6 +65,10 @@ export function mountExportBar({
       } finally {
         button.textContent = original;
         for (const b of buttons) b.disabled = false;
+        bar.removeAttribute("aria-busy");
+        // Return focus to the button that started this. Re-enabling a disabled
+        // element drops focus to <body>, which strands keyboard users.
+        button.focus();
       }
     });
 

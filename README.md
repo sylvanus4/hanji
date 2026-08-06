@@ -22,8 +22,21 @@ newly relevant to a lot of people who never thought about it before.
 | | |
 |---|---|
 | View | HWP, HWPX, HML, PDF, PNG/JPEG/WebP/GIF/BMP/SVG/AVIF |
-| Convert | not yet |
+| Convert | HWP ↔ HWPX ↔ HML · Hangul → PDF / PNG · PDF → PNG / JPEG · image → PNG / JPEG / WebP |
 | Edit | not yet |
+
+**HWP → HWPX is the one worth calling out.** Korean public bodies were required from 2026-05-18 to
+move to open document formats, and HWPX is the open one. The engine exports it natively, so the
+output is a real HWPX package rather than a re-render — and unlike every other converter that does
+this, your file never leaves the tab. The test suite converts a document, reopens the result and
+checks its page geometry survived.
+
+Multi-page exports arrive as a `.zip`, written by a small store-only ZIP writer. Everything going
+in is already-compressed PNG or JPEG, so deflate would cost CPU and save nothing.
+
+PDF export rasterises each page, which means the text in it is not selectable or searchable. The
+button says so before you click. A vector path would need Korean fonts embedded in the PDF; that
+is a real piece of work and is on the roadmap rather than pretended away.
 
 Measured on a real 2-page Korean civil-service exam paper: HWP parsed in ~50 ms cold, ~5 ms warm.
 Initial page weight is under 5 kB gzipped; every engine is a dynamic import that only downloads
@@ -76,13 +89,22 @@ so the page can never become cross-origin isolated and multi-threaded WASM stays
 
 - [x] Viewer: HWP/HWPX, PDF, images
 - [x] Network-zero badge with a test that enforces it
-- [ ] Fidelity corpus of real Hangul documents, and an upstream issue for the render defect
-- [ ] Convert: HWP → PDF/PNG, PDF ↔ image, image ↔ image, HEIC → JPEG
+- [x] Convert: HWP ↔ HWPX ↔ HML, Hangul → PDF/PNG, PDF → image, image → image
+- [ ] HEIC → JPEG (iPhone photos; needs a lazily-loaded decoder, no browser ships one)
+- [ ] Vector PDF export, so exported text stays selectable
 - [ ] Edit: PDF merge/split/rotate/reorder, Hangul text edits with re-save
+- [ ] Fidelity corpus of real Hangul documents — no baseline exists for this ecosystem
 - [ ] PWA / full offline
 
 Out of scope for v1: Office (docx/pptx) conversion, which has no clean client-side path; video and
 audio, pending a real measurement of ffmpeg.wasm's cost.
+
+## Accessibility
+
+Keyboard order is Open → each conversion → the file input, every control is a real `<button>` with
+a visible focus ring, the status line is an `aria-live` region, and focus returns to the button you
+pressed after a conversion finishes rather than being dropped on `<body>`. Motion respects
+`prefers-reduced-motion`; both light and dark themes are deliberate rather than inverted.
 
 ## License
 
