@@ -39,9 +39,15 @@ installed it, so text was mismeasured and columns overran. Fixed.
 
 The second is an upstream regression, bisected to rhwp commit `10c36e23` (first shipped in
 v0.7.6): a block-level table preceded by tabs is displaced by the tab width, pushing boxed
-passages out of their column. It reproduces in rhwp's own CLI with no browser involved. We carry a
-patch for it and have reported it upstream — see [docs/DECISIONS.md](docs/DECISIONS.md) for the
-bisect and the measurements.
+passages out of their column. It reproduces in rhwp's own CLI with no browser involved.
+
+Every published `@rhwp/core` since 0.7.6 has it, so there is no version to pin to. We build the
+engine ourselves with a one-file patch — see [vendor/README.md](vendor/README.md) for provenance
+and rebuild steps, and [docs/DECISIONS.md](docs/DECISIONS.md) for the bisect and measurements.
+Upstream's own test suite passes 2933/2933 with the patch applied.
+
+Both are fixed as of now. `e2e-smoke.py` asserts that no table exceeds the page width, so a
+regression fails the build rather than quietly rendering a wrong-looking page.
 
 We have no Hancom reference renderer, so "correct" here means *matches rhwp before the regression
 and stays inside the page*. Building a real fidelity corpus for Hangul documents is on the roadmap.

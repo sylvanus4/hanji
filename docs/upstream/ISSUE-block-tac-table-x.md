@@ -1,6 +1,7 @@
 # Draft upstream issue for edwardkim/rhwp
 
-Not yet submitted — filing this publicly needs the maintainer-facing text reviewed first.
+**Not filed, by decision.** Kept as the written record of the bisect and as the source of the
+patch we vendor. If we ever do submit it, this is the text.
 
 ---
 

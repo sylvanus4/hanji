@@ -111,7 +111,24 @@ rightmost rect edge returns to 971.4, inside the 971.36px page, from 1034.0 befo
 
 **Open caveat.** We have no Hancom oracle, so we cannot prove what the *correct* offset is — only
 that a table must not leave its column, and that this file rendered correctly before `10c36e23`.
-The upstream report says exactly that and leaves the semantics to the maintainer.
+
+### D4c — We ship our own engine build rather than wait
+
+Every published `@rhwp/core` from 0.7.6 onward carries the regression, so there is no version to
+pin to. `vendor/rhwp-core` is v0.8.2 built from source with the patch applied
+(`wasm-pack build --target web --release`), versioned `0.8.2-hanji.1` so it cannot be mistaken for
+a release. Provenance and rebuild steps are in [`vendor/README.md`](../vendor/README.md).
+
+In the browser this lands the table at x 24.5 / 497.0 with the rightmost rect at 971.4 inside a
+971.36px page — matching the patched CLI to within 0.3px, the expected residual between Canvas
+`measureText` and the engine's embedded metrics.
+
+`e2e-smoke.py` now asserts no rect exceeds the page width, so installing an unpatched engine fails
+the build. Without that guard the regression is easy to reintroduce: the page still renders, it
+just renders wrong.
+
+The upstream issue is drafted in `docs/upstream/` but **deliberately not filed**. The patch is
+ours to carry for now.
 
 rhwp's README declines to treat Hancom's PDF as ground truth, so no fidelity baseline exists for
 this ecosystem. Building one remains on the roadmap and is plausibly worth more than the viewer.

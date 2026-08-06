@@ -5,6 +5,7 @@ loads, that lazy chunks resolve, or that pages render. It drives a real Chromium
 against the production build and asserts on what appears on screen.
 """
 
+import re
 import sys
 from playwright.sync_api import sync_playwright
 
@@ -68,6 +69,40 @@ with sync_playwright() as p:
     page.wait_for_selector(".viewer-error", timeout=15000)
     check("unsupported format shows an error", True,
           f'-> {page.inner_text(".viewer-error")[:60]!r}')
+
+    # --- Hangul geometry regression guard ---
+    #
+    # rhwp v0.7.6 through v0.8.2 displace block-level tables by the width of any
+    # preceding tabs, pushing boxed passages off the page. We ship a patched
+    # engine build (see vendor/README.md); this fails the build if an unpatched
+    # one is ever installed, which is otherwise easy to miss — the page still
+    # renders, it just renders wrong.
+    #
+    # Blob URLs are revoked on load, so the shim below keeps them readable. It
+    # is scoped to this one page and does not touch the app.
+    geo = browser.new_page()
+    geo.add_init_script("URL.revokeObjectURL = () => {};")
+    geo.goto(URL, wait_until="networkidle")
+    geo.set_input_files("input[type=file]", HWP)
+    geo.wait_for_selector(".viewer img.page", timeout=60000)
+    geo.wait_for_timeout(2500)
+    svg = geo.evaluate(
+        "async () => (await fetch(document.querySelector('.viewer img.page').src)).text()"
+    )
+    geo.close()
+
+    page_w = float(re.search(r'<svg[^>]*\bwidth="([\d.]+)"', svg).group(1))
+    edges = [
+        float(x.group(1)) + float(w.group(1))
+        for r in re.findall(r"<rect[^>]*>", svg)
+        if (x := re.search(r'\bx="([-\d.]+)"', r)) and (w := re.search(r'\bwidth="([-\d.]+)"', r))
+    ]
+    overflow = max(edges) - page_w
+    check(
+        "no table escapes the page",
+        overflow < 1.0,
+        f"-> rightmost rect {max(edges):.1f} vs page {page_w:.1f} (overflow {overflow:+.1f}px)",
+    )
 
     # --- the claim ---
     check("zero foreign requests", len(foreign) == 0, f"-> {foreign[:3]}")
