@@ -20,11 +20,19 @@ jobs:
           # One universal bundle rather than separate Intel and Apple Silicon
           # downloads. It costs a second Rust target and saves every visitor
           # from having to know which Mac they own.
+          #
+          # The two target fields are not redundant. universal-apple-darwin is a
+          # Tauri-level pseudo-target: it builds both real architectures and
+          # lipos them together. rustup has no std component under that name, so
+          # asking it to install one fails outright — the real triples have to be
+          # installed separately.
           - platform: macos-latest
-            target: universal-apple-darwin
+            rust_targets: aarch64-apple-darwin,x86_64-apple-darwin
+            bundle_target: universal-apple-darwin
             label: macOS
           - platform: windows-latest
-            target: ""
+            rust_targets: ""
+            bundle_target: ""
             label: Windows
 
     runs-on: ${{ matrix.platform }}
@@ -40,7 +48,7 @@ jobs:
 
       - uses: dtolnay/rust-toolchain@stable
         with:
-          targets: ${{ matrix.target }}
+          targets: ${{ matrix.rust_targets }}
 
       - uses: swatinem/rust-cache@v2
         with:
@@ -65,4 +73,4 @@ jobs:
             앱을 **우클릭 → 열기**로 한 번만 실행하면 이후로는 그냥 열립니다.
           releaseDraft: true
           prerelease: false
-          args: ${{ matrix.target && format('--target {0}', matrix.target) || '' }}
+          args: ${{ matrix.bundle_target && format('--target {0}', matrix.bundle_target) || '' }}
