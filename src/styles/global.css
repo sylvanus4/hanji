@@ -44,15 +44,25 @@ body {
 
 .app {
   display: grid;
-  grid-template-rows: var(--bar-height) 1fr;
+  /*
+   * auto, not a fixed bar height: once touch targets grow to 44px the controls
+   * cannot fit one row at 320px, and a fixed row forced a 37px horizontal
+   * overflow instead of letting them wrap. min-block-size on .bar keeps the
+   * desktop proportions identical.
+   */
+  grid-template-rows: auto 1fr;
   height: 100dvh;
 }
 
 .bar {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: var(--space-md);
+  row-gap: var(--space-2xs);
+  min-block-size: var(--bar-height);
   padding-inline: var(--space-lg);
+  padding-block: var(--space-2xs);
   border-bottom: 1px solid var(--rule);
   background: var(--paper);
 }
@@ -253,5 +263,73 @@ body {
   }
   .viewer {
     padding: var(--space-sm);
+  }
+}
+
+/* ---------- theme control ---------- */
+
+.button-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+}
+
+#theme-glyph {
+  /* Fixed width so cycling ◐ → ☀ → ☾ does not shift the buttons beside it. */
+  display: inline-block;
+  inline-size: 1em;
+  text-align: center;
+  font-size: var(--text-md);
+  line-height: 1;
+}
+
+/* ---------- responsive ---------- */
+
+/*
+ * Touch targets.
+ *
+ * Measured at 29px before this rule, against a 44px minimum. The dense desktop
+ * toolbar is deliberate for an editorial tool, so the size is raised only where
+ * the pointer is actually a finger rather than unconditionally.
+ */
+@media (pointer: coarse) {
+  .button,
+  .exportbar-button {
+    min-height: 44px;
+    padding-inline: var(--space-md);
+  }
+}
+
+@media (width <= 640px) {
+  .bar {
+    padding-inline: var(--space-md);
+    gap: var(--space-xs);
+  }
+
+  /* Buttons wrapped to 70px at 320px and broke the header's height. */
+  .button {
+    white-space: nowrap;
+  }
+
+  /* The label is decorative; the glyph plus aria-label carry the meaning. */
+  #theme-label {
+    display: none;
+  }
+}
+
+@media (width <= 460px) {
+  /*
+   * "이 기기 안에서" is the promise, but at this width it competes with the
+   * controls for the same row. The empty state states it in full anyway.
+   */
+  .wordmark small {
+    display: none;
+  }
+
+  .exportbar-label {
+    /* Reads as a section heading on its own line rather than a cramped inline
+       label squeezed against the first button. */
+    flex-basis: 100%;
+    margin-block-end: var(--space-2xs);
   }
 }

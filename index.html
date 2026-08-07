@@ -34,12 +34,18 @@
       content="Open and convert Hangul (HWP/HWPX), PDF and image files entirely in your browser. Nothing is uploaded."
     />
     <meta name="twitter:image" content="/og.svg" />
+
+    <!-- Synchronous and same-origin: sets the saved theme before first paint. -->
+    <script src="/theme-init.js"></script>
   </head>
   <body>
     <div class="app">
       <header class="bar">
         <h1 class="wordmark">hanji<small id="tagline">이 기기 안에서</small></h1>
         <div class="bar-spacer"></div>
+        <button id="theme-toggle" class="button button-quiet button-icon" type="button">
+          <span id="theme-glyph" aria-hidden="true">◐</span><span id="theme-label">시스템</span>
+        </button>
         <button id="lang-toggle" class="button button-quiet" type="button">English</button>
         <button id="open-file" class="button" type="button">파일 열기</button>
         <div id="badge-host"></div>

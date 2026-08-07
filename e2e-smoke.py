@@ -143,6 +143,53 @@ with sync_playwright() as p:
 
     check("no uncaught page errors", not errors, f"-> {errors[:2]}")
 
+    # --- theme: three states, and the case a media query cannot express ---
+    #
+    # A binary toggle would silently strand anyone who clicked once, so "system"
+    # has to be reachable again. The explicit-dark-on-a-light-OS case is the one
+    # that proves data-theme actually beats prefers-color-scheme.
+    themed = browser.new_context(color_scheme="light")
+    tp = themed.new_page()
+    tp.goto(URL, wait_until="networkidle")
+    seen = []
+    for _ in range(4):
+        seen.append(tp.evaluate("() => document.querySelector('#theme-toggle').dataset.mode"))
+        tp.click("#theme-toggle")
+        tp.wait_for_timeout(150)
+    check("theme cycles system -> light -> dark -> system",
+          seen == ["system", "light", "dark", "system"], f"-> {seen}")
+
+    tp.evaluate("() => localStorage.setItem('hanji.theme','dark')")
+    tp.reload(wait_until="domcontentloaded")
+    # Asserted at domcontentloaded, not networkidle: the whole point of the
+    # separate theme-init.js is that it lands before first paint.
+    check("explicit dark beats a light OS, before first paint",
+          tp.get_attribute("html", "data-theme") == "dark",
+          f'-> {tp.get_attribute("html", "data-theme")!r}')
+    themed.close()
+
+    # --- touch targets at a phone width ---
+    phone = browser.new_context(
+        viewport={"width": 320, "height": 780}, has_touch=True, is_mobile=True
+    )
+    pp = phone.new_page()
+    pp.goto(URL, wait_until="networkidle")
+    pp.set_input_files("input[type=file]", HWP)
+    pp.wait_for_selector(".exportbar-button", timeout=60000)
+    pp.wait_for_timeout(2000)
+    metrics = pp.evaluate("""() => {
+      const de = document.documentElement;
+      return {
+        overflow: de.scrollWidth - de.clientWidth,
+        minButton: Math.min(...[...document.querySelectorAll('button')]
+          .map(e => Math.round(e.getBoundingClientRect().height))),
+      };
+    }""")
+    check("320px: no sideways scroll and every target >= 44px",
+          metrics["overflow"] <= 0 and metrics["minButton"] >= 44,
+          f'-> overflow {metrics["overflow"]}px, smallest button {metrics["minButton"]}px')
+    phone.close()
+
     # --- conversions ---
     #
     # Asserting on the produced bytes, not on the button having been clicked. A

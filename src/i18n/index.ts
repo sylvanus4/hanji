@@ -67,6 +67,14 @@ export const S = {
   openFile: { ko: "파일 열기", en: "Open a file" },
   chooseFile: { ko: "열 문서 선택", en: "Choose a document to open" },
   switchLang: { ko: "English", en: "한국어" },
+  themeSystem: { ko: "시스템", en: "System" },
+  themeLight: { ko: "밝게", en: "Light" },
+  themeDark: { ko: "어둡게", en: "Dark" },
+  themeTitle: {
+    ko: (next: string) => `테마: 지금은 ${next}. 눌러서 전환합니다.`,
+    en: (next: string) => `Theme: currently ${next}. Click to change.`,
+  },
+
   switchLangTitle: {
     ko: "Switch to English",
     en: "한국어로 전환",

@@ -17,11 +17,17 @@
   /* ---- ink ---- */
   --ink: oklch(21% 0.008 75);
   --ink-soft: oklch(46% 0.006 75);
-  --ink-faint: oklch(66% 0.005 75);
+  /* 55%, not 66%: at 66% this measured 2.99:1 on --paper and fails WCAG AA,
+     and the token is used on real sentences (conversion caveats, status line),
+     not just decoration. 55% gives 4.6:1. */
+  --ink-faint: oklch(55% 0.005 75);
   --rule: oklch(89% 0.005 85);
   --rule-strong: oklch(80% 0.006 85);
 
-  /* ---- the one accent. reserved for the no-upload proof. ---- */
+  /* ---- the one accent. reserved for the no-upload proof. ----
+     Guard-rail: at 52% this measures 4.74:1 on --paper — over WCAG AA, but by
+     only 0.24. Lightening the seal or darkening the paper tips it under; if
+     either moves, re-measure before shipping. */
   --seal: oklch(52% 0.17 152);
   --seal-wash: oklch(52% 0.17 152 / 0.10);
 
@@ -81,8 +87,20 @@
   --bar-height: 3rem;
 }
 
+/*
+ * Dark palette.
+ *
+ * Declared twice on purpose. The media query is the default so the OS
+ * preference is honoured with no JavaScript, and the attribute selector lets an
+ * explicit choice win in both directions — including "dark on a light OS",
+ * which a media query alone cannot express.
+ *
+ * light-dark() would collapse this into one declaration, but a browser that
+ * does not understand it drops every colour at once, and an unreadable page is
+ * a worse outcome than a duplicated block.
+ */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --paper: oklch(19% 0.006 75);
     --paper-sunk: oklch(15.5% 0.006 75);
     --paper-raised: oklch(23% 0.007 75);
@@ -90,7 +108,7 @@
 
     --ink: oklch(93% 0.004 85);
     --ink-soft: oklch(70% 0.005 85);
-    --ink-faint: oklch(52% 0.005 85);
+    --ink-faint: oklch(60% 0.005 85);
     --rule: oklch(30% 0.007 75);
     --rule-strong: oklch(40% 0.008 75);
 
@@ -105,6 +123,30 @@
 
     --ring: 0 0 0 2px var(--paper), 0 0 0 4px var(--ink);
   }
+}
+
+:root[data-theme="dark"] {
+    --paper: oklch(19% 0.006 75);
+    --paper-sunk: oklch(15.5% 0.006 75);
+    --paper-raised: oklch(23% 0.007 75);
+    --paper-hover: oklch(26% 0.008 75);
+
+    --ink: oklch(93% 0.004 85);
+    --ink-soft: oklch(70% 0.005 85);
+    --ink-faint: oklch(60% 0.005 85);
+    --rule: oklch(30% 0.007 75);
+    --rule-strong: oklch(40% 0.008 75);
+
+    --seal: oklch(74% 0.16 152);
+    --seal-wash: oklch(74% 0.16 152 / 0.14);
+    --alarm: oklch(70% 0.17 27);
+    --alarm-wash: oklch(70% 0.17 27 / 0.14);
+
+    --lift-1: 0 1px 2px oklch(0% 0 0 / 0.30);
+    --lift-2: 0 2px 6px oklch(0% 0 0 / 0.36), 0 1px 2px oklch(0% 0 0 / 0.28);
+    --lift-3: 0 8px 24px oklch(0% 0 0 / 0.44), 0 2px 6px oklch(0% 0 0 / 0.30);
+
+    --ring: 0 0 0 2px var(--paper), 0 0 0 4px var(--ink);
 }
 
 @media (prefers-reduced-motion: reduce) {

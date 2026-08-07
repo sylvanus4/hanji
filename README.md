@@ -117,12 +117,36 @@ an HWP file. Guessing wrong in that direction hides the product from the people
 it was built for. The choice persists, and switching re-opens the current
 document rather than reloading the page.
 
+## Theme
+
+Three states — system, light, dark — not two. A binary toggle overrides the OS preference forever
+after one accidental click with no way back to "just follow my machine", which is what most people
+want. The choice persists, and an explicit choice wins in *both* directions, including dark on a
+light OS, which `prefers-color-scheme` alone cannot express.
+
+The saved theme is applied by a separate same-origin script in `<head>` rather than by the module
+bundle, so nobody gets a flash of the wrong palette on load. It is a file rather than an inline
+`<script>` because the CSP pins `script-src` to `'self'`.
+
+Document pages stay on white paper in dark mode. The page is the user's content, and recolouring it
+would misrepresent the document — the same choice Preview and Acrobat make.
+
+## Responsive
+
+Verified at 320, 375, 768, 1024 and 1440 with real touch emulation: no horizontal scroll at any
+width, and every control clears 44px where the pointer is actually a finger. The desktop toolbar
+stays deliberately dense — the size only grows under `(pointer: coarse)`.
+
+The header wraps rather than sitting in a fixed-height row. Raising touch targets to 44px made the
+controls stop fitting one line at 320px and forced a 37px overflow; wrapping fixes the cause instead
+of shrinking the targets back.
+
 ## Accessibility
 
 Keyboard order is Open → each conversion → the file input, every control is a real `<button>` with
 a visible focus ring, the status line is an `aria-live` region, and focus returns to the button you
 pressed after a conversion finishes rather than being dropped on `<body>`. Motion respects
-`prefers-reduced-motion`; both light and dark themes are deliberate rather than inverted.
+`prefers-reduced-motion`.
 
 ## License
 

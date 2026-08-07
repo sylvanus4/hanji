@@ -21,16 +21,31 @@ import {
   UnsupportedFormatError,
 } from "./formats/registry";
 import { getLang, onLangChange, S, setLang, t } from "./i18n";
+import {
+  cycleTheme,
+  effectiveTheme,
+  getTheme,
+  initTheme,
+  onThemeChange,
+} from "./theme";
 
 const stage = document.querySelector<HTMLElement>("#stage");
 const badgeHost = document.querySelector<HTMLElement>("#badge-host");
 const openButton = document.querySelector<HTMLElement>("#open-file");
 const langButton = document.querySelector<HTMLButtonElement>("#lang-toggle");
 const tagline = document.querySelector<HTMLElement>("#tagline");
+const themeButton = document.querySelector<HTMLButtonElement>("#theme-toggle");
+const themeGlyph = document.querySelector<HTMLElement>("#theme-glyph");
+const themeLabel = document.querySelector<HTMLElement>("#theme-label");
 
-if (!stage || !badgeHost || !openButton || !langButton || !tagline) {
+if (
+  !stage || !badgeHost || !openButton || !langButton || !tagline ||
+  !themeButton || !themeGlyph || !themeLabel
+) {
   throw new Error(t(S.shellBroken));
 }
+
+initTheme();
 
 mountNetBadge(badgeHost);
 
@@ -43,12 +58,31 @@ mountNetBadge(badgeHost);
  */
 let openFile: File | null = null;
 
+/** Half-filled circle for system, sun for light, moon for dark. */
+const THEME_GLYPH = { system: "◐", light: "☀", dark: "☾" } as const;
+
+function paintTheme(): void {
+  const mode = getTheme();
+  const name = t(
+    mode === "light" ? S.themeLight : mode === "dark" ? S.themeDark : S.themeSystem,
+  );
+  themeGlyph!.textContent = THEME_GLYPH[mode];
+  themeLabel!.textContent = name;
+  themeButton!.title = t(S.themeTitle)(name);
+  // The glyph alone is ambiguous to a screen reader, and the visible label is
+  // hidden on narrow screens, so the button carries its own name.
+  themeButton!.setAttribute("aria-label", t(S.themeTitle)(name));
+  themeButton!.dataset.mode = mode;
+  themeButton!.dataset.effective = effectiveTheme();
+}
+
 function paintChrome(): void {
   document.documentElement.lang = getLang();
   tagline!.textContent = t(S.tagline);
   openButton!.textContent = t(S.openFile);
   langButton!.textContent = t(S.switchLang);
   langButton!.title = t(S.switchLangTitle);
+  paintTheme();
 }
 
 function emptyState(): void {
@@ -124,6 +158,12 @@ async function open(file: File): Promise<void> {
 langButton.addEventListener("click", () => {
   setLang(getLang() === "ko" ? "en" : "ko");
 });
+
+themeButton.addEventListener("click", () => {
+  cycleTheme();
+});
+
+onThemeChange(paintTheme);
 
 onLangChange(() => {
   paintChrome();
