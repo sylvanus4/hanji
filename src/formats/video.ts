@@ -19,7 +19,12 @@
  */
 
 import type { FormatHandler, RenderContext } from "./registry";
-import { baseName, type ConversionTarget } from "../convert/types";
+import {
+  baseName,
+  type ConversionContext,
+  type ConversionTarget,
+} from "../convert/types";
+import { planFrames, presetsFor } from "../convert/gifpresets";
 import { S, t } from "../i18n";
 import { makeZip } from "../convert/zip";
 import { canvasToBlob, pageLabel } from "../convert/raster";
@@ -224,27 +229,34 @@ function conversions(file: File): ConversionTarget[] {
         return { name: `${stem}-stills.zip`, blob: zip };
       },
     },
-    {
-      id: "gif",
-      label: t(S.labelGif),
-      note: t(S.noteVideoGif)(Math.round(GIF_MAX_FRAMES / GIF_FPS)),
-      run: async ({ report }) => {
+    ...presetsFor("video").map((preset) => ({
+      id: `gif-${preset.id}`,
+      label: t(preset.label),
+      note: `${t(preset.note)}. ${t(S.noteVideoGif)(Math.round(GIF_MAX_FRAMES / GIF_FPS))}`,
+      group: t(S.gifGroup),
+      run: async ({ report }: ConversionContext) => {
         // Starts from wherever the user left the playhead, so a GIF of the one
         // interesting second does not require trimming the file first.
         const startAt = onScreen ? onScreen.currentTime : 0;
-        const frames = await gifFrames(file, startAt, (done, total) =>
+        const bitmaps = await gifFrames(file, startAt, (done, total) =>
           report(t(S.extractingFrame)(done, total)),
         );
         report(t(S.encodingAs)("GIF"));
         const { encodeGif } = await import("../convert/gif");
-        const blob = await encodeGif(frames, {
-          delayMs: Math.round(1000 / GIF_FPS),
-          maxEdge: GIF_MAX_EDGE,
+        const frames = planFrames(preset, bitmaps.length).flatMap((planned) => {
+          const source = bitmaps[planned.index];
+          return source ? [{ source, delayMs: planned.delayMs }] : [];
         });
-        for (const frame of frames) frame.close();
-        return { name: `${stem}.gif`, blob };
+        const blob = await encodeGif(frames, {
+          maxEdge: preset.maxEdge,
+          loops: preset.loops,
+        });
+        // Closed by walking the extracted originals rather than the plan: a
+        // boomerang names the same bitmap twice and would be closed twice.
+        for (const bitmap of bitmaps) bitmap.close();
+        return { name: `${stem}-${preset.id.replace(/^video-/, "")}.gif`, blob };
       },
-    },
+    })),
   ];
 }
 

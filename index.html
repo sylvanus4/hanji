@@ -41,6 +41,21 @@
   <body>
     <div class="app">
       <header class="bar">
+        <!--
+          The mark is inline rather than an <img> so it inherits nothing from
+          the network and costs no request, and so the seal green stays exactly
+          the green the badge uses. aria-hidden because the <h1> next to it
+          already says the name; a screen reader announcing "hanji hanji" is
+          worse than one that ignores a decoration.
+        -->
+        <svg class="wordmark-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <rect x="2" y="2" width="60" height="60" rx="8" fill="#008231" />
+          <g fill="none" stroke="#fcfaf7" stroke-width="5" stroke-linecap="round">
+            <path d="M32 12.5v4.5" />
+            <path d="M20.5 24h23" />
+          </g>
+          <circle cx="32" cy="40.5" r="9.5" fill="none" stroke="#fcfaf7" stroke-width="5" />
+        </svg>
         <h1 class="wordmark">hanji<small id="tagline">이 기기 안에서</small></h1>
         <div class="bar-spacer"></div>
         <button id="theme-toggle" class="button button-quiet button-icon" type="button">

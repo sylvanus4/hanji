@@ -84,6 +84,19 @@ body {
   background: var(--paper);
 }
 
+/*
+ * The mark sits at cap height rather than at the full line box. Matching the
+ * wordmark's font-size would make the square visibly taller than the letters
+ * beside it, because a lowercase word only occupies the middle of its own line.
+ */
+.wordmark-mark {
+  inline-size: 1.15rem;
+  block-size: 1.15rem;
+  border-radius: 3px;
+  flex: none;
+  margin-inline-end: var(--space-xs);
+}
+
 .wordmark {
   font-family: var(--font-display);
   font-size: var(--text-lg);

@@ -1,30 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="hanji">
   <!--
-    App icon. Same artwork as the favicon — a sheet of paper with a seal — but
-    laid out for an app grid rather than a browser tab.
+    App icon. Same mark as public/favicon.svg — ㅎ carved out of a seal — laid
+    out for an app grid rather than a browser tab.
 
-    Two differences from public/favicon.svg, both deliberate:
+    Two differences from the favicon, both deliberate:
 
       * The shape is inset ~10% instead of filling the canvas. macOS and Windows
         both composite icons at their full size, so an edge-to-edge square sits
         visibly larger than every neighbour in the Dock or taskbar.
       * The corner radius follows the platform squircle proportion (~0.22 of the
-        shape's width) rather than the favicon's tighter curve, which reads as a
-        rectangle at 32px.
+        shape's width) rather than the favicon's tighter curve. The design tokens
+        ask for nearly square corners because this is a paper tool, and that is
+        right inside the app; in a dock full of squircles it reads as a mistake.
+
+    The canvas is transparent on purpose. The icon pipeline composites this over
+    whatever the platform uses behind it, and a baked-in paper-coloured square
+    would show up as a pale halo on a dark dock.
 
     Colours are literal. This file is rasterised at build time, far outside the
     page's CSS, so a token would resolve to nothing.
   -->
-  <g transform="translate(102 102)">
-    <rect width="820" height="820" rx="180" fill="#faf8f4" />
-    <rect width="820" height="820" rx="180" fill="none" stroke="#dcd8d0" stroke-width="8" />
-    <g stroke="#2b2925" stroke-width="46" stroke-linecap="round">
-      <path d="M154 230h512" />
-      <path d="M154 390h512" />
-      <path d="M154 550h320" />
-    </g>
-    <circle cx="590" cy="590" r="132" fill="#1f9254" />
-    <path d="M532 594l42 43 76 -83" fill="none" stroke="#faf8f4" stroke-width="40"
-          stroke-linecap="round" stroke-linejoin="round" />
+  <rect x="102" y="102" width="820" height="820" rx="180" fill="#008231" />
+  <g fill="none" stroke="#fcfaf7" stroke-width="74" stroke-linecap="round">
+    <path d="M512 278v70" />
+    <path d="M336 400h352" />
   </g>
+  <circle cx="512" cy="646" r="142" fill="none" stroke="#fcfaf7" stroke-width="74" />
 </svg>

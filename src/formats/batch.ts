@@ -9,8 +9,8 @@
  * Order is taken from the filenames, not from the drop. A multi-file drag hands
  * over an order the operating system decided, which is not stable across
  * platforms and is invisible to the person doing the dragging. Sorting by name
- * is at least a rule they can see and control, so every batch target says so in
- * its note rather than letting them discover it from a scrambled result.
+ * is at least a rule they can see and control, and the bar states it once under
+ * every batch rather than letting anyone discover it from a scrambled result.
  */
 
 import type { RenderContext } from "./registry";
@@ -18,14 +18,11 @@ import { extensionOf } from "./registry";
 import { baseName, type ConversionTarget } from "../convert/types";
 import { S, t } from "../i18n";
 import { makeZip } from "../convert/zip";
+import { planFrames, presetsFor } from "../convert/gifpresets";
 
 const IMAGE_EXT = new Set([
   "png", "jpg", "jpeg", "webp", "gif", "bmp", "svg", "avif",
 ]);
-
-/** Half a second reads as a slideshow rather than a flicker. */
-const PHOTO_GIF_DELAY_MS = 500;
-const PHOTO_GIF_MAX_EDGE = 900;
 
 /** CSS pixels are 96 to the inch, PDF points are 72, so a page is 0.75× the image. */
 const PX_TO_PT = 0.75;
@@ -120,39 +117,60 @@ async function renderPdfs(files: File[], ctx: RenderContext): Promise<void> {
   ctx.report(t(S.batchOpened)(files.length, t(S.batchKindPdf)));
 }
 
+/**
+ * One button per GIF preset, all decoded through the same path.
+ *
+ * The photos are decoded inside `run` rather than once up front, so opening a
+ * folder of images does not pay for a conversion nobody asked for. That does
+ * mean picking a second preset decodes them again; it is the cheaper mistake,
+ * because most people press exactly one of these buttons and holding forty full
+ * resolution bitmaps in memory on the off-chance is how a phone tab dies.
+ */
+function gifPresetTargets(ordered: File[], stem: string): ConversionTarget[] {
+  return presetsFor("images").map((preset) => ({
+    id: `gif-${preset.id}`,
+    label: t(preset.label),
+    note: t(preset.note),
+    group: t(S.gifGroup),
+    run: async ({ report }) => {
+      const bitmaps: ImageBitmap[] = [];
+      try {
+        for (const [i, file] of ordered.entries()) {
+          report(t(S.extractingFrame)(i + 1, ordered.length));
+          const img = await decode(file);
+          bitmaps.push(await createImageBitmap(img));
+        }
+        report(t(S.encodingAs)("GIF"));
+        const { encodeGif } = await import("../convert/gif");
+        // Frames may name the same bitmap twice — a boomerang plays the middle
+        // of the sequence in both directions — so cleanup below iterates the
+        // decoded originals, not the plan, and never closes one twice.
+        const frames = planFrames(preset, bitmaps.length).flatMap((planned) => {
+          const source = bitmaps[planned.index];
+          return source ? [{ source, delayMs: planned.delayMs }] : [];
+        });
+        const blob = await encodeGif(frames, {
+          maxEdge: preset.maxEdge,
+          loops: preset.loops,
+        });
+        return { name: `${stem}-${preset.id}.gif`, blob };
+      } finally {
+        for (const bitmap of bitmaps) bitmap.close();
+      }
+    },
+  }));
+}
+
 function imageTargets(files: File[]): ConversionTarget[] {
   const ordered = inNameOrder(files);
   const stem = baseName(ordered[0]?.name ?? "images");
 
   return [
-    {
-      id: "gif",
-      label: t(S.labelImagesToGif),
-      note: `${t(S.noteImagesToGif)}. ${t(S.batchOrder)}`,
-      run: async ({ report }) => {
-        const bitmaps: ImageBitmap[] = [];
-        try {
-          for (const [i, file] of ordered.entries()) {
-            report(t(S.extractingFrame)(i + 1, ordered.length));
-            const img = await decode(file);
-            bitmaps.push(await createImageBitmap(img));
-          }
-          report(t(S.encodingAs)("GIF"));
-          const { encodeGif } = await import("../convert/gif");
-          const blob = await encodeGif(bitmaps, {
-            delayMs: PHOTO_GIF_DELAY_MS,
-            maxEdge: PHOTO_GIF_MAX_EDGE,
-          });
-          return { name: `${stem}.gif`, blob };
-        } finally {
-          for (const bitmap of bitmaps) bitmap.close();
-        }
-      },
-    },
+    ...gifPresetTargets(ordered, stem),
     {
       id: "pdf",
       label: t(S.labelImagesToPdf),
-      note: `${t(S.noteImagesToPdf)}. ${t(S.batchOrder)}`,
+      note: t(S.noteImagesToPdf),
       run: async ({ report }) => {
         const { PDFDocument } = await import("pdf-lib");
         const pdf = await PDFDocument.create();
@@ -220,7 +238,6 @@ function pdfTargets(files: File[]): ConversionTarget[] {
     {
       id: "zip",
       label: "ZIP",
-      note: t(S.batchOrder),
       run: async () => {
         const zip = await makeZip(
           ordered.map((file) => ({ name: file.name, blob: file })),

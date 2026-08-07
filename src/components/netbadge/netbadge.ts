@@ -15,6 +15,7 @@
  */
 
 import { onLangChange, S, t } from "../../i18n";
+import { isDesktop } from "../../platform";
 
 export interface NetStats {
   egress: number;
@@ -25,11 +26,43 @@ export interface NetStats {
 const stats: NetStats = { egress: 0, assets: 0, lastEgressUrl: null };
 const listeners = new Set<(s: NetStats) => void>();
 
+/**
+ * The desktop shell's own bridge, which is not a network channel.
+ *
+ * Tauri routes `invoke` to the app's own Rust process through a custom scheme
+ * the webview resolves in-process. No socket is opened, and the process on the
+ * other end links no HTTP client at all — see src-tauri/Cargo.toml, which has
+ * neither reqwest nor hyper, deliberately.
+ *
+ * Without this, one desktop save counted as two transmissions: the Save panel
+ * and the write are two separate invokes. So a user who saved a single file
+ * watched this badge turn red and report "sent 2" — the app accusing itself of
+ * leaking at the exact moment it had just proven it does not. A false alarm
+ * here is worse than no badge, because it teaches people the badge is noise.
+ *
+ * The exemption is deliberately narrow. It is a closed list, and it applies
+ * only inside the desktop shell. In a browser these are ordinary foreign
+ * origins and still count; and a real `fetch("https://…")` from the desktop app
+ * still counts too, because the webview genuinely can reach the network.
+ */
+const BRIDGE_SCHEMES = new Set(["ipc:", "tauri:", "asset:"]);
+const BRIDGE_HOSTS = new Set([
+  "ipc.localhost",
+  "tauri.localhost",
+  "asset.localhost",
+]);
+
+function isDesktopBridge(u: URL): boolean {
+  if (!isDesktop()) return false;
+  return BRIDGE_SCHEMES.has(u.protocol) || BRIDGE_HOSTS.has(u.hostname);
+}
+
 function isForeign(url: string): boolean {
   try {
     const u = new URL(url, location.href);
     // blob:/data: never touch the network at all.
     if (u.protocol === "blob:" || u.protocol === "data:") return false;
+    if (isDesktopBridge(u)) return false;
     return u.origin !== location.origin;
   } catch {
     // An unparseable URL is treated as foreign: fail loud, not silent.

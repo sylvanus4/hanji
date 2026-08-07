@@ -51,6 +51,17 @@ export interface ConversionTarget {
    * loses selectable text; that is the kind of thing that belongs here.
    */
   note?: string;
+  /**
+   * Targets sharing a group render together under one heading.
+   *
+   * This exists because the GIF presets arrived: ten sibling buttons that are
+   * all the same conversion at different settings. Left in the main row they
+   * would drown the two or three targets that are genuinely different formats,
+   * and their notes would turn the footnote under the bar into a paragraph. A
+   * grouped target's note stays on the chip, where it is read at the moment
+   * someone is choosing between chips.
+   */
+  group?: string;
   input?: TargetInput;
   run: (ctx: ConversionContext) => Promise<ConvertedFile>;
 }

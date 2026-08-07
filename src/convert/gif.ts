@@ -11,11 +11,26 @@
  * content is the cost of the format, not a defect in this code.
  */
 
-export interface GifOptions {
-  /** Milliseconds each frame is shown. */
+/**
+ * One rendered frame: what to draw, and how long it stays on screen.
+ *
+ * Timing is per frame rather than one value for the whole animation because
+ * several of the shipped presets vary it — holding an opening title longer, or
+ * resting on the final frame so a loop does not snap away from it.
+ */
+export interface GifFrame {
+  source: ImageBitmap;
   delayMs: number;
+}
+
+export interface GifOptions {
   /** Longest edge in pixels; frames are scaled down to fit. 0 disables scaling. */
   maxEdge?: number;
+  /**
+   * How many times the animation repeats. 0, the GIF default, repeats forever;
+   * 1 plays through once and rests on the last frame.
+   */
+  loops?: number;
   /** Progress text for the status line. Called as report(doneCount, total). */
   report?: (done: number, total: number) => void;
 }
@@ -30,16 +45,17 @@ const LETTERBOX_FILL = "#000000";
  * later frames are letterboxed to fit it (GIF has one canvas size for all frames).
  */
 export async function encodeGif(
-  sources: ImageBitmap[],
-  options: GifOptions,
+  frames: GifFrame[],
+  options: GifOptions = {},
 ): Promise<Blob> {
   // Destructured up front so the compiler carries the non-undefined type
   // through the size calculation below; tsconfig has noUncheckedIndexedAccess,
   // and an empty sequence is a caller bug rather than something to paper over.
-  const [first] = sources;
-  if (!first) {
-    throw new Error("encodeGif requires at least one source image.");
+  const [firstFrame] = frames;
+  if (!firstFrame) {
+    throw new Error("encodeGif requires at least one frame.");
   }
+  const first = firstFrame.source;
 
   const { GIFEncoder, quantize, applyPalette } = await import("gifenc");
 
@@ -62,13 +78,18 @@ export async function encodeGif(
   }
 
   const gif = GIFEncoder();
-  const total = sources.length;
+  const total = frames.length;
+
+  // gifenc writes the loop record only while emitting the first frame, and
+  // reads -1 as "no loop record at all", which is how a GIF says play once.
+  const repeat = (options.loops ?? 0) === 0 ? 0 : -1;
 
   // Iterated by value rather than by index: noUncheckedIndexedAccess widens
-  // sources[i] to include undefined, and a `!` here would be asserting away the
+  // frames[i] to include undefined, and a `!` here would be asserting away the
   // one thing the compiler is actually right about.
   let done = 0;
-  for (const source of sources) {
+  for (const frame of frames) {
+    const source = frame.source;
     // A frame that does not share the first frame's aspect ratio gets
     // centred on a solid background rather than stretched, since stretching
     // would visibly distort the image just to satisfy the format's single
@@ -90,7 +111,8 @@ export async function encodeGif(
     const index = applyPalette(data, palette, PALETTE_FORMAT);
     gif.writeFrame(index, canvasWidth, canvasHeight, {
       palette,
-      delay: options.delayMs,
+      delay: frame.delayMs,
+      repeat,
       transparent: false,
     });
 

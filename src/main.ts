@@ -144,15 +144,22 @@ async function open(files: File[]): Promise<void> {
     // stay separate rather than treating a single file as a batch of one,
     // because "merge these" and "what is in this" are different questions and
     // collapsing them would put merge buttons under every PDF a user opens.
-    const targets =
-      files.length === 1
-        ? await openOne(first, viewer, report)
-        : await openMany(files, viewer, report);
+    const many = files.length > 1;
+    const targets = many
+      ? await openMany(files, viewer, report)
+      : await openOne(first, viewer, report);
 
     // Mounted only after a successful render: offering to convert a document
     // that failed to open would be offering something we cannot deliver.
     const { mountExportBar } = await import("./components/exportbar/exportbar");
-    mountExportBar({ host: toolbar, targets, report });
+    // The ordering rule applies to every batch target at once, so it is stated
+    // once under the bar instead of being repeated inside thirteen notes.
+    mountExportBar({
+      host: toolbar,
+      targets,
+      report,
+      ...(many ? { footnote: t(S.batchOrder) } : {}),
+    });
   } catch (error) {
     const message =
       error instanceof UnsupportedFormatError || error instanceof MixedBatchError

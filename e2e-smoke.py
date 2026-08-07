@@ -6,6 +6,7 @@ against the production build and asserts on what appears on screen.
 """
 
 import os
+import pathlib
 import re
 import sys
 import tempfile
@@ -263,10 +264,10 @@ with sync_playwright() as p:
     def convert(path, target_id):
         conv.set_input_files("input[type=file]", path)
         conv.wait_for_selector(
-            f".exportbar-button[data-target={target_id}]", timeout=60000
+            f".exportbar [data-target={target_id}]", timeout=60000
         )
         with conv.expect_download(timeout=180000) as handle:
-            conv.click(f".exportbar-button[data-target={target_id}]")
+            conv.click(f".exportbar [data-target={target_id}]")
         # Keep the produced suffix: the app dispatches on extension, so a file
         # saved without one cannot be fed back in.
         download = handle.value
@@ -350,7 +351,7 @@ with sync_playwright() as p:
         check("video yields still frames", len(entries) >= 1,
               f"-> {len(entries)} stills")
 
-        out = convert(VIDEO, "gif")
+        out = convert(VIDEO, "gif-video-realtime")
         with open(out, "rb") as fh:
             head = fh.read(6)
         check("video yields a real GIF", head in (b"GIF89a", b"GIF87a"),
@@ -369,21 +370,107 @@ with sync_playwright() as p:
     def convert_many(paths, target_id):
         conv.set_input_files("input[type=file]", paths)
         conv.wait_for_selector(
-            f".exportbar-button[data-target={target_id}]", timeout=60000
+            f".exportbar [data-target={target_id}]", timeout=60000
         )
         with conv.expect_download(timeout=180000) as handle:
-            conv.click(f".exportbar-button[data-target={target_id}]")
+            conv.click(f".exportbar [data-target={target_id}]")
         download = handle.value
         suffix = os.path.splitext(download.suggested_filename)[1]
         out = os.path.join(tempfile.gettempdir(), f"hanji-e2e-many-{target_id}{suffix}")
         download.save_as(out)
         return out
 
-    out = convert_many(IMAGES, "gif")
+    out = convert_many(IMAGES, "gif-slideshow")
     with open(out, "rb") as fh:
         head = fh.read(6)
     check("images become a real GIF", head in (b"GIF89a", b"GIF87a"),
           f"-> magic {head!r}, {os.path.getsize(out)} bytes")
+
+    # --- GIF presets ---
+    #
+    # A preset that produced a valid GIF but ignored its own settings would pass
+    # the check above, so these read the settings back out of the bytes. Each
+    # one targets the single property that distinguishes that preset from the
+    # default, because a preset nobody can tell apart from another is not a
+    # feature, it is ten buttons.
+    def gif_facts(path):
+        """Read a GIF's real structure by walking its blocks.
+
+        The first version of this counted occurrences of the three bytes that
+        introduce a frame and reported five frames in a four-frame boomerang,
+        because that byte sequence also turned up inside the compressed image
+        data. It failed a feature that was working correctly — the second time
+        in this suite that a shortcut in the checker accused the code.
+
+        Walking the blocks costs about twenty lines, cannot be fooled by
+        compressed bytes, and yields the per-frame delays as well, which is what
+        the presets are actually made of.
+        """
+        data = pathlib.Path(path).read_bytes()
+        # Header, then the logical screen descriptor: width and height first.
+        width = int.from_bytes(data[6:8], "little")
+        height = int.from_bytes(data[8:10], "little")
+        flags = data[10]
+        i = 13
+        if flags & 0x80:  # skip the global colour table
+            i += 3 * (2 ** ((flags & 7) + 1))
+
+        frames, delays, loops = 0, [], False
+        while i < len(data) and data[i] != 0x3B:  # 0x3B is the trailer
+            marker = data[i]
+            if marker == 0x21:  # extension
+                label = data[i + 1]
+                i += 2
+                if label == 0xFF and data[i + 1:i + 12] == b"NETSCAPE2.0":
+                    loops = True  # the record that makes a GIF repeat
+                if label == 0xF9:  # graphic control: delay in centiseconds
+                    delays.append(int.from_bytes(data[i + 2:i + 4], "little") * 10)
+                while i < len(data) and data[i] != 0:
+                    i += data[i] + 1
+                i += 1
+            elif marker == 0x2C:  # image descriptor: one per frame
+                frames += 1
+                local = data[i + 9]
+                i += 10
+                if local & 0x80:  # skip the local colour table
+                    i += 3 * (2 ** ((local & 7) + 1))
+                i += 1  # LZW minimum code size
+                while i < len(data) and data[i] != 0:
+                    i += data[i] + 1
+                i += 1
+            else:
+                break
+
+        return {"width": width, "height": height, "frames": frames,
+                "delays": delays, "loops": loops}
+
+    base = gif_facts(out)
+    check("a slideshow GIF repeats, one frame per picture, at its stated pace",
+          base["loops"] and base["frames"] == len(IMAGES)
+          and set(base["delays"]) == {1200},
+          f"-> {base['frames']} frames, delays {base['delays']}, loops={base['loops']}")
+
+    cover = gif_facts(convert_many(IMAGES, "gif-cover"))
+    # The one preset whose entire point is that frames differ from each other.
+    check("holding the cover gives the first picture its own longer delay",
+          cover["delays"][:1] == [2000] and set(cover["delays"][1:]) == {500},
+          f"-> delays {cover['delays']}")
+
+    boomerang = gif_facts(convert_many(IMAGES, "gif-boomerang"))
+    # Out and back without repeating either endpoint: n + (n - 2).
+    expected = len(IMAGES) * 2 - 2
+    check("a boomerang GIF plays back out and returns",
+          boomerang["frames"] == expected,
+          f"-> {boomerang['frames']} frames, expected {expected}")
+
+    once = gif_facts(convert_many(IMAGES, "gif-once"))
+    check("a play-once GIF carries no loop record",
+          not once["loops"], f"-> loops={once['loops']}")
+
+    chat = gif_facts(convert_many(IMAGES, "gif-chat"))
+    check("a chat-sized GIF is capped at 320px on its long edge",
+          max(chat["width"], chat["height"]) == 320,
+          f"-> {chat['width']}x{chat['height']}")
 
     out = convert_many(IMAGES, "pdf")
     made = pdf_page_count(conv, out)

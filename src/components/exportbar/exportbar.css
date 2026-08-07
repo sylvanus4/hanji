@@ -8,12 +8,23 @@
 
 .exportbar {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-xs);
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-sm);
   padding-block: var(--space-sm);
   border-block-end: 1px solid var(--rule);
   margin-block-end: var(--space-lg);
+}
+
+.exportbar-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.exportbar-slot {
+  display: inline-flex;
 }
 
 .exportbar-label {
@@ -64,8 +75,92 @@
   cursor: progress;
 }
 
+/*
+ * Preset chips.
+ *
+ * A grid rather than a wrapping row. Ten options that wrap leave a ragged last
+ * line and, worse, put them at inconsistent widths, which invites the reader to
+ * think width means something. Equal cells say plainly that these are ten
+ * peers, and auto-fill keeps the count per row honest to the window instead of
+ * to a breakpoint someone guessed.
+ */
+.exportbar-presets {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.exportbar-presets-head {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.exportbar-chips {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr));
+  gap: var(--space-2xs);
+}
+
+.exportbar-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.125rem;
+  inline-size: 100%;
+  block-size: 100%;
+  text-align: start;
+  font-family: var(--font-ui);
+  color: var(--ink);
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.625rem;
+  cursor: pointer;
+  transition:
+    background var(--dur-fast) var(--ease-out-expo),
+    border-color var(--dur-fast) var(--ease-out-expo),
+    box-shadow var(--dur-fast) var(--ease-out-expo),
+    transform var(--dur-fast) var(--ease-out-expo);
+}
+
+.exportbar-chip-name {
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.exportbar-chip-note {
+  font-size: var(--text-2xs);
+  line-height: 1.35;
+  color: var(--ink-faint);
+  text-wrap: pretty;
+}
+
+.exportbar-chip:hover:not(:disabled) {
+  background: var(--paper-hover);
+  border-color: var(--rule-strong);
+  box-shadow: var(--lift-1);
+}
+
+.exportbar-chip:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.exportbar-chip:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+}
+
+.exportbar-chip:disabled {
+  opacity: 0.45;
+  cursor: progress;
+}
+
 .exportbar-note {
-  flex-basis: 100%;
   margin: 0;
   font-family: var(--font-ui);
   font-size: var(--text-xs);

@@ -254,10 +254,15 @@ export const S = {
     ko: (max: number) => `영상 전체에서 고르게 최대 ${max}장, .zip으로 묶어 저장`,
     en: (max: number) => `up to ${max} evenly spaced frames, delivered as a .zip`,
   },
-  labelGif: { ko: "GIF로 만들기", en: "Make a GIF" },
   noteVideoGif: {
     ko: (secs: number) => `재생 위치부터 약 ${secs}초, 소리는 빠집니다`,
     en: (secs: number) => `about ${secs}s from the playhead, without sound`,
+  },
+  // The heading over the preset chips. It carries one instruction, because the
+  // choosing *is* the interaction: there is no second button to press after.
+  gifGroup: {
+    ko: "GIF로 만들기 — 고르면 바로 저장됩니다",
+    en: "Make a GIF — picking one saves it",
   },
 
   // ---- several files at once ----
@@ -290,15 +295,13 @@ export const S = {
     ko: "놓은 순서가 아니라 파일 이름 순서로 이어 붙입니다",
     en: "joined in filename order, not the order they were dropped",
   },
-  labelImagesToGif: { ko: "GIF로 만들기", en: "Make a GIF" },
-  noteImagesToGif: {
-    ko: "한 장당 0.5초, 첫 장 크기에 맞춰 나머지를 담습니다",
-    en: "half a second per image, fitted to the first image's size",
-  },
   labelImagesToPdf: { ko: "PDF로 묶기", en: "Combine into a PDF" },
+  // Says only what is specific to this target. The ordering rule governs every
+  // batch conversion, so it is stated once under the bar rather than repeated
+  // inside each note — which is how this line came to read "이름 순서대로" twice.
   noteImagesToPdf: {
-    ko: "한 장당 한 쪽, 이름 순서대로",
-    en: "one page per image, in filename order",
+    ko: "한 장당 한 쪽",
+    en: "one page per image",
   },
 
   // ---- PDF editing ----

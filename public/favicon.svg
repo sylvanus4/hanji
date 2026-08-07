@@ -1,19 +1,30 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="hanji">
   <!--
-    A sheet of paper with a seal on it. The seal is the same green the app
-    spends its single accent on, because the mark and the network-zero badge
-    are making the same promise.
+    A seal with ㅎ carved out of it — the first letter of 한지, in the same green
+    the app spends its only accent on. The design system calls that token
+    `--seal`, so the mark and the network-zero badge are literally made of the
+    same thing, and the icon is a stamp rather than a picture of a document.
+
+    Three earlier drafts were rendered at 1024, 128, 48 and 32 pixels and looked
+    at side by side. A sheet of paper with a small seal in the corner read fine
+    large and turned to mud by 48, because it asks two shapes to survive where
+    one barely does. A solid block with a single glyph knocked out of it is the
+    highest-contrast thing available at tab and dock size, so that is what this
+    is.
+
+    The corner radius is tight here and much rounder in the app icon. That is
+    deliberate rather than inconsistent: the design tokens call for nearly square
+    corners because this is a paper tool, while macOS composites every icon into
+    a squircle and a near-square one looks foreign in a dock. See
+    src-tauri/icons/source.svg.
+
     Colours are literal rather than tokens: this file is fetched by the browser
     chrome, outside the page's CSS.
   -->
-  <rect width="64" height="64" rx="12" fill="#faf8f4" />
-  <rect width="64" height="64" rx="12" fill="none" stroke="#dcd8d0" stroke-width="1.5" />
-  <g stroke="#2b2925" stroke-width="3" stroke-linecap="round">
-    <path d="M16 20h32" />
-    <path d="M16 30h32" />
-    <path d="M16 40h20" />
+  <rect x="2" y="2" width="60" height="60" rx="8" fill="#008231" />
+  <g fill="none" stroke="#fcfaf7" stroke-width="5" stroke-linecap="round">
+    <path d="M32 12.5v4.5" />
+    <path d="M20.5 24h23" />
   </g>
-  <circle cx="45" cy="45" r="8" fill="#1f9254" />
-  <path d="M41.5 45.2l2.6 2.6 4.6-5" fill="none" stroke="#faf8f4" stroke-width="2.4"
-        stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="32" cy="40.5" r="9.5" fill="none" stroke="#fcfaf7" stroke-width="5" />
 </svg>
