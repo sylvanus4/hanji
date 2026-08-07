@@ -6,21 +6,45 @@ Each entry records what was chosen, what evidence forced it, and what would reve
 
 ## D1 — Host on Cloudflare Pages, not GitHub Pages
 
-**Evidence.** GitHub's own documentation and three long-running community discussions confirm
-GitHub Pages offers no mechanism whatsoever for custom response headers. Without
-`Cross-Origin-Opener-Policy` and `Cross-Origin-Embedder-Policy` the page cannot become
-cross-origin isolated, so `SharedArrayBuffer` is unavailable, so multi-threaded WASM is
-unavailable. That closes off ffmpeg.wasm's fast build and LibreOffice-class engines permanently.
+**The original reasoning here was wrong and has been replaced.** It claimed GitHub Pages was
+disqualified because it cannot send COOP/COEP, so the page can never be cross-origin isolated, so
+multi-threaded WASM is unavailable. The conclusion happens to survive; the argument does not.
 
-The `coi-serviceworker` workaround does exist and does work, but it forces a reload on first
-visit, has broken on Safari before, requires the worker and all WASM to be same-origin, and once
-COEP is on, every cross-origin subresource must send CORP or it is silently blocked.
+**Measured 2026-08-07**, serving the production build from a static server sending no response
+headers at all:
 
-Cloudflare Pages supports `_headers`, has no meaningful bandwidth ceiling for an app whose
-traffic is just its own bundle, allows commercial use, and permits 25 MiB assets — comfortably
-above the 7.2 MB Hangul WASM.
+| | |
+|---|---|
+| `crossOriginIsolated` | `false` |
+| `SharedArrayBuffer` | `undefined` |
+| Hangul document | renders, 2 pages, 43 ms |
+| PDF | renders, 2 pages |
+| HWP → HWPX conversion | valid package |
+| Uncaught errors | none |
 
-**Reversed if.** GitHub ships header configuration for Pages.
+Nothing we ship uses threads. The vendored WASM contains no atomics and `rhwp.js` references
+`SharedArrayBuffer` zero times. Cross-origin isolation buys this app nothing *today*; it only
+matters for engines we have explicitly scoped out (ffmpeg.wasm's fast build, LibreOffice-class
+layout). Keeping the headers is cheap insurance, not a live requirement.
+
+**The reasons that actually decide it:**
+
+1. **Bandwidth.** Measured transfer: a landing visit is ~20 kB, but opening a Hangul document
+   pulls the 7.2 MB engine (2.7 MB gzipped) plus ~3 MB of self-hosted Korean fonts — roughly
+   6 MB over the wire per Hangul session. A 100 GB/month free tier is therefore about 17,000
+   Hangul sessions. Distribution for this category is GitHub and Hacker News, which can exceed
+   that in an afternoon. Cloudflare Pages does not meter bandwidth on the free plan; Netlify,
+   Vercel and GitHub Pages all publish 100 GB-ish limits.
+2. **CSP.** `connect-src 'self'` is what makes the no-upload claim enforceable by the browser
+   rather than by our good intentions. A `<meta http-equiv>` CSP covers `connect-src`, but *not*
+   `frame-ancestors` — so on a header-less host anyone could iframe hanji inside a page that
+   claims to upload. For a product whose entire pitch is trust, being embeddable in someone
+   else's trust story is a real exposure.
+3. **Private repository.** Publishing GitHub Pages from a private repo requires a paid plan.
+   Cloudflare Pages builds private repos on the free tier.
+
+**Reversed if.** The payload shrinks enough that metered tiers stop mattering *and* we accept
+being framable — or GitHub ships response-header configuration for Pages.
 
 ---
 

@@ -79,11 +79,19 @@ surface locally instead of after deploy.
 
 ## Deploy
 
-Cloudflare Pages. Build `npm run build`, output `dist`. The `public/_headers` file carries the
-COOP/COEP and CSP configuration.
+Cloudflare Pages. Build command `npm run build`, output directory `dist`. The `public/_headers`
+file carries the CSP and the COOP/COEP configuration.
 
-GitHub Pages **cannot host this correctly** — it provides no way to set response headers at all,
-so the page can never become cross-origin isolated and multi-threaded WASM stays unavailable.
+```bash
+npx wrangler pages deploy dist --project-name hanji
+```
+
+**Why not GitHub Pages?** Not for the reason you would expect. The app runs fine with no response
+headers at all — nothing here uses threads, so cross-origin isolation is irrelevant (measured; see
+[docs/DECISIONS.md](docs/DECISIONS.md) D1). It comes down to bandwidth and framing: opening a
+Hangul document transfers roughly 6 MB, so a 100 GB/month tier is ~17,000 sessions, and without a
+real CSP header we lose `frame-ancestors`, which lets anyone embed this tool inside a page that
+claims to upload your file. Cloudflare Pages meters neither and sends both.
 
 ## Roadmap
 
