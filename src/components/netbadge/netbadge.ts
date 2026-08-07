@@ -14,6 +14,8 @@
  * later module cannot quietly slip a request past it.
  */
 
+import { onLangChange, S, t } from "../../i18n";
+
 export interface NetStats {
   egress: number;
   assets: number;
@@ -112,12 +114,17 @@ export function mountNetBadge(host: HTMLElement): void {
   el.setAttribute("aria-live", "polite");
   host.append(el);
 
-  onNetChange((s) => {
+  const paint = (s: NetStats) => {
     const clean = s.egress === 0;
     el.dataset.state = clean ? "clean" : "breached";
     el.title = clean
-      ? `Nothing has been sent anywhere. ${s.assets} local asset loads.`
-      : `Unexpected outbound request: ${s.lastEgressUrl}`;
-    el.textContent = clean ? "0 sent" : `${s.egress} sent`;
-  });
+      ? t(S.sentCleanTitle)(s.assets)
+      : t(S.sentBreachedTitle)(String(s.lastEgressUrl));
+    el.textContent = clean ? t(S.sentClean) : t(S.sentBreached)(s.egress);
+  };
+
+  onNetChange(paint);
+  // Repaint on language change; the badge is the one label a user is most
+  // likely to be staring at when they hit the toggle.
+  onLangChange(() => paint({ ...stats }));
 }

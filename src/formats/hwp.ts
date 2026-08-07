@@ -19,6 +19,7 @@ import {
   pdfFromPageImages,
 } from "../convert/raster";
 import { extensionOf } from "./registry";
+import { S, t } from "../i18n";
 
 /**
  * Text-measurement bridge required by the engine, per @rhwp/core's README.
@@ -75,10 +76,10 @@ function engine(): Promise<typeof import("@rhwp/core")> {
 }
 
 async function render(file: File, ctx: RenderContext): Promise<void> {
-  ctx.report("Loading the Hangul engine…");
+  ctx.report(t(S.loadingHangulEngine));
   const rhwp = await engine();
 
-  ctx.report("Reading the document…");
+  ctx.report(t(S.readingDocument));
   const bytes = new Uint8Array(await file.arrayBuffer());
 
   const started = performance.now();
@@ -86,7 +87,7 @@ async function render(file: File, ctx: RenderContext): Promise<void> {
   const parseMs = Math.round(performance.now() - started);
 
   const pages = doc.pageCount();
-  ctx.report(`${pages} page${pages === 1 ? "" : "s"}, parsed in ${parseMs} ms`);
+  ctx.report(t(S.pagesParsed)(pages, parseMs));
 
   for (let i = 0; i < pages; i += 1) {
     const svg = doc.renderPageSvg(i);
@@ -95,7 +96,7 @@ async function render(file: File, ctx: RenderContext): Promise<void> {
     const blob = new Blob([svg], { type: "image/svg+xml" });
     const img = new Image();
     img.className = "page";
-    img.alt = `Page ${i + 1}`;
+    img.alt = t(S.pageAria)(i + 1);
     img.decoding = "async";
     img.src = URL.createObjectURL(blob);
     img.addEventListener("load", () => URL.revokeObjectURL(img.src), {
@@ -144,7 +145,7 @@ async function rasterisePages(
     }[] = [];
 
     for (let i = 0; i < total; i += 1) {
-      report(`Rendering page ${i + 1} of ${total}…`);
+      report(t(S.renderingPage)(i + 1, total));
       const canvas = document.createElement("canvas");
       doc.renderPageToCanvas(i, canvas, PAGE_SCALE);
       const blob = await canvasToBlob(canvas, "image/png");
@@ -177,9 +178,9 @@ function conversions(file: File): ConversionTarget[] {
     targets.push({
       id: "hwpx",
       label: "HWPX",
-      note: "the open XML format required for public-sector documents",
+      note: t(S.noteHwpx),
       run: async ({ report }) => {
-        report("Converting to HWPX…");
+        report(t(S.convertingTo)("HWPX"));
         const bytes = await withDocument(file, (doc) => doc.exportHwpx());
         return {
           name: `${stem}.hwpx`,
@@ -196,7 +197,7 @@ function conversions(file: File): ConversionTarget[] {
       id: "hwp",
       label: "HWP",
       run: async ({ report }) => {
-        report("Converting to HWP…");
+        report(t(S.convertingTo)("HWP"));
         const bytes = await withDocument(file, (doc) => doc.exportHwp());
         return {
           name: `${stem}.hwp`,
@@ -211,21 +212,21 @@ function conversions(file: File): ConversionTarget[] {
   targets.push({
     id: "pdf",
     label: "PDF",
-    note: "pages are images, so the text is not selectable or searchable",
+    note: t(S.notePdfRaster),
     run: async ({ report }) => {
       const pages = await rasterisePages(file, report);
-      report("Assembling the PDF…");
+      report(t(S.assemblingPdf));
       return { name: `${stem}.pdf`, blob: await pdfFromPageImages(pages) };
     },
   });
 
   targets.push({
     id: "png",
-    label: "PNG pages",
-    note: "one image per page, delivered as a .zip",
+    label: t(S.labelPngPages),
+    note: t(S.noteZip),
     run: async ({ report }) => {
       const pages = await rasterisePages(file, report);
-      report("Building the archive…");
+      report(t(S.buildingArchive));
       const zip = await makeZip(
         pages.map((page, i) => ({
           name: `${stem}-${pageLabel(i + 1, pages.length)}.png`,

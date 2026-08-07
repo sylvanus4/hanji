@@ -107,6 +107,16 @@ claims to upload your file. Cloudflare Pages meters neither and sends both.
 Out of scope for v1: Office (docx/pptx) conversion, which has no clean client-side path; video and
 audio, pending a real measurement of ffmpeg.wasm's cost.
 
+## Language
+
+Korean by default, with an English toggle in the header. The default is
+unconditional rather than sniffed from `navigator.language`: this tool exists for
+Korean documents, and someone arriving with an English-locale browser is more
+likely to be a Korean user on an English machine than an English speaker holding
+an HWP file. Guessing wrong in that direction hides the product from the people
+it was built for. The choice persists, and switching re-opens the current
+document rather than reloading the page.
+
 ## Accessibility
 
 Keyboard order is Open → each conversion → the file input, every control is a real `<button>` with

@@ -1,21 +1,47 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>hanji — documents that stay on your device</title>
+    <title>hanji — 문서가 이 기기를 벗어나지 않습니다</title>
     <meta
       name="description"
-      content="Open, convert and lightly edit Hangul (HWP/HWPX), PDF and image files entirely in your browser. Files are never uploaded."
+      content="한글(HWP·HWPX), PDF, 이미지 파일을 브라우저 안에서 열고 변환합니다. 파일을 업로드하지 않습니다. HWP를 공공기관 개방형 포맷인 HWPX로 변환할 수 있습니다."
     />
     <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!--
+      Distribution for this category is GitHub and Hacker News, where the link
+      preview is most of the first impression. og:image is an SVG served from
+      our own origin — no third-party image host, which would contradict the
+      whole premise.
+    -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="hanji — 문서가 이 기기를 벗어나지 않습니다" />
+    <meta
+      property="og:description"
+      content="한글(HWP·HWPX), PDF, 이미지를 브라우저 안에서 열고 변환합니다. 업로드가 없으니 나중에 지울 것도 없습니다."
+    />
+    <meta property="og:image" content="/og.svg" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="hanji — documents that stay on your device" />
+    <meta
+      name="twitter:description"
+      content="Open and convert Hangul (HWP/HWPX), PDF and image files entirely in your browser. Nothing is uploaded."
+    />
+    <meta name="twitter:image" content="/og.svg" />
   </head>
   <body>
     <div class="app">
       <header class="bar">
-        <h1 class="wordmark">hanji<small>local only</small></h1>
+        <h1 class="wordmark">hanji<small id="tagline">이 기기 안에서</small></h1>
         <div class="bar-spacer"></div>
-        <button id="open-file" class="button" type="button">Open a file</button>
+        <button id="lang-toggle" class="button button-quiet" type="button">English</button>
+        <button id="open-file" class="button" type="button">파일 열기</button>
         <div id="badge-host"></div>
       </header>
       <main class="stage" id="stage"></main>

@@ -7,6 +7,8 @@
  * users get the same entry point.
  */
 
+import { onLangChange, S, t } from "../../i18n";
+
 export interface DropzoneOptions {
   stage: HTMLElement;
   trigger: HTMLElement;
@@ -26,7 +28,9 @@ export function mountDropzone({
   // The input is visually hidden and driven by the toolbar button, so it needs
   // its own accessible name — a screen reader reaching it directly would
   // otherwise hear an unlabelled file control.
-  input.setAttribute("aria-label", "Choose a document to open");
+  const label = () => input.setAttribute("aria-label", t(S.chooseFile));
+  label();
+  onLangChange(label);
   input.accept = accept.map((e) => `.${e}`).join(",");
   input.addEventListener("change", () => {
     const file = input.files?.[0];

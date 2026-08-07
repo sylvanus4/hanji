@@ -48,8 +48,13 @@ with sync_playwright() as p:
     )
 
     page.goto(URL, wait_until="networkidle")
-    check("shell renders", "Drop a document" in page.inner_text("body"))
-    check("badge starts clean", page.inner_text(".netbadge").strip().lower() == "0 sent",
+    # Korean is the unconditional default — this tool is for Korean documents,
+    # and sniffing navigator.language would hide it from Korean users on
+    # English-locale machines.
+    check("shell renders in Korean by default",
+          "문서를 끌어다 놓으세요" in page.inner_text("body")
+          and page.get_attribute("html", "lang") == "ko")
+    check("badge starts clean", page.inner_text(".netbadge").strip() == "전송 0",
           f'-> "{page.inner_text(".netbadge").strip()}"')
 
     # --- HWP ---
@@ -72,6 +77,29 @@ with sync_playwright() as p:
     page.wait_for_selector(".viewer-error", timeout=15000)
     check("unsupported format shows an error", True,
           f'-> {page.inner_text(".viewer-error")[:60]!r}')
+
+    # --- language toggle, with a document open ---
+    #
+    # Switching language re-opens the current file rather than reloading, so the
+    # risk being covered is a half-translated interface or a lost document.
+    page.set_input_files("input[type=file]", HWP)
+    page.wait_for_selector(".exportbar-button", timeout=60000)
+    page.wait_for_timeout(2000)
+    page.click("#lang-toggle")
+    page.wait_for_selector(".exportbar-button", timeout=60000)
+    page.wait_for_timeout(2000)
+    check("toggle switches every surface to English",
+          page.get_attribute("html", "lang") == "en"
+          and page.inner_text(".netbadge").strip().lower() == "0 sent"
+          and page.inner_text("#open-file") == "Open a file"
+          and "page" in page.inner_text("#status"),
+          f'-> status {page.inner_text("#status")!r}')
+    check("the open document survives the switch",
+          page.locator(".viewer img.page").count() == 2,
+          f'-> {page.locator(".viewer img.page").count()} pages')
+    page.click("#lang-toggle")
+    page.wait_for_selector(".exportbar-button", timeout=60000)
+    page.wait_for_timeout(2000)
 
     # --- Hangul geometry regression guard ---
     #
@@ -110,7 +138,7 @@ with sync_playwright() as p:
     # --- the claim ---
     check("zero foreign requests", len(foreign) == 0, f"-> {foreign[:3]}")
     check("badge still clean after 3 files",
-          page.inner_text(".netbadge").strip().lower() == "0 sent",
+          page.inner_text(".netbadge").strip() == "전송 0",
           f'-> "{page.inner_text(".netbadge").strip()}"')
 
     check("no uncaught page errors", not errors, f"-> {errors[:2]}")

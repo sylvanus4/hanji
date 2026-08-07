@@ -5,6 +5,8 @@
  * turn a stack of page images into a PDF.
  */
 
+import { S, t } from "../i18n";
+
 /** 2× gives a page that still looks sharp when printed or zoomed once. */
 export const PAGE_SCALE = 2;
 
@@ -31,11 +33,7 @@ export function canvasToBlob(
       (blob) =>
         blob
           ? resolve(blob)
-          : reject(
-              new Error(
-                `This browser could not encode the image as ${type}. The page may be too large.`,
-              ),
-            ),
+          : reject(new Error(t(S.encodeFailed)(type))),
       type,
       quality,
     );

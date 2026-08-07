@@ -8,6 +8,7 @@
  */
 
 import type { ConversionTarget } from "../convert/types";
+import { S, t } from "../i18n";
 
 export interface RenderContext {
   /** Where pages/canvases should be appended. */
@@ -54,12 +55,21 @@ export function extensionOf(name: string): string {
 
 export class UnsupportedFormatError extends Error {
   constructor(readonly extension: string) {
+    // The Error message stays English for logs and stack traces; the sentence a
+    // user reads comes from describe(), so it follows the interface language
+    // rather than being frozen at throw time.
     super(
       extension
         ? `.${extension} is not supported yet.`
         : "That file has no extension, so its type could not be determined.",
     );
     this.name = "UnsupportedFormatError";
+  }
+
+  describe(): string {
+    return this.extension
+      ? t(S.unsupportedExt)(this.extension)
+      : t(S.unsupportedNoExt);
   }
 }
 

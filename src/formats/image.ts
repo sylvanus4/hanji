@@ -11,9 +11,10 @@ import type { FormatHandler, RenderContext } from "./registry";
 import { baseName, type ConversionTarget } from "../convert/types";
 import { canvasToBlob, RASTER_EXT, type RasterType } from "../convert/raster";
 import { extensionOf } from "./registry";
+import { S, t } from "../i18n";
 
 async function render(file: File, ctx: RenderContext): Promise<void> {
-  ctx.report("Decoding…");
+  ctx.report(t(S.decoding));
   const url = URL.createObjectURL(file);
 
   try {
@@ -26,9 +27,7 @@ async function render(file: File, ctx: RenderContext): Promise<void> {
     await img.decode();
 
     const ms = Math.round(performance.now() - started);
-    ctx.report(
-      `${img.naturalWidth} × ${img.naturalHeight}, decoded in ${ms} ms`,
-    );
+    ctx.report(t(S.imageDecoded)(img.naturalWidth, img.naturalHeight, ms));
     ctx.host.append(img);
   } finally {
     // Revoked on the next frame so the decoded bitmap is already attached.
@@ -55,7 +54,7 @@ async function toCanvas(file: File, type: RasterType): Promise<HTMLCanvasElement
     canvas.width = img.naturalWidth;
     canvas.height = img.naturalHeight;
     const context = canvas.getContext("2d");
-    if (!context) throw new Error("This browser refused a 2D canvas context.");
+    if (!context) throw new Error(t(S.noCanvas));
 
     // Formats without alpha would otherwise render transparency as black.
     if (type !== "image/png") {
@@ -86,7 +85,7 @@ function conversions(file: File): ConversionTarget[] {
       id: RASTER_EXT[type],
       label,
       run: async ({ report }) => {
-        report(`Encoding as ${label}…`);
+        report(t(S.encodingAs)(label));
         const canvas = await toCanvas(file, type);
         const blob = await canvasToBlob(canvas, type);
         canvas.width = 0;

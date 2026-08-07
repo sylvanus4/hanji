@@ -9,6 +9,7 @@
 
 import type { FormatHandler, RenderContext } from "./registry";
 import { baseName, type ConversionTarget } from "../convert/types";
+import { S, t } from "../i18n";
 import { makeZip } from "../convert/zip";
 import {
   canvasToBlob,
@@ -39,19 +40,17 @@ function loadEngine(): Promise<typeof import("pdfjs-dist")> {
 }
 
 async function render(file: File, ctx: RenderContext): Promise<void> {
-  ctx.report("Loading the PDF engine…");
+  ctx.report(t(S.loadingPdfEngine));
   const pdfjs = await loadEngine();
 
-  ctx.report("Reading the document…");
+  ctx.report(t(S.readingDocument));
   const data = new Uint8Array(await file.arrayBuffer());
 
   const started = performance.now();
   const doc = await pdfjs.getDocument({ data }).promise;
   const parseMs = Math.round(performance.now() - started);
 
-  ctx.report(
-    `${doc.numPages} page${doc.numPages === 1 ? "" : "s"}, opened in ${parseMs} ms`,
-  );
+  ctx.report(t(S.pagesOpened)(doc.numPages, parseMs));
 
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
@@ -67,10 +66,10 @@ async function render(file: File, ctx: RenderContext): Promise<void> {
     canvas.height = Math.ceil(viewport.height);
     canvas.style.width = `${Math.ceil(viewport.width / dpr)}px`;
     canvas.setAttribute("role", "img");
-    canvas.setAttribute("aria-label", `Page ${n}`);
+    canvas.setAttribute("aria-label", t(S.pageAria)(n));
 
     const context = canvas.getContext("2d");
-    if (!context) throw new Error("This browser refused a 2D canvas context.");
+    if (!context) throw new Error(t(S.noCanvas));
 
     ctx.host.append(canvas);
     await page.render({ canvas, canvasContext: context, viewport }).promise;
@@ -92,7 +91,7 @@ async function rasterisePages(
   const out: Blob[] = [];
   try {
     for (let n = 1; n <= doc.numPages; n += 1) {
-      report(`Rendering page ${n} of ${doc.numPages}…`);
+      report(t(S.renderingPage)(n, doc.numPages));
       const page = await doc.getPage(n);
       const viewport = page.getViewport({ scale: PAGE_SCALE });
 
@@ -100,7 +99,7 @@ async function rasterisePages(
       canvas.width = Math.ceil(viewport.width);
       canvas.height = Math.ceil(viewport.height);
       const context = canvas.getContext("2d");
-      if (!context) throw new Error("This browser refused a 2D canvas context.");
+      if (!context) throw new Error(t(S.noCanvas));
 
       // JPEG has no alpha, so an untouched canvas would export as black.
       if (type === "image/jpeg") {
@@ -127,10 +126,10 @@ function conversions(file: File): ConversionTarget[] {
   const pageArchive = (type: RasterType, label: string): ConversionTarget => ({
     id: RASTER_EXT[type],
     label,
-    note: "one image per page, delivered as a .zip",
+    note: t(S.noteZip),
     run: async ({ report }) => {
       const pages = await rasterisePages(file, type, report);
-      report("Building the archive…");
+      report(t(S.buildingArchive));
       const zip = await makeZip(
         pages.map((blob, i) => ({
           name: `${stem}-${pageLabel(i + 1, pages.length)}.${RASTER_EXT[type]}`,
@@ -141,7 +140,10 @@ function conversions(file: File): ConversionTarget[] {
     },
   });
 
-  return [pageArchive("image/png", "PNG pages"), pageArchive("image/jpeg", "JPEG pages")];
+  return [
+    pageArchive("image/png", t(S.labelPngPages)),
+    pageArchive("image/jpeg", t(S.labelJpegPages)),
+  ];
 }
 
 export const handler: FormatHandler = { label: "PDF", render, conversions };

@@ -8,6 +8,7 @@
 
 import type { ConversionTarget } from "../../convert/types";
 import { saveBlob } from "../../convert/save";
+import { S, t } from "../../i18n";
 
 export interface ExportBarOptions {
   host: HTMLElement;
@@ -27,11 +28,11 @@ export function mountExportBar({
   // A labelled group, so a screen reader announces what this row of buttons is
   // for before reading the buttons themselves.
   bar.setAttribute("role", "group");
-  bar.setAttribute("aria-label", "Convert and save this document");
+  bar.setAttribute("aria-label", t(S.saveAsAria));
 
   const label = document.createElement("span");
   label.className = "exportbar-label";
-  label.textContent = "Save as";
+  label.textContent = t(S.saveAs);
   label.setAttribute("aria-hidden", "true");
   bar.append(label);
 
@@ -50,17 +51,17 @@ export function mountExportBar({
       const buttons = [...bar.querySelectorAll("button")];
       for (const b of buttons) b.disabled = true;
       const original = button.textContent;
-      button.textContent = "Working…";
+      button.textContent = t(S.working);
       bar.setAttribute("aria-busy", "true");
 
       try {
         const result = await target.run({ report });
         saveBlob(result.blob, result.name);
-        report(`Saved ${result.name}`);
+        report(t(S.saved)(result.name));
         bar.dataset.lastSaved = result.name;
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
-        report(`Could not convert: ${message}`);
+        report(t(S.convertFailed)(message));
         console.error(error);
       } finally {
         button.textContent = original;

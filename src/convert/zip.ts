@@ -10,6 +10,8 @@
  * save roughly nothing. Storing also means no dependency and no WASM.
  */
 
+import { S, t } from "../i18n";
+
 const LOCAL_SIG = 0x04034b50;
 const CENTRAL_SIG = 0x02014b50;
 const EOCD_SIG = 0x06054b50;
@@ -93,9 +95,7 @@ export async function makeZip(entries: ZipEntry[]): Promise<Blob> {
     offset += 30 + nameBytes.length + data.length;
 
     if (offset > MAX_TOTAL) {
-      throw new Error(
-        "That export is larger than 4 GB, which this archive format cannot hold. Try exporting fewer pages.",
-      );
+      throw new Error(t(S.zipTooBig));
     }
   }
 

@@ -116,6 +116,25 @@ body {
   transform: none;
 }
 
+/*
+ * Language toggle. Recessed on purpose: it must be findable by someone in the
+ * wrong language, but it is not the action anyone came here to perform, and
+ * giving it the same weight as "open a file" would misrepresent the hierarchy.
+ */
+.button-quiet {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+}
+
+.button-quiet:hover {
+  background: var(--paper-hover);
+  border-color: var(--rule);
+  box-shadow: none;
+}
+
 .stage {
   position: relative;
   overflow: hidden;
