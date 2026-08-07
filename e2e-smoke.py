@@ -10,11 +10,36 @@ import re
 import sys
 import tempfile
 import zipfile
+from urllib.parse import urlsplit
+
 from playwright.sync_api import sync_playwright
 
-URL = "http://localhost:4173/"
-HWP = "/Users/hanhyojung/Downloads/행정학개론(지방행정 포함)(지방9급)-D.hwp"
-PDF = "/Users/hanhyojung/Downloads/행정학개론(지방행정 포함)(지방9급)-D.pdf"
+URL = os.environ.get("HANJI_URL", "http://localhost:4173/")
+# Derived, not hard-coded: the foreign-request assertion is the product's whole
+# claim, and a stale literal port would classify our own assets as egress —
+# turning the most important check in the suite into noise.
+_parts = urlsplit(URL)
+ORIGIN = f"{_parts.scheme}://{_parts.netloc}"
+
+# Fixtures are supplied rather than committed: the sample used during
+# development is a Korean civil-service exam paper, and shipping arbitrary
+# real-world documents in a public repository is a habit worth not forming.
+#
+# Any HWP and any PDF will do — the page-count assertions read the numbers off
+# the documents themselves rather than hard-coding 2.
+HWP = os.environ.get("HANJI_FIXTURE_HWP", "")
+PDF = os.environ.get("HANJI_FIXTURE_PDF", "")
+
+if not HWP or not PDF:
+    sys.exit(
+        "This suite needs two documents to drive.\n\n"
+        "  export HANJI_FIXTURE_HWP=/path/to/any.hwp\n"
+        "  export HANJI_FIXTURE_PDF=/path/to/any.pdf\n"
+        "  npm run preview   # in another shell\n"
+        "  python3 e2e-smoke.py\n\n"
+        "Override the address with HANJI_URL if preview is not on :4173 — the "
+        "port is Vite's default and another project may already hold it."
+    )
 
 failures = []
 
@@ -41,7 +66,7 @@ with sync_playwright() as p:
     page.on(
         "request",
         lambda r: foreign.append(r.url)
-        if not r.url.startswith("http://localhost:4173")
+        if not r.url.startswith(ORIGIN)
         and not r.url.startswith("blob:")
         and not r.url.startswith("data:")
         else None,
@@ -63,14 +88,16 @@ with sync_playwright() as p:
     page.wait_for_timeout(2500)
     hwp_pages = page.locator(".viewer img.page").count()
     status = page.inner_text("#status")
-    check("HWP renders pages", hwp_pages == 2, f"-> {hwp_pages} pages, status: {status!r}")
+    # Any HWP will do, so the bar is "it rendered something", and the observed
+    # count becomes the yardstick every later page assertion is measured against.
+    check("HWP renders pages", hwp_pages >= 1, f"-> {hwp_pages} pages, status: {status!r}")
 
     # --- PDF ---
     page.set_input_files('input[type=file]', PDF)
     page.wait_for_selector(".viewer canvas.page", timeout=60000)
     page.wait_for_timeout(2500)
     pdf_pages = page.locator(".viewer canvas.page").count()
-    check("PDF renders pages", pdf_pages == 2, f"-> {pdf_pages} pages")
+    check("PDF renders pages", pdf_pages >= 1, f"-> {pdf_pages} pages")
 
     # --- unsupported format must fail visibly, not silently ---
     page.set_input_files('input[type=file]', __file__)
@@ -95,7 +122,7 @@ with sync_playwright() as p:
           and "page" in page.inner_text("#status"),
           f'-> status {page.inner_text("#status")!r}')
     check("the open document survives the switch",
-          page.locator(".viewer img.page").count() == 2,
+          page.locator(".viewer img.page").count() == hwp_pages,
           f'-> {page.locator(".viewer img.page").count()} pages')
     page.click("#lang-toggle")
     page.wait_for_selector(".exportbar-button", timeout=60000)
@@ -199,7 +226,7 @@ with sync_playwright() as p:
     conv.on(
         "request",
         lambda r: foreign.append(r.url)
-        if not r.url.startswith("http://localhost:4173")
+        if not r.url.startswith(ORIGIN)
         and not r.url.startswith("blob:")
         and not r.url.startswith("data:")
         else None,
@@ -235,11 +262,13 @@ with sync_playwright() as p:
 
     out = convert(HWP, "png")
     entries = zipfile.ZipFile(out).namelist() if zipfile.is_zipfile(out) else []
-    check("HWP converts to one PNG per page", len(entries) == 2, f"-> {len(entries)} entries")
+    check("HWP converts to one PNG per page", len(entries) == hwp_pages,
+          f"-> {len(entries)} entries for {hwp_pages} pages")
 
     out = convert(PDF, "png")
     entries = zipfile.ZipFile(out).namelist() if zipfile.is_zipfile(out) else []
-    check("PDF converts to one PNG per page", len(entries) == 2, f"-> {len(entries)} entries")
+    check("PDF converts to one PNG per page", len(entries) == pdf_pages,
+          f"-> {len(entries)} entries for {pdf_pages} pages")
 
     # The output has to be openable, so feed the converted HWPX straight back in.
     conv.set_input_files("input[type=file]", hwpx)
@@ -247,7 +276,7 @@ with sync_playwright() as p:
     conv.wait_for_timeout(2500)
     check(
         "the converted HWPX reopens",
-        conv.locator(".viewer img.page").count() == 2,
+        conv.locator(".viewer img.page").count() == hwp_pages,
         f"-> {conv.locator('.viewer img.page').count()} pages",
     )
     conv.close()

@@ -133,10 +133,23 @@ npm run dev            # web, http://localhost:5173
 npm run build          # typecheck + production build
 npm run desktop:dev    # native window, hot-reloads the same frontend
 npm run desktop:build  # .dmg / .exe into src-tauri/target/release/bundle
-python3 e2e-smoke.py   # headless browser test (needs `npm run preview` on :4173)
 ```
 
 The desktop build needs a [Rust toolchain](https://rustup.rs); the web build does not.
+
+The end-to-end suite drives a real Chromium against the production build and asserts on what
+appears on screen — including the zero-egress claim, which it verifies itself by recording every
+request rather than trusting the badge's own count. Point it at any two documents you have:
+
+```bash
+export HANJI_FIXTURE_HWP=/path/to/any.hwp
+export HANJI_FIXTURE_PDF=/path/to/any.pdf
+npm run preview &      # HANJI_URL overrides the address if :4173 is taken
+python3 e2e-smoke.py
+```
+
+Fixtures are supplied rather than committed. Page counts are read off whatever you provide instead
+of being hard-coded, so "one PNG per page" is checked against the pages that actually rendered.
 
 The dev server sets the same COOP/COEP headers as production so cross-origin-isolation problems
 surface locally instead of after deploy.

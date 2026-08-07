@@ -13,8 +13,10 @@ staged animation over a file picker — so if drag-and-drop ever breaks, the dem
 breaks with it rather than continuing to advertise a feature that stopped
 working.
 
-    python3 demo-record.py            # needs `npm run preview` on :4173
-    → docs/media/demo.mp4  (+ .gif if ffmpeg's palette filters are available)
+    export HANJI_FIXTURE_HWP=/path/to/any.hwp
+    npm run preview &                 # :4173, or set HANJI_URL
+    python3 demo-record.py
+    → docs/media/demo.mp4 and demo.gif
 """
 
 import base64
@@ -26,7 +28,7 @@ import sys
 
 from playwright.sync_api import sync_playwright
 
-HWP = pathlib.Path.home() / "Downloads" / "행정학개론(지방행정 포함)(지방9급)-D.hwp"
+HWP = pathlib.Path(os.environ.get("HANJI_FIXTURE_HWP", ""))
 OUT = pathlib.Path(__file__).parent / "docs" / "media"
 
 # Overridable because 4173 is Vite's shared default and another project's server
@@ -66,8 +68,13 @@ def caption(page, text: str, sub: str = "") -> None:
 
 
 def main() -> int:
-    if not HWP.exists():
-        print(f"missing sample document: {HWP}", file=sys.stderr)
+    if not HWP.name or not HWP.exists():
+        print(
+            "Set HANJI_FIXTURE_HWP to a Hangul document to record with.\n"
+            "Any .hwp will do; it is not committed, because the demo shows its "
+            "contents on screen and that should always be a deliberate choice.",
+            file=sys.stderr,
+        )
         return 1
     OUT.mkdir(parents=True, exist_ok=True)
 
