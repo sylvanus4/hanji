@@ -22,6 +22,23 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/*
+ * Korean line breaking.
+ *
+ * Browsers treat Hangul like Chinese and Japanese and will break a line between
+ * any two syllables, so the headline rendered as "문서를 끌어다 놓으세 / 요." —
+ * a word split down the middle on the product's first screen. keep-all restricts
+ * breaks to spaces, which is how Korean is actually set.
+ *
+ * The pair matters: keep-all alone makes a single long unspaced token overflow
+ * its container instead of wrapping, so break-word stays as the escape hatch for
+ * things like a long file name in the status line.
+ */
+:lang(ko) {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
 :focus-visible {
   outline: none;
   box-shadow: var(--ring);

@@ -1,0 +1,68 @@
+name: release
+
+# Desktop builds cannot cross-compile: a Windows installer has to be produced on
+# Windows and a macOS bundle on macOS. That is the only reason this matrix
+# exists — the app itself is identical on both.
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # One universal bundle rather than separate Intel and Apple Silicon
+          # downloads. It costs a second Rust target and saves every visitor
+          # from having to know which Mac they own.
+          - platform: macos-latest
+            target: universal-apple-darwin
+            label: macOS
+          - platform: windows-latest
+            target: ""
+            label: Windows
+
+    runs-on: ${{ matrix.platform }}
+    name: ${{ matrix.label }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+
+      - run: npm ci
+
+      # Type errors should fail here, not halfway through a ten-minute Rust
+      # build on two runners.
+      - run: npm run typecheck
+
+      - uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ github.ref_name }}
+          releaseName: hanji ${{ github.ref_name }}
+          releaseBody: |
+            설치 방법과 사용법은 [README](https://github.com/sylvanus4/hanji#설치)를 봐주세요.
+
+            **macOS**: 내려받은 앱은 서명되어 있지 않아 처음 열 때 경고가 뜹니다.
+            앱을 **우클릭 → 열기**로 한 번만 실행하면 이후로는 그냥 열립니다.
+          releaseDraft: true
+          prerelease: false
+          args: ${{ matrix.target && format('--target {0}', matrix.target) || '' }}

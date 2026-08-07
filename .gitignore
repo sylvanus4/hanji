@@ -5,3 +5,9 @@ dist/
 .DS_Store
 .env
 .env.*
+
+# Rust build output and Tauri's generated schemas. The vendored WASM engine in
+# vendor/ is deliberately NOT ignored — it is a patched build we produce
+# ourselves and CI has no way to reproduce it. See vendor/README.md.
+src-tauri/target/
+src-tauri/gen/

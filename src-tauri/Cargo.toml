@@ -1,0 +1,33 @@
+[package]
+name = "hanji"
+version = "0.1.0"
+description = "Local-first document viewer and converter"
+edition = "2021"
+license = "MIT"
+rust-version = "1.77.2"
+
+[lib]
+# Tauri v2 keeps the app in a lib so the same code builds for desktop and mobile.
+name = "hanji_lib"
+crate-type = ["lib", "cdylib", "staticlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+# dialog: the native Save panel. fs: writing the bytes the panel chose.
+#
+# No HTTP client, no network feature, nothing that can reach outside the
+# machine. That absence is the product, so it is worth stating here rather than
+# leaving someone to infer it from what is missing.
+tauri-plugin-dialog = "2"
+tauri-plugin-fs = "2"
+
+[profile.release]
+# The bundle ships to people over a home connection; size is worth the compile.
+opt-level = "s"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true

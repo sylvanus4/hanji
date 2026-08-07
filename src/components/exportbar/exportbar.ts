@@ -56,9 +56,12 @@ export function mountExportBar({
 
       try {
         const result = await target.run({ report });
-        saveBlob(result.blob, result.name);
-        report(t(S.saved)(result.name));
-        bar.dataset.lastSaved = result.name;
+        // Desktop puts up a Save panel the user can dismiss; the browser cannot
+        // be cancelled. Reporting the outcome rather than the intent keeps the
+        // status line truthful in both shells.
+        const written = await saveBlob(result.blob, result.name);
+        report(written ? t(S.saved)(result.name) : t(S.saveCancelled));
+        if (written) bar.dataset.lastSaved = result.name;
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
         report(t(S.convertFailed)(message));

@@ -88,7 +88,7 @@ export const S = {
   },
   sentCleanTitle: {
     ko: (assets: number) =>
-      `어디로도 전송되지 않았습니다. 이 사이트 자체 파일 ${assets}건만 불러왔습니다.`,
+      `어디로도 전송되지 않았습니다. 이 앱 자체 파일 ${assets}건만 불러왔습니다.`,
     en: (assets: number) =>
       `Nothing has been sent anywhere. ${assets} local asset loads.`,
   },
@@ -105,6 +105,14 @@ export const S = {
   emptyBody: {
     ko: "한글(HWP·HWPX), PDF, 이미지 파일을 이 탭 안에서 실행되는 코드가 엽니다. 업로드하지 않으니 나중에 지울 것도 없습니다.",
     en: "Hangul, PDF and image files are opened by code running in this tab. Nothing is uploaded, so nothing has to be deleted afterwards.",
+  },
+  // Desktop says something stronger, not just something different. A web page
+  // can only promise it does not upload; an installed app can invite you to pull
+  // the network and watch it keep working, which is a claim you can check in ten
+  // seconds rather than take on faith. (It also has no "tab" to speak of.)
+  emptyBodyDesktop: {
+    ko: "한글(HWP·HWPX), PDF, 이미지 파일을 이 컴퓨터 안에서 엽니다. 인터넷을 꺼두고 써보세요. 그대로 동작합니다.",
+    en: "Hangul, PDF and image files are opened on this computer. Try it with the network switched off — it keeps working.",
   },
 
   // ---- viewer ----
@@ -172,6 +180,9 @@ export const S = {
     ko: (name: string) => `${name} 저장됨`,
     en: (name: string) => `Saved ${name}`,
   },
+  // Desktop only: the native Save panel was dismissed. The conversion itself
+  // succeeded, so this is not phrased as a failure.
+  saveCancelled: { ko: "저장을 취소했습니다", en: "Save cancelled" },
   convertFailed: {
     ko: (why: string) => `변환하지 못했습니다: ${why}`,
     en: (why: string) => `Could not convert: ${why}`,

@@ -21,6 +21,7 @@ import {
   UnsupportedFormatError,
 } from "./formats/registry";
 import { getLang, onLangChange, S, setLang, t } from "./i18n";
+import { isDesktop } from "./platform";
 import {
   cycleTheme,
   effectiveTheme,
@@ -96,7 +97,9 @@ function emptyState(): void {
     </div>
   `;
   stage!.querySelector(".empty-title")!.textContent = t(S.emptyTitle);
-  stage!.querySelector(".empty-sub")!.textContent = t(S.emptyBody);
+  stage!.querySelector(".empty-sub")!.textContent = t(
+    isDesktop() ? S.emptyBodyDesktop : S.emptyBody,
+  );
 }
 
 function shell(): {

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "hanji",
+  "version": "0.1.0",
+  "identifier": "app.hanji.desktop",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:5173",
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "hanji",
+        "width": 1100,
+        "height": 760,
+        "minWidth": 380,
+        "minHeight": 480,
+        "resizable": true,
+        "center": true,
+        "dragDropEnabled": false
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' ipc: http://ipc.localhost blob: data:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'none'"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "category": "Productivity",
+    "shortDescription": "문서가 이 기기를 벗어나지 않습니다",
+    "longDescription": "한글(HWP·HWPX), PDF, 이미지 파일을 열고 변환합니다. 네트워크를 쓰지 않으므로 랜선을 뽑아도 동작합니다.",
+    "copyright": "MIT licensed",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  }
+}
