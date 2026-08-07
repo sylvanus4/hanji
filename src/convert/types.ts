@@ -15,6 +15,30 @@ export interface ConvertedFile {
 export interface ConversionContext {
   /** Progress text; conversions of large documents are not instant. */
   report: (message: string) => void;
+  /**
+   * What the user typed into this target's field, if it declared one. Empty
+   * string when the field exists but was left blank; undefined when the target
+   * has no field at all.
+   */
+  value?: string;
+}
+
+/**
+ * A field a target needs before it can run.
+ *
+ * Only one target so far wants this: keeping a page range out of a PDF needs to
+ * know which pages, and there is no sane default to guess. It is deliberately a
+ * single free-text box rather than a page-picker UI. A picker means rendering
+ * every page as a selectable thumbnail, which is a large surface for something
+ * people can express in six characters.
+ */
+export interface TargetInput {
+  /** Shown inside the empty field, as an example rather than an instruction. */
+  placeholder: string;
+  /** Accessible name; the field has no visible label next to it. */
+  label: string;
+  /** Message shown if the button is pressed with the field empty. */
+  required: string;
 }
 
 export interface ConversionTarget {
@@ -27,6 +51,7 @@ export interface ConversionTarget {
    * loses selectable text; that is the kind of thing that belongs here.
    */
   note?: string;
+  input?: TargetInput;
   run: (ctx: ConversionContext) => Promise<ConvertedFile>;
 }
 

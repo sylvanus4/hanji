@@ -350,3 +350,51 @@ body {
     margin-block-end: var(--space-2xs);
   }
 }
+
+/* ---------- video ---------- */
+
+.video-page {
+  /*
+   * Sized like a page rather than filling the viewer. A clip is being examined
+   * for a frame worth keeping, not watched, and full-bleed video would push the
+   * conversion controls off screen on a laptop.
+   */
+  max-inline-size: min(100%, 900px);
+  inline-size: 100%;
+  block-size: auto;
+  background: oklch(20% 0 0);
+  border-radius: var(--radius-xs);
+  box-shadow: var(--lift-2);
+}
+
+/* ---------- several files at once ---------- */
+
+.batch-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--space-sm);
+  inline-size: 100%;
+  max-inline-size: 900px;
+}
+
+.batch-thumb {
+  inline-size: 100%;
+  aspect-ratio: 1;
+  /* contain, not cover: the point of this grid is checking the batch and its
+     order, and a crop can hide which photo is which. */
+  object-fit: contain;
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-xs);
+}
+
+.batch-list {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+  max-inline-size: 60ch;
+  margin: 0;
+  padding-inline-start: 2.5ch;
+  display: grid;
+  gap: var(--space-2xs);
+}

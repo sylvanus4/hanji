@@ -47,9 +47,15 @@ newly relevant to a lot of people who never thought about it before.
 
 | | |
 |---|---|
-| View | HWP, HWPX, HML, PDF, PNG/JPEG/WebP/GIF/BMP/SVG/AVIF |
+| View | HWP, HWPX, HML, PDF, images, video (MP4/MOV/WebM) |
 | Convert | HWP ↔ HWPX ↔ HML · Hangul → PDF / PNG · PDF → PNG / JPEG · image → PNG / JPEG / WebP |
-| Edit | not yet |
+| Edit | PDF split, rotate, keep-a-page-range, merge |
+| Make | video → stills or GIF · images → GIF or PDF |
+
+Drop several files at once and the app switches from "what is in this document" to "make one thing
+out of these": merge the PDFs, or turn the photos into a GIF or a PDF. Order comes from the
+filenames rather than from the drag, because a multi-file drop hands over whatever order the
+operating system felt like and the user cannot see it.
 
 **HWP → HWPX is the one worth calling out.** Korean public bodies were required from 2026-05-18 to
 move to open document formats, and HWPX is the open one. The engine exports it natively, so the
@@ -175,9 +181,12 @@ claims to upload your file. Cloudflare Pages meters neither and sends both.
 - [x] Viewer: HWP/HWPX, PDF, images
 - [x] Network-zero badge with a test that enforces it
 - [x] Convert: HWP ↔ HWPX ↔ HML, Hangul → PDF/PNG, PDF → image, image → image
+- [x] Edit: PDF split, rotate, page-range extract, merge
+- [x] Video → stills / GIF, and images → GIF / PDF, without shipping a codec
 - [ ] HEIC → JPEG (iPhone photos; needs a lazily-loaded decoder, no browser ships one)
 - [ ] Vector PDF export, so exported text stays selectable
-- [ ] Edit: PDF merge/split/rotate/reorder, Hangul text edits with re-save
+- [ ] Reordering pages, which unlike the rest genuinely needs a page-picker UI
+- [ ] Hangul text edits with re-save
 - [ ] Fidelity corpus of real Hangul documents — no baseline exists for this ecosystem
 - [x] Desktop app for Windows and macOS
 - [ ] PWA / full offline
@@ -218,6 +227,24 @@ stays deliberately dense — the size only grows under `(pointer: coarse)`.
 The header wraps rather than sitting in a fixed-height row. Raising touch targets to 44px made the
 controls stop fitting one line at 320px and forced a 37px overflow; wrapping fixes the cause instead
 of shrinking the targets back.
+
+## Why there is no ffmpeg in here
+
+Extracting a still and building a short GIF are the two things people ask a video tool for without
+wanting a video tool, and neither needs a codec of our own. A `<video>` element drawn onto a canvas
+gets frames out of anything the platform can already play, which is MP4/H.264 and WebM everywhere
+this app runs. GIF encoding is `gifenc`, about 10 kB gzipped and lazily imported.
+
+Bundling ffmpeg was the obvious alternative and was rejected on measurement. The app is 9.3 MB; a
+static ffmpeg is 70 to 90 MB, so it would have been roughly ten times the entire product. The
+common builds are configured `--enable-gpl --enable-libx264`, which does not make MIT code GPL but
+does put GPL obligations on the distributed bundle, and whether a tightly integrated sidecar counts
+as mere aggregation is contested ground a solo maintainer should not volunteer for. And a project
+whose central claim is "read the dependency list, there is no network client in it" does not want
+to answer for several hundred container and codec parsers.
+
+The honest cost of the choice: exotic codecs will not open, and there is no trimming, no
+re-encoding, no audio. That is a video editor's job and this is not one.
 
 ## Korean typography
 

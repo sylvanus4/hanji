@@ -13,14 +13,19 @@ export interface DropzoneOptions {
   stage: HTMLElement;
   trigger: HTMLElement;
   accept: string[];
-  onFile: (file: File) => void;
+  /**
+   * Receives everything that was dropped or picked, in the order the platform
+   * handed it over. Callers that need a deterministic order sort by name
+   * themselves; this layer does not decide that for them.
+   */
+  onFiles: (files: File[]) => void;
 }
 
 export function mountDropzone({
   stage,
   trigger,
   accept,
-  onFile,
+  onFiles,
 }: DropzoneOptions): void {
   const input = document.createElement("input");
   input.type = "file";
@@ -32,9 +37,13 @@ export function mountDropzone({
   label();
   onLangChange(label);
   input.accept = accept.map((e) => `.${e}`).join(",");
+  // Multiple because merging PDFs and building a GIF are both "these files, as
+  // one thing", and making someone open them one at a time would make those
+  // features impossible rather than merely tedious.
+  input.multiple = true;
   input.addEventListener("change", () => {
-    const file = input.files?.[0];
-    if (file) onFile(file);
+    const files = [...(input.files ?? [])];
+    if (files.length > 0) onFiles(files);
     input.value = "";
   });
   // Deliberately parented to <body>, not to the stage: the stage's innerHTML is
@@ -72,8 +81,8 @@ export function mountDropzone({
     e.preventDefault();
     depth = 0;
     setDragging(false);
-    const file = e.dataTransfer?.files?.[0];
-    if (file) onFile(file);
+    const files = [...(e.dataTransfer?.files ?? [])];
+    if (files.length > 0) onFiles(files);
   });
 
   // A file dropped anywhere else would otherwise navigate the tab away and

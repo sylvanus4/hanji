@@ -29,6 +29,33 @@ ORIGIN = f"{_parts.scheme}://{_parts.netloc}"
 # the documents themselves rather than hard-coding 2.
 HWP = os.environ.get("HANJI_FIXTURE_HWP", "")
 PDF = os.environ.get("HANJI_FIXTURE_PDF", "")
+# Optional. The video and image batch checks are skipped rather than failed when
+# these are absent, because they exercise added features and should not stop
+# someone verifying the core claim.
+VIDEO = os.environ.get("HANJI_FIXTURE_VIDEO", "")
+IMAGES = sorted(
+    p for p in os.environ.get("HANJI_FIXTURE_IMAGES", "").split(os.pathsep) if p
+)
+
+
+def pdf_page_count(browser_page, path: str) -> int:
+    """Count pages by reopening the file in the app and counting what renders.
+
+    An earlier version scanned the bytes for /Type /Page markers and reported
+    zero for every file, because pdf-lib writes page dictionaries into
+    deflate-compressed object streams where those markers do not appear as plain
+    text. The comment defending that shortcut claimed our own output was the
+    safe case to parse crudely; our own output was in fact exactly the case it
+    could not read.
+
+    Feeding the file back through the viewer needs no new dependency and asserts
+    something stronger anyway: not that the bytes contain a marker, but that the
+    document opens and shows the pages it should.
+    """
+    browser_page.set_input_files("input[type=file]", path)
+    browser_page.wait_for_selector(".viewer canvas.page", timeout=90000)
+    browser_page.wait_for_timeout(1500)
+    return browser_page.locator(".viewer canvas.page").count()
 
 if not HWP or not PDF:
     sys.exit(
@@ -269,6 +296,111 @@ with sync_playwright() as p:
     entries = zipfile.ZipFile(out).namelist() if zipfile.is_zipfile(out) else []
     check("PDF converts to one PNG per page", len(entries) == pdf_pages,
           f"-> {len(entries)} entries for {pdf_pages} pages")
+
+    # --- PDF editing ---
+    #
+    # These are the lossless operations: the output must still be a real PDF
+    # whose text a reader can select, which is the whole reason they exist
+    # rather than being another rasterise-and-hope path.
+    out = convert(PDF, "split")
+    entries = zipfile.ZipFile(out).namelist() if zipfile.is_zipfile(out) else []
+    check("PDF splits into one file per page", len(entries) == pdf_pages,
+          f"-> {len(entries)} entries for {pdf_pages} pages")
+    if entries:
+        with zipfile.ZipFile(out) as z:
+            check("each split piece is a real PDF",
+                  z.read(entries[0])[:5] == b"%PDF-")
+
+    out = convert(PDF, "rotate")
+    check("PDF rotates and stays a PDF", open(out, "rb").read(5) == b"%PDF-")
+    rotated_pages = pdf_page_count(conv, out)
+    check("rotating keeps every page", rotated_pages == pdf_pages,
+          f"-> {rotated_pages} pages")
+
+    conv.set_input_files("input[type=file]", PDF)
+    conv.wait_for_selector(".exportbar-field", timeout=60000)
+    conv.fill(".exportbar-field", "1")
+    with conv.expect_download(timeout=120000) as handle:
+        conv.click(".exportbar-button[data-target=extract]")
+    extracted = os.path.join(tempfile.gettempdir(), "hanji-e2e-extract.pdf")
+    handle.value.save_as(extracted)
+    kept = pdf_page_count(conv, extracted)
+    check("page range keeps only the pages asked for", kept == 1,
+          f"-> {kept} pages from spec '1'")
+
+    # An empty field must not silently produce a broken file.
+    conv.set_input_files("input[type=file]", PDF)
+    conv.wait_for_selector(".exportbar-field", timeout=60000)
+    conv.fill(".exportbar-field", "")
+    conv.click(".exportbar-button[data-target=extract]")
+    conv.wait_for_timeout(400)
+    check("empty page range refuses instead of guessing",
+          "쪽 번호" in conv.inner_text("#status"),
+          f'-> {conv.inner_text("#status")!r}')
+
+    # --- video: frames without ffmpeg ---
+    if os.path.exists(VIDEO):
+        conv.set_input_files("input[type=file]", VIDEO)
+        conv.wait_for_selector(".viewer video.page", timeout=60000)
+        check("video opens with the platform decoder",
+              conv.locator(".viewer video.page").count() == 1)
+
+        out = convert(VIDEO, "stills")
+        entries = zipfile.ZipFile(out).namelist() if zipfile.is_zipfile(out) else []
+        check("video yields still frames", len(entries) >= 1,
+              f"-> {len(entries)} stills")
+
+        out = convert(VIDEO, "gif")
+        with open(out, "rb") as fh:
+            head = fh.read(6)
+        check("video yields a real GIF", head in (b"GIF89a", b"GIF87a"),
+              f"-> magic {head!r}, {os.path.getsize(out)} bytes")
+
+    # --- several files at once ---
+    #
+    # Multi-file intake is what makes merge and GIF possible at all, so these
+    # check the intake as much as the encoders.
+    conv.set_input_files("input[type=file]", IMAGES)
+    conv.wait_for_selector(".batch-thumb", timeout=60000)
+    check("a batch of images shows every one of them",
+          conv.locator(".batch-thumb").count() == len(IMAGES),
+          f"-> {conv.locator('.batch-thumb').count()} thumbnails")
+
+    def convert_many(paths, target_id):
+        conv.set_input_files("input[type=file]", paths)
+        conv.wait_for_selector(
+            f".exportbar-button[data-target={target_id}]", timeout=60000
+        )
+        with conv.expect_download(timeout=180000) as handle:
+            conv.click(f".exportbar-button[data-target={target_id}]")
+        download = handle.value
+        suffix = os.path.splitext(download.suggested_filename)[1]
+        out = os.path.join(tempfile.gettempdir(), f"hanji-e2e-many-{target_id}{suffix}")
+        download.save_as(out)
+        return out
+
+    out = convert_many(IMAGES, "gif")
+    with open(out, "rb") as fh:
+        head = fh.read(6)
+    check("images become a real GIF", head in (b"GIF89a", b"GIF87a"),
+          f"-> magic {head!r}, {os.path.getsize(out)} bytes")
+
+    out = convert_many(IMAGES, "pdf")
+    made = pdf_page_count(conv, out)
+    check("images become one PDF page each", made == len(IMAGES),
+          f"-> {made} pages for {len(IMAGES)} images")
+
+    out = convert_many([PDF, PDF], "merge")
+    merged = pdf_page_count(conv, out)
+    check("merging two PDFs sums their pages", merged == pdf_pages * 2,
+          f"-> {merged} pages, expected {pdf_pages * 2}")
+
+    # Mixing kinds has no sensible answer, so it must say so rather than pick one.
+    conv.set_input_files("input[type=file]", [PDF, IMAGES[0]])
+    conv.wait_for_selector(".viewer-error", timeout=30000)
+    check("a mixed batch explains itself",
+          "같은 종류" in conv.inner_text(".viewer-error"),
+          f'-> {conv.inner_text(".viewer-error")[:50]!r}')
 
     # The output has to be openable, so feed the converted HWPX straight back in.
     conv.set_input_files("input[type=file]", hwpx)

@@ -140,7 +140,54 @@ function conversions(file: File): ConversionTarget[] {
     },
   });
 
+  // Editing targets come first. Splitting or rotating keeps the document a real
+  // PDF with selectable text, while the raster exports below throw that away, so
+  // the lossless operations should be the ones a user reaches first.
+  const editing: ConversionTarget[] = [
+    {
+      id: "split",
+      label: t(S.labelSplitPages),
+      note: t(S.noteSplitPages),
+      run: async ({ report }) => {
+        const { splitPdfPages } = await import("../convert/pdfedit");
+        const parts = await splitPdfPages(file, { report });
+        report(t(S.buildingArchive));
+        return {
+          name: `${stem}-pages.zip`,
+          blob: await makeZip(parts),
+        };
+      },
+    },
+    {
+      id: "rotate",
+      label: t(S.labelRotate)(90),
+      note: t(S.noteRotate),
+      run: async () => {
+        const { rotatePdf } = await import("../convert/pdfedit");
+        return { name: `${stem}-rotated.pdf`, blob: await rotatePdf(file, 1) };
+      },
+    },
+    {
+      id: "extract",
+      label: t(S.labelExtractPages),
+      note: t(S.noteExtractPages),
+      input: {
+        placeholder: t(S.pageSpecPlaceholder),
+        label: t(S.pageSpecLabel),
+        required: t(S.pageSpecEmpty),
+      },
+      run: async ({ value }) => {
+        const { extractPages } = await import("../convert/pdfedit");
+        return {
+          name: `${stem}-p${(value ?? "").replace(/[^0-9]+/g, "-")}.pdf`,
+          blob: await extractPages(file, value ?? ""),
+        };
+      },
+    },
+  ];
+
   return [
+    ...editing,
     pageArchive("image/png", t(S.labelPngPages)),
     pageArchive("image/jpeg", t(S.labelJpegPages)),
   ];

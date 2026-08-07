@@ -20,6 +20,8 @@ import {
   supportedExtensions,
   UnsupportedFormatError,
 } from "./formats/registry";
+import { MixedBatchError } from "./formats/batch";
+import type { ConversionTarget } from "./convert/types";
 import { getLang, onLangChange, S, setLang, t } from "./i18n";
 import { isDesktop } from "./platform";
 import {
@@ -57,7 +59,7 @@ mountNetBadge(badgeHost);
  * a Hangul document) and much better than either reloading the page or leaving
  * half the interface in the old language.
  */
-let openFile: File | null = null;
+let openFiles: File[] = [];
 
 /** Half-filled circle for system, sun for light, moon for dark. */
 const THEME_GLYPH = { system: "◐", light: "☀", dark: "☾" } as const;
@@ -121,27 +123,39 @@ function shell(): {
   };
 }
 
-async function open(file: File): Promise<void> {
-  openFile = file;
+async function open(files: File[]): Promise<void> {
+  const [first] = files;
+  if (!first) return;
+  openFiles = files;
+
   const { viewer, status, toolbar } = shell();
   const report = (message: string) => {
     status.textContent = message;
   };
 
-  report(t(S.opening)(file.name));
+  report(
+    files.length === 1
+      ? t(S.opening)(first.name)
+      : t(S.openingMany)(files.length),
+  );
 
   try {
-    const handler = await resolveHandler(file);
-    await handler.render(file, { host: viewer, report });
+    // One file is a document; several are a job to do with them. The two paths
+    // stay separate rather than treating a single file as a batch of one,
+    // because "merge these" and "what is in this" are different questions and
+    // collapsing them would put merge buttons under every PDF a user opens.
+    const targets =
+      files.length === 1
+        ? await openOne(first, viewer, report)
+        : await openMany(files, viewer, report);
 
     // Mounted only after a successful render: offering to convert a document
     // that failed to open would be offering something we cannot deliver.
-    const targets = handler.conversions?.(file) ?? [];
     const { mountExportBar } = await import("./components/exportbar/exportbar");
     mountExportBar({ host: toolbar, targets, report });
   } catch (error) {
     const message =
-      error instanceof UnsupportedFormatError
+      error instanceof UnsupportedFormatError || error instanceof MixedBatchError
         ? error.describe()
         : error instanceof Error
           ? error.message
@@ -152,10 +166,34 @@ async function open(file: File): Promise<void> {
     viewer.innerHTML = "";
     const box = document.createElement("p");
     box.className = "viewer-error";
-    box.textContent = t(S.openFailed)(file.name, message);
+    box.textContent =
+      files.length === 1
+        ? t(S.openFailed)(first.name, message)
+        : t(S.openFailedMany)(files.length, message);
     viewer.append(box);
     console.error(error);
   }
+}
+
+async function openOne(
+  file: File,
+  viewer: HTMLElement,
+  report: (message: string) => void,
+): Promise<ConversionTarget[]> {
+  const handler = await resolveHandler(file);
+  await handler.render(file, { host: viewer, report });
+  return handler.conversions?.(file) ?? [];
+}
+
+async function openMany(
+  files: File[],
+  viewer: HTMLElement,
+  report: (message: string) => void,
+): Promise<ConversionTarget[]> {
+  const { resolveBatch } = await import("./formats/batch");
+  const handler = resolveBatch(files);
+  await handler.render(files, { host: viewer, report });
+  return handler.conversions(files);
 }
 
 langButton.addEventListener("click", () => {
@@ -170,7 +208,7 @@ onThemeChange(paintTheme);
 
 onLangChange(() => {
   paintChrome();
-  if (openFile) void open(openFile);
+  if (openFiles.length > 0) void open(openFiles);
   else emptyState();
 });
 
@@ -178,7 +216,7 @@ mountDropzone({
   stage,
   trigger: openButton,
   accept: supportedExtensions,
-  onFile: open,
+  onFiles: open,
 });
 
 paintChrome();

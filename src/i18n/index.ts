@@ -103,16 +103,16 @@ export const S = {
     en: "Drop a document. It stays on this device.",
   },
   emptyBody: {
-    ko: "한글(HWP·HWPX), PDF, 이미지 파일을 이 탭 안에서 실행되는 코드가 엽니다. 업로드하지 않으니 나중에 지울 것도 없습니다.",
-    en: "Hangul, PDF and image files are opened by code running in this tab. Nothing is uploaded, so nothing has to be deleted afterwards.",
+    ko: "한글(HWP·HWPX), PDF, 이미지, 동영상을 이 탭 안에서 실행되는 코드가 엽니다. 여러 개를 한꺼번에 놓으면 합치거나 GIF로 만들 수 있습니다.",
+    en: "Hangul, PDF, image and video files are opened by code running in this tab. Drop several at once to merge them or turn them into a GIF.",
   },
   // Desktop says something stronger, not just something different. A web page
   // can only promise it does not upload; an installed app can invite you to pull
   // the network and watch it keep working, which is a claim you can check in ten
   // seconds rather than take on faith. (It also has no "tab" to speak of.)
   emptyBodyDesktop: {
-    ko: "한글(HWP·HWPX), PDF, 이미지 파일을 이 컴퓨터 안에서 엽니다. 인터넷을 꺼두고 써보세요. 그대로 동작합니다.",
-    en: "Hangul, PDF and image files are opened on this computer. Try it with the network switched off — it keeps working.",
+    ko: "한글(HWP·HWPX), PDF, 이미지, 동영상을 이 컴퓨터 안에서 엽니다. 인터넷을 꺼두고 써보세요. 그대로 동작합니다.",
+    en: "Hangul, PDF, image and video files are opened on this computer. Try it with the network switched off, it keeps working.",
   },
 
   // ---- viewer ----
@@ -224,5 +224,114 @@ export const S = {
       `이 브라우저가 ${type} 형식으로 인코딩하지 못했습니다. 쪽 크기가 너무 클 수 있습니다.`,
     en: (type: string) =>
       `This browser could not encode the image as ${type}. The page may be too large.`,
+  },
+
+  // ---- video ----
+  //
+  // We decode with the platform's own player rather than shipping ffmpeg, so a
+  // failure here means "this machine has no decoder for that codec" and not
+  // "the file is broken". The message says so, because the two call for
+  // completely different next steps from the user.
+  videoUndecodable: {
+    ko: "이 영상을 재생할 수 없습니다. 컴퓨터에 해당 코덱이 없거나 파일이 손상됐을 수 있습니다. MP4(H.264)나 WebM은 대부분 열립니다.",
+    en: "This video could not be decoded. The codec may not be available on this machine, or the file may be damaged. MP4 (H.264) and WebM open almost everywhere.",
+  },
+  videoOpened: {
+    ko: (w: number, h: number, s: number) => `${w} × ${h}, ${s}초`,
+    en: (w: number, h: number, s: number) => `${w} × ${h}, ${s}s`,
+  },
+  extractingFrame: {
+    ko: (n: number, total: number) => `${total}장 중 ${n}장 뽑는 중…`,
+    en: (n: number, total: number) => `Extracting frame ${n} of ${total}…`,
+  },
+  labelCurrentFrame: { ko: "이 장면 저장", en: "Save this frame" },
+  noteCurrentFrame: {
+    ko: "재생 위치의 화면을 원본 해상도 PNG로 저장합니다",
+    en: "saves the frame at the playhead as a full-resolution PNG",
+  },
+  labelStills: { ko: "장면 여러 장", en: "Stills" },
+  noteStills: {
+    ko: (max: number) => `영상 전체에서 고르게 최대 ${max}장, .zip으로 묶어 저장`,
+    en: (max: number) => `up to ${max} evenly spaced frames, delivered as a .zip`,
+  },
+  labelGif: { ko: "GIF로 만들기", en: "Make a GIF" },
+  noteVideoGif: {
+    ko: (secs: number) => `재생 위치부터 약 ${secs}초, 소리는 빠집니다`,
+    en: (secs: number) => `about ${secs}s from the playhead, without sound`,
+  },
+
+  // ---- several files at once ----
+  // Blaming one file for a batch problem sends the user off to inspect a file
+  // that is fine. The fault is in the combination, so the message says that.
+  openFailedMany: {
+    ko: (n: number, why: string) => `${n}개를 열지 못했습니다. ${why}`,
+    en: (n: number, why: string) => `Those ${n} files could not be opened. ${why}`,
+  },
+  openingMany: {
+    ko: (n: number) => `${n}개 여는 중…`,
+    en: (n: number) => `Opening ${n} files…`,
+  },
+  batchOpened: {
+    ko: (n: number, kind: string) => `${kind} ${n}개`,
+    en: (n: number, kind: string) => `${n} ${kind}`,
+  },
+  batchKindImage: { ko: "이미지", en: "images" },
+  batchKindPdf: { ko: "PDF", en: "PDFs" },
+  batchMixed: {
+    ko: "여러 개를 한 번에 열 때는 같은 종류여야 합니다. 이미지끼리, 또는 PDF끼리 놓아주세요.",
+    en: "Opening several files at once needs them to be the same kind. Drop images together, or PDFs together.",
+  },
+  batchOrder: {
+    ko: "이름 순서대로 처리합니다. 순서를 바꾸려면 파일 이름 앞에 번호를 붙여주세요.",
+    en: "Processed in filename order. To change the order, number the filenames.",
+  },
+  labelMergePdf: { ko: "하나로 합치기", en: "Merge into one" },
+  noteMergePdf: {
+    ko: "놓은 순서가 아니라 파일 이름 순서로 이어 붙입니다",
+    en: "joined in filename order, not the order they were dropped",
+  },
+  labelImagesToGif: { ko: "GIF로 만들기", en: "Make a GIF" },
+  noteImagesToGif: {
+    ko: "한 장당 0.5초, 첫 장 크기에 맞춰 나머지를 담습니다",
+    en: "half a second per image, fitted to the first image's size",
+  },
+  labelImagesToPdf: { ko: "PDF로 묶기", en: "Combine into a PDF" },
+  noteImagesToPdf: {
+    ko: "한 장당 한 쪽, 이름 순서대로",
+    en: "one page per image, in filename order",
+  },
+
+  // ---- PDF editing ----
+  labelSplitPages: { ko: "낱장으로 나누기", en: "Split into pages" },
+  noteSplitPages: {
+    ko: "쪽마다 PDF 한 개, .zip으로 묶어 저장",
+    en: "one PDF per page, delivered as a .zip",
+  },
+  labelRotate: {
+    ko: (deg: number) => `${deg}° 돌리기`,
+    en: (deg: number) => `Rotate ${deg}°`,
+  },
+  noteRotate: {
+    ko: "모든 쪽을 지금 각도에서 더 돌립니다. 다시 그리지 않아 글자는 그대로 남습니다",
+    en: "turns every page from its current angle. Nothing is re-rendered, so the text stays selectable",
+  },
+  labelExtractPages: { ko: "고른 쪽만 저장", en: "Keep only these pages" },
+  noteExtractPages: {
+    ko: "예: 1-3,7 처럼 적으면 그 쪽만 남깁니다",
+    en: "for example 1-3,7 keeps just those pages",
+  },
+  pageSpecPlaceholder: { ko: "1-3,7", en: "1-3,7" },
+  pageSpecLabel: { ko: "남길 쪽 번호", en: "Pages to keep" },
+  pageSpecEmpty: {
+    ko: "남길 쪽 번호를 먼저 적어주세요.",
+    en: "Type which pages to keep first.",
+  },
+  mergingFile: {
+    ko: (n: number, total: number) => `${total}개 중 ${n}개째 합치는 중…`,
+    en: (n: number, total: number) => `Merging ${n} of ${total}…`,
+  },
+  splittingPage: {
+    ko: (n: number, total: number) => `${total}쪽 중 ${n}쪽 나누는 중…`,
+    en: (n: number, total: number) => `Splitting page ${n} of ${total}…`,
   },
 } as const;

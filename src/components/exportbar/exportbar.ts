@@ -37,6 +37,26 @@ export function mountExportBar({
   bar.append(label);
 
   for (const target of targets) {
+    // A target that needs a value gets its field and button wrapped together, so
+    // the two never wrap onto separate lines and leave an orphaned input whose
+    // purpose is no longer visible.
+    const group = target.input ? document.createElement("span") : bar;
+    if (group !== bar) group.className = "exportbar-group";
+
+    let field: HTMLInputElement | null = null;
+    if (target.input) {
+      field = document.createElement("input");
+      field.type = "text";
+      field.className = "exportbar-field";
+      field.placeholder = target.input.placeholder;
+      field.setAttribute("aria-label", target.input.label);
+      // inputmode rather than type=number: the value is a range expression like
+      // 1-3,7, which a numeric input would refuse to hold.
+      field.inputMode = "numeric";
+      field.size = 8;
+      group.append(field);
+    }
+
     const button = document.createElement("button");
     button.type = "button";
     button.className = "exportbar-button";
@@ -44,18 +64,35 @@ export function mountExportBar({
     button.textContent = target.label;
     if (target.note) button.title = target.note;
 
+    if (field) {
+      // Typing a range and pressing Enter is the obvious gesture, and leaving it
+      // inert would make the field feel broken.
+      field.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" && !button.disabled) button.click();
+      });
+    }
+
     button.addEventListener("click", async () => {
+      const value = field ? field.value.trim() : undefined;
+      if (target.input && !value) {
+        report(target.input.required);
+        field?.focus();
+        return;
+      }
+
       // Every button is disabled, not just the clicked one: these conversions
       // re-parse the document and compete for the same memory, and two large
       // exports at once is the fastest way to lose a mobile tab.
       const buttons = [...bar.querySelectorAll("button")];
+      const fields = [...bar.querySelectorAll("input")];
       for (const b of buttons) b.disabled = true;
+      for (const f of fields) f.disabled = true;
       const original = button.textContent;
       button.textContent = t(S.working);
       bar.setAttribute("aria-busy", "true");
 
       try {
-        const result = await target.run({ report });
+        const result = await target.run({ report, value });
         // Desktop puts up a Save panel the user can dismiss; the browser cannot
         // be cancelled. Reporting the outcome rather than the intent keeps the
         // status line truthful in both shells.
@@ -69,6 +106,7 @@ export function mountExportBar({
       } finally {
         button.textContent = original;
         for (const b of buttons) b.disabled = false;
+        for (const f of fields) f.disabled = false;
         bar.removeAttribute("aria-busy");
         // Return focus to the button that started this. Re-enabling a disabled
         // element drops focus to <body>, which strands keyboard users.
@@ -76,7 +114,8 @@ export function mountExportBar({
       }
     });
 
-    bar.append(button);
+    group.append(button);
+    if (group !== bar) bar.append(group);
   }
 
   const notes = targets.filter((t) => t.note);

@@ -44,6 +44,12 @@ const byExtension: Record<string, Loader> = {
   bmp: () => import("./image").then((m) => m.handler),
   svg: () => import("./image").then((m) => m.handler),
   avif: () => import("./image").then((m) => m.handler),
+  // Decoded by the platform's own player rather than a bundled codec, so this
+  // list is what every target supports and not what any one of them might.
+  mp4: () => import("./video").then((m) => m.handler),
+  m4v: () => import("./video").then((m) => m.handler),
+  mov: () => import("./video").then((m) => m.handler),
+  webm: () => import("./video").then((m) => m.handler),
 };
 
 export const supportedExtensions = Object.keys(byExtension);
