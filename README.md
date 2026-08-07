@@ -18,7 +18,7 @@ build if a single foreign request appears.
 |---|---|
 | **Windows** | [Releases](../../releases)에서 `-setup.exe` 받아 실행 |
 | **macOS** | [Releases](../../releases)에서 `-universal.dmg` 받아 Applications로 드래그 → **첫 실행만 우클릭 → 열기** |
-| **브라우저** | 설치 없이 바로 사용 (기능 동일) |
+| **브라우저** | 설치 없는 웹 버전은 준비 중 (기능은 동일, 주소 공개 전) |
 
 macOS builds are unsigned — an Apple Developer certificate is $99/year and this is a free tool, so
 the first launch needs right-click → Open. Windows shows a SmartScreen notice for the same reason.
