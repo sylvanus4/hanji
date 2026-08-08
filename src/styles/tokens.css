@@ -25,9 +25,15 @@
   --rule-strong: oklch(80% 0.006 85);
 
   /* ---- the one accent. reserved for the no-upload proof. ----
+     Green because it is a status, not a brand: it says the request count is
+     still zero. Not to be confused with the seal on the app's mark, which is
+     vermillion — the mark used to be green too, and stopped being green the day
+     it turned out to look like a well-known spreadsheet. The name survives
+     because this token is older; the colours mean different things.
+
      Guard-rail: at 52% this measures 4.74:1 on --paper — over WCAG AA, but by
-     only 0.24. Lightening the seal or darkening the paper tips it under; if
-     either moves, re-measure before shipping. */
+     only 0.24. Lightening it or darkening the paper tips it under; if either
+     moves, re-measure before shipping. */
   --seal: oklch(52% 0.17 152);
   --seal-wash: oklch(52% 0.17 152 / 0.10);
 

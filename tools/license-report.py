@@ -147,11 +147,19 @@ def cargo_packages() -> list[Package]:
     # Windows is still distributed — to Windows users.
     out: dict[tuple[str, str], Package] = {}
     for target in TARGETS:
-        meta = subprocess.run(
-            ["cargo", "metadata", "--format-version", "1",
-             "--filter-platform", target],
-            cwd=tauri, capture_output=True, text=True,
-        )
+        try:
+            meta = subprocess.run(
+                ["cargo", "metadata", "--format-version", "1",
+                 "--filter-platform", target],
+                cwd=tauri, capture_output=True, text=True,
+            )
+        except FileNotFoundError:
+            # No Rust toolchain here. Worth saying out loud rather than dying:
+            # this exact traceback failed a CI job that had npm but not cargo,
+            # and an exception reads like a licence problem when it is a missing
+            # program.
+            print("  cargo not installed; skipping the Rust half", file=sys.stderr)
+            return []
         if meta.returncode != 0:
             print(f"  cargo metadata ({target}) unavailable: "
                   f"{meta.stderr.strip()[:160]}", file=sys.stderr)

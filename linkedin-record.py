@@ -54,7 +54,9 @@ APP_H = round(VIEW["height"] * APP_W / VIEW["width"])   # 784
 TOP = 250                                              # headline band
 BOTTOM = FRAME_H - TOP - APP_H                         # 316, caption band
 
-PAPER, INK, SOFT, SEAL = "#fcfaf7", "#1a1814", "#5a5854", "#008231"
+# The seal is the vermillion of the app's mark, not the green of the badge.
+# The two were the same colour until the mark stopped being a green tile.
+PAPER, INK, SOFT, SEAL = "#fcfaf7", "#1a1814", "#5a5854", "#b23a2e"
 
 
 # --------------------------------------------------------------------------
@@ -115,6 +117,25 @@ def case_hangul(page):
     page.wait_for_timeout(2200)
     page.click(".exportbar [data-target=pdf]")
     page.wait_for_timeout(2600)
+
+
+def case_print(page):
+    drop(page, [FIXTURES / "예시-문서.hwpx"])
+    page.wait_for_selector(".viewer img.page", timeout=60000)
+    page.wait_for_timeout(1900)
+    page.hover(".exportbar [data-target=print]")
+    page.wait_for_timeout(900)
+    # The print dialog belongs to the operating system and cannot be filmed, so
+    # the call is stubbed. What the viewer sees instead is the more useful half:
+    # the same pages with the interface taken off, which is what would actually
+    # have gone to the printer.
+    page.evaluate("() => { window.print = () => {}; }")
+    page.click(".exportbar [data-target=print]")
+    page.wait_for_timeout(1100)
+    page.emulate_media(media="print")
+    page.wait_for_timeout(3200)
+    page.emulate_media(media="screen")
+    page.wait_for_timeout(600)
 
 
 def case_pdf(page):
@@ -302,22 +323,26 @@ def main():
         sys.exit(f"Fixtures not found at {FIXTURES}. Set HANJI_FIXTURE_DIR.")
 
     cases = [
-        {"id": "hangul", "fn": case_hangul, "secs": 13,
+        {"id": "hangul", "fn": case_hangul, "secs": 12,
          "step": "01 · 한글 문서",
          "head": "공공기관이 요구하는<br>형식으로 바꿉니다",
          "sub": "HWP·HWPX를 열고 PDF나 개방형 포맷으로. 어디에도 올리지 않습니다."},
-        {"id": "pdf", "fn": case_pdf, "secs": 12,
-         "step": "02 · PDF",
+        {"id": "print", "fn": case_print, "secs": 11,
+         "step": "02 · 인쇄",
+         "head": "화면 그대로<br>종이로 나갑니다",
+         "sub": "도구 막대도 배지도 빠집니다. 한 쪽이 한 장으로 나갑니다."},
+        {"id": "pdf", "fn": case_pdf, "secs": 10,
+         "step": "03 · PDF",
          "head": "필요한 쪽만<br>골라냅니다",
          "sub": "쪽 번호만 적으면 됩니다. 다시 그리지 않아 글자는 그대로 남습니다."},
-        {"id": "gif", "fn": case_gif, "secs": 13,
-         "step": "03 · 사진 여러 장",
+        {"id": "gif", "fn": case_gif, "secs": 11,
+         "step": "04 · 사진 여러 장",
          "head": "고르면 바로<br>GIF가 됩니다",
          "sub": "슬라이드쇼·타임랩스·왕복 재생처럼 쓰임새로 고릅니다."},
     ]
     if VIDEO and pathlib.Path(VIDEO).exists():
-        cases.append({"id": "video", "fn": case_video, "secs": 12,
-                      "step": "04 · 동영상",
+        cases.append({"id": "video", "fn": case_video, "secs": 10,
+                      "step": "05 · 동영상",
                       "head": "장면을 사진으로<br>뽑아냅니다",
                       "sub": "영상 전체에서 고르게. ffmpeg 설치는 필요 없습니다."})
     else:

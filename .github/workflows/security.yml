@@ -67,7 +67,7 @@ jobs:
       # Second opinion across both ecosystems from a different advisory
       # database, because npm and RustSec do not always carry the same finding
       # at the same time.
-      - uses: google/osv-scanner-action/osv-scanner-action@v2
+      - uses: google/osv-scanner-action/osv-scanner-action@v2.5.0
         with:
           scan-args: |-
             --lockfile=package-lock.json
@@ -111,17 +111,23 @@ jobs:
         with:
           node-version: 22
       - run: npm ci
+      # The Rust half of the inventory needs a toolchain. Without one the
+      # report silently covers only npm, which is the half less likely to
+      # surprise anybody.
+      - uses: dtolnay/rust-toolchain@stable
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
       # Fails only on licences that would change what this project may be.
       # Per-file copyleft is disclosed in THIRD_PARTY_LICENSES.md rather than
       # failed on, because failing on a thing that is merely to be documented
       # teaches everyone to pass --no-verify.
       - run: python3 tools/license-report.py --check
 
-      - name: notice file is current
-        run: |
-          python3 tools/license-report.py
-          git diff --exit-code -- THIRD_PARTY_LICENSES.md \
-            || { echo "THIRD_PARTY_LICENSES.md is stale; regenerate and commit it"; exit 1; }
+      # Deliberately not diffing the committed notice file against a freshly
+      # generated one. The licence *texts* are read out of each package's own
+      # directory, and a cargo registry populated differently from a developer's
+      # produces a different file for reasons that have nothing to do with
+      # licensing. A guard that fails for environmental reasons gets ignored,
+      # and then it is guarding nothing.
