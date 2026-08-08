@@ -75,6 +75,7 @@ jobs:
       - uses: google/osv-scanner-action/osv-scanner-action@v2.5.0
         with:
           scan-args: |-
+            --config=osv-scanner.toml
             --lockfile=package-lock.json
             --lockfile=src-tauri/Cargo.lock
 

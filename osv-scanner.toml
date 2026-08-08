@@ -1,0 +1,82 @@
+# Advisories that do not reach anything we ship.
+#
+# Every entry here has a reason, and the reason is the point: a suppression file
+# without one becomes a place where real findings go to be forgotten. Nothing is
+# ignored because it is inconvenient — the two categories below are "not in the
+# binary" and "unmaintained, no defect claimed".
+#
+# This file does not silence new findings. Anything not listed by ID still fails
+# the scan, which is what it is for.
+#
+# Re-derive the first category with:
+#   cargo metadata --filter-platform aarch64-apple-darwin
+# and check whether the crate is in resolve.nodes. If it is, it ships, and the
+# entry has to come out.
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2024-0411"
+reason = """Linux-only GUI stack. Tauri depends on gtk-rs for its Linux target, so these appear in a Cargo.lock that is platform-agnostic by design, but nothing here is compiled into the macOS or Windows binaries that are actually distributed. Verified with `cargo metadata --filter-platform`: absent from aarch64-apple-darwin, x86_64-apple-darwin and x86_64-pc-windows-msvc."""
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2024-0412"
+reason = """Linux-only GUI stack. Tauri depends on gtk-rs for its Linux target, so these appear in a Cargo.lock that is platform-agnostic by design, but nothing here is compiled into the macOS or Windows binaries that are actually distributed. Verified with `cargo metadata --filter-platform`: absent from aarch64-apple-darwin, x86_64-apple-darwin and x86_64-pc-windows-msvc."""
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2024-0413"
+reason = """Linux-only GUI stack. Tauri depends on gtk-rs for its Linux target, so these appear in a Cargo.lock that is platform-agnostic by design, but nothing here is compiled into the macOS or Windows binaries that are actually distributed. Verified with `cargo metadata --filter-platform`: absent from aarch64-apple-darwin, x86_64-apple-darwin and x86_64-pc-windows-msvc."""
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2024-0414"
+reason = """Linux-only GUI stack. Tauri depends on gtk-rs for its Linux target, so these appear in a Cargo.lock that is platform-agnostic by design, but nothing here is compiled into the macOS or Windows binaries that are actually distributed. Verified with `cargo metadata --filter-platform`: absent from aarch64-apple-darwin, x86_64-apple-darwin and x86_64-pc-windows-msvc."""
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2024-0415"
+reason = """Linux-only GUI stack. Tauri depends on gtk-rs for its Linux target, so these appear in a Cargo.lock that is platform-agnostic by design, but nothing here is compiled into the macOS or Windows binaries that are actually distributed. Verified with `cargo metadata --filter-platform`: absent from aarch64-apple-darwin, x86_64-apple-darwin and x86_64-pc-windows-msvc."""
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2024-0416"
+reason = """Linux-only GUI stack. Tauri depends on gtk-rs for its Linux target, so these appear in a Cargo.lock that is platform-agnostic by design, but nothing here is compiled into the macOS or Windows binaries that are actually distributed. Verified with `cargo metadata --filter-platform`: absent from aarch64-apple-darwin, x86_64-apple-darwin and x86_64-pc-windows-msvc."""
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2024-0417"
+reason = """Linux-only GUI stack. Tauri depends on gtk-rs for its Linux target, so these appear in a Cargo.lock that is platform-agnostic by design, but nothing here is compiled into the macOS or Windows binaries that are actually distributed. Verified with `cargo metadata --filter-platform`: absent from aarch64-apple-darwin, x86_64-apple-darwin and x86_64-pc-windows-msvc."""
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2024-0418"
+reason = """Linux-only GUI stack. Tauri depends on gtk-rs for its Linux target, so these appear in a Cargo.lock that is platform-agnostic by design, but nothing here is compiled into the macOS or Windows binaries that are actually distributed. Verified with `cargo metadata --filter-platform`: absent from aarch64-apple-darwin, x86_64-apple-darwin and x86_64-pc-windows-msvc."""
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2024-0419"
+reason = """Linux-only GUI stack. Tauri depends on gtk-rs for its Linux target, so these appear in a Cargo.lock that is platform-agnostic by design, but nothing here is compiled into the macOS or Windows binaries that are actually distributed. Verified with `cargo metadata --filter-platform`: absent from aarch64-apple-darwin, x86_64-apple-darwin and x86_64-pc-windows-msvc."""
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2024-0420"
+reason = """Linux-only GUI stack. Tauri depends on gtk-rs for its Linux target, so these appear in a Cargo.lock that is platform-agnostic by design, but nothing here is compiled into the macOS or Windows binaries that are actually distributed. Verified with `cargo metadata --filter-platform`: absent from aarch64-apple-darwin, x86_64-apple-darwin and x86_64-pc-windows-msvc."""
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2024-0429"
+reason = """Linux-only GUI stack. Tauri depends on gtk-rs for its Linux target, so these appear in a Cargo.lock that is platform-agnostic by design, but nothing here is compiled into the macOS or Windows binaries that are actually distributed. Verified with `cargo metadata --filter-platform`: absent from aarch64-apple-darwin, x86_64-apple-darwin and x86_64-pc-windows-msvc."""
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2024-0370"
+reason = """Build-time only. A procedural-macro helper that runs during compilation and is not part of the produced binary."""
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2025-0075"
+reason = """Unmaintained, not vulnerable. The advisory records that the crate is no longer maintained; no defect is claimed. Pulled in transitively, and there is no upstream release to move to."""
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2025-0080"
+reason = """Unmaintained, not vulnerable. The advisory records that the crate is no longer maintained; no defect is claimed. Pulled in transitively, and there is no upstream release to move to."""
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2025-0081"
+reason = """Unmaintained, not vulnerable. The advisory records that the crate is no longer maintained; no defect is claimed. Pulled in transitively, and there is no upstream release to move to."""
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2025-0098"
+reason = """Unmaintained, not vulnerable. The advisory records that the crate is no longer maintained; no defect is claimed. Pulled in transitively, and there is no upstream release to move to."""
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2025-0100"
+reason = """Unmaintained, not vulnerable. The advisory records that the crate is no longer maintained; no defect is claimed. Pulled in transitively, and there is no upstream release to move to."""
