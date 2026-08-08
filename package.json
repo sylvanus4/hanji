@@ -1,6 +1,6 @@
 {
   "name": "hanji",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "description": "Local-first document viewer and converter. Files never leave your device.",
@@ -23,7 +23,7 @@
     "@tauri-apps/plugin-fs": "^2.5.1",
     "gifenc": "^1.0.3",
     "pdf-lib": "^1.17.1",
-    "pdfjs-dist": "^5.4.149"
+    "pdfjs-dist": "^6.2.108"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2.11.4",

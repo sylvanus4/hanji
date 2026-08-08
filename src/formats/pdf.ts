@@ -39,6 +39,41 @@ function loadEngine(): Promise<typeof import("pdfjs-dist")> {
   return ready;
 }
 
+/**
+ * Start loading a PDF, with the surfaces we do not want left off.
+ *
+ * Every document opened here is untrusted by definition — the premise of the
+ * app is that people bring files other people sent them — so the engine's
+ * defaults deserve a second look rather than a shrug.
+ *
+ * `enableXfa` is off. XFA is effectively a second document format layered on
+ * PDF, an XML application that Adobe itself deprecated, and it is a large
+ * amount of parser to expose for a feature nobody here has asked for. It is
+ * already the default, which is exactly why it is written down: a default that
+ * flips in some future release would widen that surface in silence.
+ *
+ * There used to be an `isEvalSupported: false` alongside it, to stop pdf.js
+ * compiling embedded font programs through `eval`. pdf.js 6 removed the option
+ * because it removed the eval path, so passing it now would be a comforting
+ * no-op — and a reader would reasonably assume a defence was in place that the
+ * library no longer needs.
+ *
+ * None of this replaces keeping the engine current. Releases 5.6.83 through
+ * 6.2.107 carried an arbitrary-JavaScript-execution flaw reachable by opening a
+ * crafted file (GHSA-hq66-cqwq-w95j), and no option on this call would have
+ * blunted it. The dependency audit that caught it runs in CI for that reason.
+ *
+ * @returns the loading task, not the document. Callers that finish with a
+ * document must `destroy()` the task to shut down its worker; in pdf.js 6 that
+ * method lives here rather than on the document proxy.
+ */
+function openDocument(
+  pdfjs: Awaited<ReturnType<typeof loadEngine>>,
+  data: Uint8Array,
+) {
+  return pdfjs.getDocument({ data, enableXfa: false });
+}
+
 async function render(file: File, ctx: RenderContext): Promise<void> {
   ctx.report(t(S.loadingPdfEngine));
   const pdfjs = await loadEngine();
@@ -47,7 +82,7 @@ async function render(file: File, ctx: RenderContext): Promise<void> {
   const data = new Uint8Array(await file.arrayBuffer());
 
   const started = performance.now();
-  const doc = await pdfjs.getDocument({ data }).promise;
+  const doc = await openDocument(pdfjs, data).promise;
   const parseMs = Math.round(performance.now() - started);
 
   ctx.report(t(S.pagesOpened)(doc.numPages, parseMs));
@@ -84,9 +119,8 @@ async function rasterisePages(
   report: (message: string) => void,
 ): Promise<Blob[]> {
   const pdfjs = await loadEngine();
-  const doc = await pdfjs.getDocument({
-    data: new Uint8Array(await file.arrayBuffer()),
-  }).promise;
+  const task = openDocument(pdfjs, new Uint8Array(await file.arrayBuffer()));
+  const doc = await task.promise;
 
   const out: Blob[] = [];
   try {
@@ -115,7 +149,9 @@ async function rasterisePages(
       await new Promise((r) => setTimeout(r, 0));
     }
   } finally {
-    await doc.destroy();
+    // The loading task, not the document: pdf.js 6 moved teardown here, and it
+    // is what actually stops the worker rather than just dropping caches.
+    await task.destroy();
   }
   return out;
 }

@@ -1,6 +1,6 @@
 [package]
 name = "hanji"
-version = "0.1.0"
+version = "0.2.0"
 description = "Local-first document viewer and converter"
 edition = "2021"
 license = "MIT"

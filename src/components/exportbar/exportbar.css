@@ -214,3 +214,47 @@
     min-block-size: 44px;
   }
 }
+
+/*
+ * Print.
+ *
+ * Given a rule to its right rather than a colour or a fill. The bar is
+ * monochrome by policy — the accent belongs to the network badge alone — so
+ * separation has to come from structure. The rule says that what follows is a
+ * different kind of decision: everything to the right of it produces a file,
+ * and this one produces paper.
+ *
+ * It leads the row because for the readers this app was built for the printed
+ * copy is frequently the errand itself, and the converted file is only how they
+ * get there.
+ */
+.exportbar-print {
+  font-weight: 600;
+  margin-inline-end: var(--space-xs);
+  padding-inline-end: calc(0.75rem + var(--space-xs));
+  border-inline-end: 1px solid var(--rule-strong);
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+}
+
+@media (pointer: coarse) {
+  .exportbar-print {
+    min-block-size: 44px;
+  }
+}
+
+/*
+ * Never on the paper.
+ *
+ * Lives here rather than with the rest of the print rules in global.css for a
+ * cascade reason worth writing down: component stylesheets are imported after
+ * global.css, so `.exportbar { display: flex }` above is later in the cascade
+ * and beats an equally specific rule elsewhere — a media query adds no
+ * specificity. Hidden from the global sheet, the bar printed itself across the
+ * bottom of every sheet.
+ */
+@media print {
+  .exportbar {
+    display: none;
+  }
+}

@@ -1,30 +1,38 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="hanji">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64"
+     role="img" aria-label="hanji">
   <!--
-    A seal with ㅎ carved out of it — the first letter of 한지, in the same green
-    the app spends its only accent on. The design system calls that token
-    `--seal`, so the mark and the network-zero badge are literally made of the
-    same thing, and the icon is a stamp rather than a picture of a document.
+    A stamped sheet of paper.
 
-    Three earlier drafts were rendered at 1024, 128, 48 and 32 pixels and looked
-    at side by side. A sheet of paper with a small seal in the corner read fine
-    large and turned to mud by 48, because it asks two shapes to survive where
-    one barely does. A solid block with a single glyph knocked out of it is the
-    highest-contrast thing available at tab and dock size, so that is what this
-    is.
+    The mark this replaced was a green rounded tile carrying a Hangul letter,
+    and it borrowed two identities at once: a green tile with a white glyph
+    reads as a well-known spreadsheet, and a Korean consonant on a coloured tile
+    reads as the office suite this tool sits beside. Neither is ours to take,
+    and a document tool wearing somebody else's mark makes a claim about where
+    it came from before anyone has opened it.
 
-    The corner radius is tight here and much rounder in the app icon. That is
-    deliberate rather than inconsistent: the design tokens call for nearly square
-    corners because this is a paper tool, while macOS composites every icon into
-    a squircle and a near-square one looks foreign in a dock. See
-    src-tauri/icons/source.svg.
+    So it says what the thing is rather than spelling its name: warm paper, a
+    heading, a few lines of body, and a seal in the corner — the shape a Korean
+    official document takes once somebody has actually approved it. No
+    letterform, which also means it needs no redrawing to mean the same thing
+    in English.
 
-    Colours are literal rather than tokens: this file is fetched by the browser
-    chrome, outside the page's CSS.
+    The heading is short and heavier than the body. Three lines of equal weight
+    would read as a hamburger menu at small sizes, which was the first attempt
+    and the reason this one has a title.
+
+    Paper #ede3d2, ink #22252a, seal #b23a2e. The seal sits nine degrees off
+    square because a stamp pressed by hand never lands straight, and that tilt
+    is most of what keeps a red square from reading as a flag.
   -->
-  <rect x="2" y="2" width="60" height="60" rx="8" fill="#008231" />
-  <g fill="none" stroke="#fcfaf7" stroke-width="5" stroke-linecap="round">
-    <path d="M32 12.5v4.5" />
-    <path d="M20.5 24h23" />
+  <rect x="2" y="2" width="60" height="60" rx="10" fill="#ede3d2" />
+  <g stroke="#22252a" stroke-linecap="round" fill="none">
+    <path d="M14 18h22" stroke-width="5" />
+    <g stroke-width="3.5">
+      <path d="M14 28h34" />
+      <path d="M14 35h34" />
+      <path d="M14 42h22" />
+    </g>
   </g>
-  <circle cx="32" cy="40.5" r="9.5" fill="none" stroke="#fcfaf7" stroke-width="5" />
+  <rect x="41" y="44" width="13" height="13" rx="3" fill="#b23a2e"
+        transform="rotate(-9 47.5 50.5)" />
 </svg>

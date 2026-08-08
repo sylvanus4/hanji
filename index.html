@@ -43,18 +43,23 @@
       <header class="bar">
         <!--
           The mark is inline rather than an <img> so it inherits nothing from
-          the network and costs no request, and so the seal green stays exactly
-          the green the badge uses. aria-hidden because the <h1> next to it
-          already says the name; a screen reader announcing "hanji hanji" is
+          the network and costs no request. aria-hidden because the <h1> beside
+          it already says the name; a screen reader announcing "hanji hanji" is
           worse than one that ignores a decoration.
+
+          A stamped sheet: paper, three strokes of ink, a seal. Kept in step
+          with public/favicon.svg and src-tauri/icons/source.svg, which carry
+          the reasoning for why it is not a letter on a coloured tile.
         -->
         <svg class="wordmark-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-          <rect x="2" y="2" width="60" height="60" rx="8" fill="#008231" />
-          <g fill="none" stroke="#fcfaf7" stroke-width="5" stroke-linecap="round">
-            <path d="M32 12.5v4.5" />
-            <path d="M20.5 24h23" />
+          <rect x="2" y="2" width="60" height="60" rx="10" fill="#ede3d2" />
+          <g stroke="#22252a" stroke-width="4" stroke-linecap="round">
+            <path d="M14 19h32" />
+            <path d="M14 28h32" />
+            <path d="M14 37h18" />
           </g>
-          <circle cx="32" cy="40.5" r="9.5" fill="none" stroke="#fcfaf7" stroke-width="5" />
+          <rect x="36" y="38" width="14" height="14" rx="3" fill="#b23a2e"
+                transform="rotate(-9 43 45)" />
         </svg>
         <h1 class="wordmark">hanji<small id="tagline">이 기기 안에서</small></h1>
         <div class="bar-spacer"></div>

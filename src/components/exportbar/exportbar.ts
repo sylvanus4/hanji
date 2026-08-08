@@ -17,10 +17,25 @@ import type { ConversionTarget } from "../../convert/types";
 import { saveBlob } from "../../convert/save";
 import { S, t } from "../../i18n";
 
+/**
+ * Print, which is not a conversion.
+ *
+ * It shares the bar because it is the same kind of decision — "what do I do
+ * with this now" — but it produces no file, so it cannot be a ConversionTarget
+ * and is passed separately rather than being forced into that shape.
+ */
+export interface PrintAction {
+  /** Used for the accessible name; a bare "Print" says nothing about scope. */
+  pages: number;
+  run: () => Promise<void>;
+}
+
 export interface ExportBarOptions {
   host: HTMLElement;
   targets: ConversionTarget[];
   report: (message: string) => void;
+  /** Omitted when the view has nothing page-shaped on it, such as a video. */
+  print?: PrintAction;
   /**
    * A rule that governs every target rather than any one of them.
    *
@@ -36,9 +51,10 @@ export function mountExportBar({
   host,
   targets,
   report,
+  print,
   footnote,
 }: ExportBarOptions): void {
-  if (targets.length === 0) return;
+  if (targets.length === 0 && !print) return;
 
   const bar = document.createElement("div");
   bar.className = "exportbar";
@@ -53,6 +69,66 @@ export function mountExportBar({
   const row = document.createElement("div");
   row.className = "exportbar-row";
   bar.append(row);
+
+  /**
+   * Disable the whole bar for the duration of one action.
+   *
+   * Every control, not only the one clicked: these conversions re-parse the
+   * document and compete for the same memory, and two large exports at once is
+   * the fastest way to lose a mobile tab. Print takes the same lock, because a
+   * half-rendered conversion is not what anyone means to put on paper.
+   *
+   * @returns a function that re-enables exactly what it disabled.
+   */
+  function lockBar(): () => void {
+    const buttons = [...bar.querySelectorAll("button")];
+    const fields = [...bar.querySelectorAll("input")];
+    for (const b of buttons) b.disabled = true;
+    for (const f of fields) f.disabled = true;
+    bar.setAttribute("aria-busy", "true");
+    return () => {
+      for (const b of buttons) b.disabled = false;
+      for (const f of fields) f.disabled = false;
+      bar.removeAttribute("aria-busy");
+    };
+  }
+
+  // Print leads the row, ahead of the save formats. For a public-sector user
+  // the paper copy is usually the errand itself and the converted file is the
+  // means, so the errand goes first.
+  if (print) {
+    const slot = document.createElement("span");
+    slot.className = "exportbar-slot";
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "exportbar-button exportbar-print";
+    button.dataset.target = "print";
+    button.textContent = t(S.print);
+    button.setAttribute("aria-label", t(S.printAria)(print.pages));
+
+    button.addEventListener("click", async () => {
+      const unlock = lockBar();
+      try {
+        await print.run();
+        // "Opened the dialog", never "printed". What happens after the dialog
+        // appears is never reported back to the page, and claiming otherwise
+        // would be a lie told at the exact moment a user is checking whether
+        // this tool does what it says.
+        report(t(S.printOpened));
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        report(t(S.printFailed)(message));
+        console.error(error);
+      } finally {
+        unlock();
+        button.focus();
+      }
+    });
+
+    slot.append(button);
+    row.append(slot);
+  }
 
   if (plain.length > 0) {
     const label = document.createElement("span");
@@ -127,13 +203,7 @@ export function mountExportBar({
         return;
       }
 
-      // Every button is disabled, not just the clicked one: these conversions
-      // re-parse the document and compete for the same memory, and two large
-      // exports at once is the fastest way to lose a mobile tab.
-      const buttons = [...bar.querySelectorAll("button")];
-      const fields = [...bar.querySelectorAll("input")];
-      for (const b of buttons) b.disabled = true;
-      for (const f of fields) f.disabled = true;
+      const unlock = lockBar();
       // A chip's label is a two-line structure, so the progress word replaces
       // only the name and leaves the setting underneath in place.
       const slot = chip
@@ -141,7 +211,6 @@ export function mountExportBar({
         : button;
       const original = slot?.textContent ?? "";
       if (slot) slot.textContent = t(S.working);
-      bar.setAttribute("aria-busy", "true");
 
       try {
         const result = await target.run({ report, value });
@@ -157,9 +226,7 @@ export function mountExportBar({
         console.error(error);
       } finally {
         if (slot) slot.textContent = original;
-        for (const b of buttons) b.disabled = false;
-        for (const f of fields) f.disabled = false;
-        bar.removeAttribute("aria-busy");
+        unlock();
         // Return focus to the button that started this. Re-enabling a disabled
         // element drops focus to <body>, which strands keyboard users.
         button.focus();

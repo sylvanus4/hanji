@@ -169,6 +169,22 @@ export const S = {
     en: "The app shell is missing required elements.",
   },
 
+  // ---- print ----
+  print: { ko: "인쇄", en: "Print" },
+  printAria: {
+    ko: (pages: number) => `이 문서 ${pages}쪽을 인쇄`,
+    en: (pages: number) =>
+      `Print this document (${pages} ${pages === 1 ? "page" : "pages"})`,
+  },
+  // Deliberately not "인쇄했습니다". Handing the document to the system dialog
+  // is all this app can observe; whether a sheet came out, the job was saved as
+  // a PDF, or the dialog was dismissed is never reported back to the page.
+  printOpened: { ko: "인쇄 대화상자를 열었습니다", en: "Opened the print dialog" },
+  printFailed: {
+    ko: (why: string) => `인쇄할 수 없습니다: ${why}`,
+    en: (why: string) => `Could not print: ${why}`,
+  },
+
   // ---- conversion ----
   saveAs: { ko: "다른 형식으로 저장", en: "Save as" },
   saveAsAria: {

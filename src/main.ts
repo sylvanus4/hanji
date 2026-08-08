@@ -151,13 +151,24 @@ async function open(files: File[]): Promise<void> {
 
     // Mounted only after a successful render: offering to convert a document
     // that failed to open would be offering something we cannot deliver.
-    const { mountExportBar } = await import("./components/exportbar/exportbar");
+    const [{ mountExportBar }, { printablePages, printDocument }] =
+      await Promise.all([
+        import("./components/exportbar/exportbar"),
+        import("./print"),
+      ]);
+
+    // Asked of the rendered result rather than declared by the format handler,
+    // so a view only offers print when there is genuinely something page-shaped
+    // on screen. A video and a batch contact sheet both answer zero.
+    const pages = printablePages(viewer);
+
     // The ordering rule applies to every batch target at once, so it is stated
     // once under the bar instead of being repeated inside thirteen notes.
     mountExportBar({
       host: toolbar,
       targets,
       report,
+      ...(pages > 0 ? { print: { pages, run: printDocument } } : {}),
       ...(many ? { footnote: t(S.batchOrder) } : {}),
     });
   } catch (error) {

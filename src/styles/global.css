@@ -411,3 +411,87 @@ body {
   display: grid;
   gap: var(--space-2xs);
 }
+
+/* ---------- print ---------- */
+
+/*
+ * What actually reaches the paper.
+ *
+ * The screen layout is a fixed-height application shell: a bar, a scrolling
+ * stage, a toolbar pinned under the document. Handed to a printer unchanged it
+ * produces one sheet showing whatever happened to be scrolled into view, with a
+ * toolbar across the bottom. So print gets its own layout rather than a tweak
+ * of the screen one — every scroll container is unwound, and everything that is
+ * interface rather than document is removed.
+ *
+ * Removed rather than hidden off-screen: a public-sector document is often
+ * printed to be signed, stamped or filed, and a stray button in the margin of a
+ * filed document is not a cosmetic problem.
+ */
+@media print {
+  /*
+   * A modest margin instead of none. Most office printers cannot reach the edge
+   * of the sheet, and asking them to silently clips whatever sits there — which
+   * on a Hangul form is the border of the outermost table.
+   */
+  @page {
+    margin: 8mm;
+  }
+
+  /*
+   * The export bar hides itself, in its own stylesheet.
+   *
+   * It cannot be hidden from here: component stylesheets are imported after
+   * this one, so `.exportbar { display: flex }` lands later in the cascade and
+   * wins against an equally specific rule, media query or not. The bar printed
+   * itself across the bottom of every sheet until the rule moved next to the
+   * declaration it has to beat.
+   */
+  .bar,
+  .viewer-status,
+  .viewer-error,
+  #badge-host {
+    display: none;
+  }
+
+  /* Unwind the app shell: every one of these is a height-constrained or
+     scrolling box on screen, and any one of them left in place truncates the
+     document to a single sheet. */
+  html,
+  body,
+  .app,
+  .stage,
+  .viewer {
+    display: block;
+    block-size: auto;
+    min-block-size: 0;
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+  }
+
+  .page {
+    /* Sheet-fitting, not width-filling. A page image is taller than it is wide,
+       so sizing by width alone overflows the sheet and splits one document page
+       across two. Constraining both axes keeps the aspect ratio and guarantees
+       one document page per sheet. */
+    max-inline-size: 100%;
+    max-block-size: 100vh;
+    inline-size: auto;
+    block-size: auto;
+    margin: 0 auto;
+    /* The paper is the page; the drop shadow and rounded corner were standing
+       in for it on screen. */
+    box-shadow: none;
+    border-radius: 0;
+    break-inside: avoid;
+    break-after: page;
+  }
+
+  /* Without this the final sheet is followed by a blank one, which on a shared
+     office printer is how a document gets separated from its own last page. */
+  .page:last-of-type {
+    break-after: auto;
+  }
+}

@@ -11,18 +11,26 @@
 
     Colours are literal: this is fetched by crawlers, outside the page's CSS.
     They match tokens.css — paper #fcfaf7, ink #1a1814, ink-faint #5a5854,
-    rule #dcdad7, seal #008231.
+    rule #dcdad7. The badge keeps its green because green is what the badge
+    means in the app; the mark no longer uses it.
   -->
   <rect width="1200" height="630" fill="#fcfaf7" />
 
-  <!-- The seal, at the size a mark can carry a card. -->
-  <g transform="translate(96 96)">
-    <rect width="132" height="132" rx="18" fill="#008231" />
-    <g fill="none" stroke="#fcfaf7" stroke-width="10.5" stroke-linecap="round">
-      <path d="M66 26v9.5" />
-      <path d="M42 49.5h48" />
+  <!-- The mark, at the size one can carry a card. Kept in step with
+       public/favicon.svg, which explains why it is a stamped sheet and not a
+       letter on a coloured tile. -->
+  <g transform="translate(96 96) scale(2.0625)">
+    <rect width="64" height="64" rx="10" fill="#ede3d2" />
+    <g stroke="#22252a" stroke-linecap="round" fill="none">
+      <path d="M14 18h22" stroke-width="5" />
+      <g stroke-width="3.5">
+        <path d="M14 28h34" />
+        <path d="M14 35h34" />
+        <path d="M14 42h22" />
+      </g>
     </g>
-    <circle cx="66" cy="84" r="19.5" fill="none" stroke="#fcfaf7" stroke-width="10.5" />
+    <rect x="41" y="44" width="13" height="13" rx="3" fill="#b23a2e"
+          transform="rotate(-9 47.5 50.5)" />
   </g>
 
   <text x="256" y="152" font-family="Georgia, 'Times New Roman', serif" font-size="58"
@@ -47,5 +55,5 @@
           font-size="17" font-weight="600" fill="#008231">전송 0 · 0 sent</text>
   </g>
   <text x="316" y="577" font-family="-apple-system, 'Segoe UI', system-ui, sans-serif"
-        font-size="17" fill="#5a5854">macOS · Windows · 브라우저 · MIT 오픈소스</text>
+        font-size="17" fill="#5a5854">macOS · Windows · 브라우저 · 오픈소스</text>
 </svg>

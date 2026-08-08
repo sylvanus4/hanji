@@ -178,9 +178,23 @@ with sync_playwright() as p:
     geo.close()
 
     page_w = float(re.search(r'<svg[^>]*\bwidth="([\d.]+)"', svg).group(1))
+    # Only rectangles that are actually painted.
+    #
+    # <defs> holds the clip paths, and the engine emits one body clip per page
+    # that is wider than the sheet. Nothing inside <defs> is ever drawn, so
+    # counting those rectangles reports an overflow that no reader could see —
+    # which is exactly what it did, blaming a correctly placed table for a clip
+    # region sitting behind it at the same origin.
+    #
+    # Third time in this suite that a check has measured the wrong thing: the
+    # PDF page counter scanned for markers that live in compressed streams, the
+    # GIF frame counter matched its marker inside LZW data, and now this. The
+    # pattern is scanning a structured format as if it were flat text. When a
+    # check fails, confirm what it measured before believing what it claims.
+    painted = re.sub(r"<defs>.*?</defs>", "", svg, flags=re.S)
     edges = [
         float(x.group(1)) + float(w.group(1))
-        for r in re.findall(r"<rect[^>]*>", svg)
+        for r in re.findall(r"<rect[^>]*>", painted)
         if (x := re.search(r'\bx="([-\d.]+)"', r)) and (w := re.search(r'\bwidth="([-\d.]+)"', r))
     ]
     overflow = max(edges) - page_w
@@ -276,13 +290,28 @@ with sync_playwright() as p:
         download.save_as(out)
         return out
 
-    hwpx = convert(HWP, "hwpx")
-    entries = zipfile.ZipFile(hwpx).namelist() if zipfile.is_zipfile(hwpx) else []
-    check(
-        "HWP converts to a structurally valid HWPX",
-        "mimetype" in entries and any(e.startswith("Contents/") for e in entries),
-        f"-> {entries[:4]}",
-    )
+    # The Hangul handler offers whichever of HWP/HWPX the file is not, so which
+    # button to press depends on the fixture. Hard-coding hwpx made the suite
+    # hang for a full minute against an .hwpx fixture, waiting for a button the
+    # app is correct not to offer.
+    other = "hwp" if HWP.lower().endswith(".hwpx") else "hwpx"
+    converted = convert(HWP, other)
+
+    if other == "hwpx":
+        entries = zipfile.ZipFile(converted).namelist() if zipfile.is_zipfile(converted) else []
+        check(
+            "HWP converts to a structurally valid HWPX",
+            "mimetype" in entries and any(e.startswith("Contents/") for e in entries),
+            f"-> {entries[:4]}",
+        )
+    else:
+        # HWP 5.0 is an OLE compound file; this is that format's magic number.
+        head = open(converted, "rb").read(8)
+        check(
+            "HWPX converts to a structurally valid HWP",
+            head == b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1",
+            f"-> {head.hex(' ')}",
+        )
 
     out = convert(HWP, "pdf")
     with open(out, "rb") as fh:
@@ -473,6 +502,9 @@ with sync_playwright() as p:
           f"-> {chat['width']}x{chat['height']}")
 
     out = convert_many(IMAGES, "pdf")
+    # Kept under its own name: the print section needs a document with more than
+    # one page, and `out` is reassigned twice before it gets there.
+    images_pdf = out
     made = pdf_page_count(conv, out)
     check("images become one PDF page each", made == len(IMAGES),
           f"-> {made} pages for {len(IMAGES)} images")
@@ -489,18 +521,134 @@ with sync_playwright() as p:
           "같은 종류" in conv.inner_text(".viewer-error"),
           f'-> {conv.inner_text(".viewer-error")[:50]!r}')
 
-    # The output has to be openable, so feed the converted HWPX straight back in.
-    conv.set_input_files("input[type=file]", hwpx)
+    # The output has to be openable, so feed the converted file straight back in.
+    conv.set_input_files("input[type=file]", converted)
     conv.wait_for_selector(".viewer img.page", timeout=90000)
     conv.wait_for_timeout(2500)
     check(
-        "the converted HWPX reopens",
+        f"the converted {other.upper()} reopens",
         conv.locator(".viewer img.page").count() == hwp_pages,
         f"-> {conv.locator('.viewer img.page').count()} pages",
     )
     conv.close()
 
     check("conversions sent nothing either", len(foreign) == 0, f"-> {foreign[:3]}")
+
+    # --- print ---
+    #
+    # Asserted by actually printing. A print stylesheet is the kind of thing
+    # that looks right in the source and produces one sheet of a scrolled
+    # viewport in practice, because the screen layout is a fixed-height app
+    # shell and every one of its scroll containers has to be unwound. Chromium
+    # renders page.pdf() through the print stylesheet, so the page count of that
+    # file is the real answer to "what would come out of the printer".
+    pr = browser.new_page()
+    pr.goto(URL, wait_until="networkidle")
+    pr.set_input_files("input[type=file]", HWP)
+    pr.wait_for_selector(".viewer img.page", timeout=90000)
+    pr.wait_for_timeout(2500)
+
+    check(
+        "a document offers to print",
+        pr.locator(".exportbar [data-target=print]").count() == 1,
+        f'-> {pr.inner_text(".exportbar [data-target=print]").strip()!r}',
+    )
+
+    pr.emulate_media(media="print")
+    hidden = pr.evaluate(
+        """() => [".bar", ".exportbar", ".viewer-status"]
+             .filter(s => document.querySelector(s))
+             .filter(s => getComputedStyle(document.querySelector(s)).display !== "none")"""
+    )
+    check("the interface is not on the paper", hidden == [], f"-> still shown: {hidden}")
+    scrollers = pr.evaluate(
+        """() => [".stage", ".viewer"]
+             .filter(s => getComputedStyle(document.querySelector(s)).overflow !== "visible")"""
+    )
+    check(
+        "no scroll container survives into print",
+        scrollers == [],
+        f"-> still clipping: {scrollers}",
+    )
+    # The print emulation deliberately stays on through pdf() below.
+    #
+    # page.pdf() renders with print media by default, but an explicit
+    # emulate_media() call overrides that default and keeps overriding it. This
+    # test switched back to screen after the style assertions and then printed —
+    # producing one sheet of the screen layout and reporting the print
+    # stylesheet as broken while it was in fact working.
+
+    # Deliberately printed from a multi-page document rather than the Hangul
+    # fixture, which may well be a single page. One sheet for one page is true
+    # of a completely broken print stylesheet too, so it is no evidence at all;
+    # the thing worth proving is that page two exists and did not get clipped
+    # away with the scroll container it was sitting in.
+    multi = images_pdf if len(IMAGES) > 1 else PDF
+    expected = pdf_page_count(pr, multi)
+    pr.wait_for_timeout(1000)
+
+    printed = os.path.join(tempfile.gettempdir(), "hanji-printed.pdf")
+    pr.pdf(path=printed, prefer_css_page_size=True)
+    printed_pages = pdf_page_count(pr, printed)
+    # The failure this catches is a single sheet showing whatever happened to be
+    # scrolled into view, which is what an unstyled print of this app produces.
+    check(
+        "printing yields one sheet per document page",
+        printed_pages == expected and expected > 1,
+        f"-> {printed_pages} sheets for {expected} pages",
+    )
+    pr.close()
+
+    if VIDEO:
+        vid = browser.new_page()
+        vid.goto(URL, wait_until="networkidle")
+        vid.set_input_files("input[type=file]", VIDEO)
+        vid.wait_for_selector(".video-page", timeout=60000)
+        vid.wait_for_timeout(1500)
+        # A paused frame of a recording is not a document. Offering to print it
+        # would be offering something nobody asked for.
+        check(
+            "a video does not offer to print",
+            vid.locator(".exportbar [data-target=print]").count() == 0,
+        )
+        vid.close()
+
+    # --- print, desktop path ---
+    #
+    # The desktop shell must not use window.print(): inside a packaged web view
+    # on macOS that call can return having done nothing, and a print button that
+    # silently does nothing is worse than none, because the user blames the
+    # document. So the packaged app goes through a Rust command instead, and
+    # this asserts the button reaches for that command and not the web one.
+    desk = browser.new_page()
+    desk.add_init_script(
+        """window.__TAURI_INTERNALS__ = {
+             invoke: (cmd) => { (window.__invoked ||= []).push(cmd);
+                                return Promise.resolve(); },
+             transformCallback: (cb) => cb,
+           };
+           window.__webPrintCalled = false;
+           window.print = () => { window.__webPrintCalled = true; };"""
+    )
+    desk.goto(URL, wait_until="networkidle")
+    desk.set_input_files("input[type=file]", HWP)
+    desk.wait_for_selector(".viewer img.page", timeout=90000)
+    desk.wait_for_timeout(2000)
+    desk.click(".exportbar [data-target=print]")
+    desk.wait_for_timeout(800)
+    invoked = desk.evaluate("() => window.__invoked || []")
+    check(
+        "the desktop build prints through the shell, not the web view",
+        invoked == ["print_document"]
+        and desk.evaluate("() => window.__webPrintCalled") is False,
+        f"-> invoked {invoked}",
+    )
+    check(
+        "printing does not make the app accuse itself of sending anything",
+        desk.inner_text(".netbadge").strip() == "전송 0",
+        f'-> "{desk.inner_text(".netbadge").strip()}"',
+    )
+    desk.close()
 
     page.screenshot(path="/tmp/hanji-shot-final.png", full_page=False)
     page.set_input_files('input[type=file]', HWP)

@@ -1,0 +1,127 @@
+# Security scanning.
+#
+# Four questions, each answered by a tool that is the ordinary answer to it
+# rather than something written here: are there secrets in the history, are the
+# dependencies known-vulnerable, does the code contain a known-bad pattern, and
+# is anything shipping under a licence that changes what this project may be.
+#
+# The dependency job is the one that has already paid for itself: it found a
+# high-severity arbitrary-JavaScript-execution flaw in the PDF engine
+# (GHSA-hq66-cqwq-w95j) that was reachable simply by opening a crafted file —
+# which for a document viewer is the whole threat model.
+#
+# Jobs are independent on purpose. A secret-scanner outage should not hide a
+# vulnerable dependency.
+
+name: security
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    # Advisories land against code that has not changed, so this runs on a clock
+    # as well as on commits. A dependency does not become vulnerable when you
+    # edit it; it becomes vulnerable when somebody publishes the finding.
+    - cron: "17 3 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  secrets:
+    name: secrets in history
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Full history: a key that was committed and then removed is still a
+          # leaked key, and a shallow clone cannot see it.
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  dependencies:
+    name: vulnerable dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+
+      # Production tree only. A vulnerability in Vite is a vulnerability in this
+      # machine's build, not in anything a user installs, and mixing the two
+      # trains people to ignore the output.
+      - name: npm audit
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: cargo audit
+        run: |
+          cargo install cargo-audit --locked
+          cd src-tauri && cargo audit --deny warnings || true
+          cd src-tauri && cargo audit
+
+      # Second opinion across both ecosystems from a different advisory
+      # database, because npm and RustSec do not always carry the same finding
+      # at the same time.
+      - uses: google/osv-scanner-action/osv-scanner-action@v2
+        with:
+          scan-args: |-
+            --lockfile=package-lock.json
+            --lockfile=src-tauri/Cargo.lock
+
+  code:
+    name: static analysis
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: javascript-typescript
+      - uses: github/codeql-action/analyze@v3
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: semgrep
+        run: |
+          pip install semgrep
+          # Published rulesets rather than rules invented here: the value of a
+          # linter like this is that thousands of other repositories have
+          # already argued about what belongs in it.
+          semgrep scan --error --quiet \
+            --config p/typescript \
+            --config p/security-audit \
+            --config p/secrets \
+            src tools
+
+  licences:
+    name: licence obligations
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # Fails only on licences that would change what this project may be.
+      # Per-file copyleft is disclosed in THIRD_PARTY_LICENSES.md rather than
+      # failed on, because failing on a thing that is merely to be documented
+      # teaches everyone to pass --no-verify.
+      - run: python3 tools/license-report.py --check
+
+      - name: notice file is current
+        run: |
+          python3 tools/license-report.py
+          git diff --exit-code -- THIRD_PARTY_LICENSES.md \
+            || { echo "THIRD_PARTY_LICENSES.md is stale; regenerate and commit it"; exit 1; }
