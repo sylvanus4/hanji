@@ -116,6 +116,16 @@ def npm_packages() -> list[Package]:
     def walk(node: dict) -> None:
         for name, info in (node.get("dependencies") or {}).items():
             version = info.get("version", "")
+            # Not installed here, so not distributed from here.
+            #
+            # Optional platform binaries — a native canvas addon per OS and
+            # architecture — appear in the tree on every machine but only unpack
+            # on the one they are for. npm reports the others with no version
+            # and no licence field, which read as nine unlicensed packages and
+            # failed CI on a Linux runner while passing on the macOS laptop that
+            # had them.
+            if not version or info.get("missing") or info.get("extraneous"):
+                continue
             key = (name, version)
             if key not in seen:
                 where = info.get("path") or str(ROOT / "node_modules" / name)

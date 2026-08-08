@@ -58,11 +58,16 @@ jobs:
       - name: npm audit
         run: npm audit --omit=dev --audit-level=high
 
+      # Vulnerabilities fail; warnings do not. The 17 warnings here are
+      # unmaintained gtk/gdk/atk crates, which are Linux-only and therefore in
+      # none of the macOS or Windows binaries anyone downloads, plus a
+      # build-time macro helper. --deny warnings would fail every run forever,
+      # which is the fastest way to teach a team to ignore a red X.
       - name: cargo audit
         run: |
           cargo install cargo-audit --locked
-          cd src-tauri && cargo audit --deny warnings || true
-          cd src-tauri && cargo audit
+          cd src-tauri
+          cargo audit
 
       # Second opinion across both ecosystems from a different advisory
       # database, because npm and RustSec do not always carry the same finding
