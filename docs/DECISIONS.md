@@ -136,6 +136,25 @@ rightmost rect edge returns to 971.4, inside the 971.36px page, from 1034.0 befo
 **Open caveat.** We have no Hancom oracle, so we cannot prove what the *correct* offset is — only
 that a table must not leave its column, and that this file rendered correctly before `10c36e23`.
 
+### D4b-1 — v0.8.4 does not fix it, so the patch stays (2026-08-13)
+
+Rechecked against upstream `v0.8.4` (tag `b3f8d234`). `compute_tac_leading_width` in
+`src/renderer/layout.rs` is **byte-identical** to v0.8.2 (2224 chars, empty diff), and the helpers
+that decide whether a table takes the buggy branch (`is_tac_table_inline_in_para` in
+`height_measurer.rs`, `tac_controls` in `composer.rs`) are unchanged too. `git apply --check` of
+`docs/upstream/rhwp-block-tac-table-x.patch` against v0.8.4 succeeds with zero fuzz, which says the
+surrounding context has not drifted either.
+
+Also built the unpatched v0.8.4 CLI and ran `export-svg` over all 355 HWP/HWPX samples shipped in
+rhwp's own repo, scanning for the page-width overflow signature that `e2e-smoke.py` guards. Nothing
+reproduced the ~117px tab-stop displacement (largest unrelated overflow was 13.1px). Upstream's own
+corpus does not contain a block TAC table preceded by tab-only runs, which explains why this was
+never caught there.
+
+**Decision: keep `0.8.2-hanji.1`.** Since the defective function is provably unchanged, v0.8.4
+cannot render the reproducing document any differently. Recheck when upstream touches
+`compute_tac_leading_width`, not on every release.
+
 ### D4c — We ship our own engine build rather than wait
 
 Every published `@rhwp/core` from 0.7.6 onward carries the regression, so there is no version to
