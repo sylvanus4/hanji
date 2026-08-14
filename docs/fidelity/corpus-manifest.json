@@ -1,0 +1,260 @@
+{
+  "generatedAt": "2026-08-14T12:26:29.024Z",
+  "count": 25,
+  "description": "Fidelity corpus for P0-c (see docs/fidelity/README.md). Real HWP/HWPX documents, identified by content hash only — no filenames or document text are stored here.",
+  "documents": [
+    {
+      "id": "doc-001",
+      "sha256": "0c3049856e318a4c0e647da0cc5b403b09a9318a9a9d0b5b3dea58b0344f3354",
+      "byteSize": 59392,
+      "ext": "hwp",
+      "axes": [
+        "gov",
+        "form"
+      ],
+      "selectionNote": "government startup-support program application form template (one of two byte-identical copies found on disk, kept once)"
+    },
+    {
+      "id": "doc-002",
+      "sha256": "5e6d0eed3358355ca5cd1921eab26f4c0d127b2796dac302ace34dec7b85ebcb",
+      "byteSize": 15360,
+      "ext": "hwp",
+      "axes": [
+        "gov",
+        "form"
+      ],
+      "selectionNote": "official attached form (별지 서식), citing its statutory basis in the title"
+    },
+    {
+      "id": "doc-003",
+      "sha256": "8e284432fd79578f2af42310f7c94506c3a87450ea4054a61b26554828962dca",
+      "byteSize": 70144,
+      "ext": "hwp",
+      "axes": [
+        "contract"
+      ],
+      "selectionNote": "standard advisory services contract"
+    },
+    {
+      "id": "doc-004",
+      "sha256": "972b5a8838928f6cf6797d84e1c5cd21cdca3860600d607dcfd94a605692f69d",
+      "byteSize": 435200,
+      "ext": "hwp",
+      "axes": [
+        "exam"
+      ],
+      "selectionNote": "9th-grade (지방9급) civil-service exam prep paper — administrative law"
+    },
+    {
+      "id": "doc-005",
+      "sha256": "276fa46e7935edde193e15dd106076169c1bd182489758064813821123d876f9",
+      "byteSize": 428544,
+      "ext": "hwp",
+      "axes": [
+        "exam"
+      ],
+      "selectionNote": "9th-grade (지방9급) civil-service exam prep paper — public administration"
+    },
+    {
+      "id": "doc-006",
+      "sha256": "0eb28a32e05ae694f9a3e3b538ded58f032ab55da102c8c27ef7fc64311fd3b8",
+      "byteSize": 464896,
+      "ext": "hwp",
+      "axes": [
+        "gov"
+      ],
+      "selectionNote": "government tenant-recruitment public notice, agency A"
+    },
+    {
+      "id": "doc-007",
+      "sha256": "f16051c56c887de2619f5f0b7eedea3c22f51642299306cab73ac5f1bf222506",
+      "byteSize": 255488,
+      "ext": "hwp",
+      "axes": [
+        "gov"
+      ],
+      "selectionNote": "government tenant-recruitment public notice, agency B"
+    },
+    {
+      "id": "doc-008",
+      "sha256": "e1ddaae4e161178b2622a99b8a75b1bf72d5a64faf5dde97d2efe4acbb25b513",
+      "byteSize": 271872,
+      "ext": "hwp",
+      "axes": [
+        "gov"
+      ],
+      "selectionNote": "government tenant-recruitment public notice, agency C"
+    },
+    {
+      "id": "doc-009",
+      "sha256": "98798e60e20c96b545ca2ebee111fe0fccd37bef6174349bd01d8d368e2fb8f3",
+      "byteSize": 39424,
+      "ext": "hwp",
+      "axes": [
+        "contract"
+      ],
+      "selectionNote": "corporate charter (정관 / articles of incorporation)"
+    },
+    {
+      "id": "doc-010",
+      "sha256": "c0742e0dd4b3f6fd05a64f4682273466753bc01bf359d722eebf822e1c70fe04",
+      "byteSize": 48640,
+      "ext": "hwp",
+      "axes": [
+        "gov",
+        "form"
+      ],
+      "selectionNote": "local-tax refund claim form"
+    },
+    {
+      "id": "doc-011",
+      "sha256": "33b62742f5fd7c311dd8a1d298925297d58280045f378408be7a0b095902a34f",
+      "byteSize": 90112,
+      "ext": "hwp",
+      "axes": [
+        "gov"
+      ],
+      "selectionNote": "government program participating-institution status report"
+    },
+    {
+      "id": "doc-012",
+      "sha256": "d11dd1331083be4e8c989dfbd587777626b3d77686d3436c35a2c20da9494603",
+      "byteSize": 262144,
+      "ext": "hwp",
+      "axes": [
+        "tech_doc"
+      ],
+      "selectionNote": "real technical API reference document, part 1 of 3 (105 pages, table-dense — stress test)"
+    },
+    {
+      "id": "doc-013",
+      "sha256": "7076cb9bf6660acad61840dead62a3baeba43b8cb4afe8501777637b2f82fc0e",
+      "byteSize": 131072,
+      "ext": "hwp",
+      "axes": [
+        "tech_doc"
+      ],
+      "selectionNote": "real technical API reference document, part 2 of 3"
+    },
+    {
+      "id": "doc-014",
+      "sha256": "76645c03f0372529bad746e9287cb04efc86c6b1aa57963caae4a1c3c004c39e",
+      "byteSize": 245760,
+      "ext": "hwp",
+      "axes": [
+        "tech_doc"
+      ],
+      "selectionNote": "real technical API reference document, part 3 of 3 (73 pages)"
+    },
+    {
+      "id": "doc-015",
+      "sha256": "64df877f3c4accda0111ecf39d837da889741bb821b220cf61b6c126dc88364d",
+      "byteSize": 2752512,
+      "ext": "hwp",
+      "axes": [
+        "tech_doc"
+      ],
+      "selectionNote": "real published file-format specification document (178 pages — largest in the corpus)"
+    },
+    {
+      "id": "doc-016",
+      "sha256": "e17464a1514e3d83391d32a5db30f662f3d0db4b7c61bbaacf4450a729f70f20",
+      "byteSize": 484352,
+      "ext": "hwp",
+      "axes": [
+        "gov"
+      ],
+      "selectionNote": "government quarterly trade-statistics press release, .hwp — pairs with the next entry"
+    },
+    {
+      "id": "doc-017",
+      "sha256": "8be6e931347112bd04eb2d78e7fa1d7ab484deed181335cf02320d2f325165e4",
+      "byteSize": 561024,
+      "ext": "hwpx",
+      "axes": [
+        "gov"
+      ],
+      "selectionNote": "the same release as the entry above, distributed as .hwpx — a same-content HWP/HWPX pair"
+    },
+    {
+      "id": "doc-018",
+      "sha256": "54f25292bdd370f3b170e36ad1368bdcb4dd4849a73afdf431939d08ac55bd13",
+      "byteSize": 560756,
+      "ext": "hwpx",
+      "axes": [
+        "gov"
+      ],
+      "selectionNote": "government quarterly trade-statistics press release (different quarter)"
+    },
+    {
+      "id": "doc-019",
+      "sha256": "abae7aebecd5e71cd907b3417483f9842dfa648cd9fe05d98e34b6b8d856a3f5",
+      "byteSize": 564204,
+      "ext": "hwpx",
+      "axes": [
+        "gov"
+      ],
+      "selectionNote": "government annual trade-statistics press release"
+    },
+    {
+      "id": "doc-020",
+      "sha256": "d2472827333e2e55027ae8968d993594f18a0e0e2cc23f3a4fa463f230812294",
+      "byteSize": 139568,
+      "ext": "hwpx",
+      "axes": [
+        "gov"
+      ],
+      "selectionNote": "government quarterly trade-statistics press release (different quarter)"
+    },
+    {
+      "id": "doc-021",
+      "sha256": "e49c69c090fa7abe9d33971f2983839f30c3efd77068d6d24b99db93a3c2872f",
+      "byteSize": 134836,
+      "ext": "hwpx",
+      "axes": [
+        "gov"
+      ],
+      "selectionNote": "government quarterly trade-statistics press release (different quarter)"
+    },
+    {
+      "id": "doc-022",
+      "sha256": "1b4d1169c8e622b7365e9029ced513b13206f5939cf12024438c38d30253c2b4",
+      "byteSize": 2686976,
+      "ext": "hwp",
+      "axes": [
+        "rfp"
+      ],
+      "selectionNote": "real public-works request-for-proposal document (27 pages)"
+    },
+    {
+      "id": "doc-023",
+      "sha256": "d785f1ba522bd5350871c558f681153f7d6c1b9fa3423e6b178bd3f16af7bee1",
+      "byteSize": 47616,
+      "ext": "hwp",
+      "axes": [
+        "gov"
+      ],
+      "selectionNote": "government consolidated fiscal-statistics report, period A"
+    },
+    {
+      "id": "doc-024",
+      "sha256": "18b094a33b8f1d4a00eb51bda774d2c5747f3db76d400862801f051cbbf1a02f",
+      "byteSize": 16384,
+      "ext": "hwp",
+      "axes": [
+        "gov"
+      ],
+      "selectionNote": "government consolidated fiscal-statistics report, period B"
+    },
+    {
+      "id": "doc-025",
+      "sha256": "8e21dc8d513fd71818b08ae91dcd3edf1636e6f819afa80a90db83f81ab70920",
+      "byteSize": 17408,
+      "ext": "hwp",
+      "axes": [
+        "gov"
+      ],
+      "selectionNote": "government consolidated fiscal-statistics report, period C"
+    }
+  ]
+}

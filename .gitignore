@@ -11,3 +11,12 @@ dist/
 # ourselves and CI has no way to reproduce it. See vendor/README.md.
 src-tauri/target/
 src-tauri/gen/
+
+# Fidelity corpus (docs/fidelity/, see its README): real documents are
+# referenced by id + sha256 in the committed manifest, never by filename or
+# path. These two files are produced locally by tools/fidelity/discover.mjs
+# and build_corpus.mjs and carry real filenames (which can reveal business
+# or personal names) plus absolute local paths — same "supplied, not
+# committed" convention as e2e-smoke.py's HANJI_FIXTURE_HWP fixtures.
+# *.local already covers *.local (bare), this covers the *.local.json shape.
+docs/fidelity/*.local.json

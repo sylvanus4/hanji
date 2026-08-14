@@ -1,0 +1,4748 @@
+{
+  "generatedAt": "2026-08-14T12:26:29.181Z",
+  "engineVersion": "0.8.2",
+  "documents": {
+    "doc-001": {
+      "sha256": "0c3049856e318a4c0e647da0cc5b403b09a9318a9a9d0b5b3dea58b0344f3354",
+      "byteSize": 59392,
+      "sourceExt": "hwp",
+      "parseOk": true,
+      "parseMs": 85,
+      "pageCount": 22,
+      "pages": [
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 11,
+          "edgeableRectCount": 11,
+          "lineCount": 27,
+          "textCount": 882
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 23,
+          "edgeableRectCount": 23,
+          "lineCount": 61,
+          "textCount": 649
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 25,
+          "textCount": 361
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 16,
+          "edgeableRectCount": 16,
+          "lineCount": 29,
+          "textCount": 1147
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 19,
+          "textCount": 188
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 3,
+          "edgeableRectCount": 3,
+          "lineCount": 12,
+          "textCount": 138
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 9,
+          "edgeableRectCount": 9,
+          "lineCount": 30,
+          "textCount": 466
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 8,
+          "textCount": 219
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 9,
+          "edgeableRectCount": 9,
+          "lineCount": 27,
+          "textCount": 365
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 9,
+          "edgeableRectCount": 9,
+          "lineCount": 32,
+          "textCount": 369
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 10,
+          "edgeableRectCount": 10,
+          "lineCount": 25,
+          "textCount": 263
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 19,
+          "edgeableRectCount": 19,
+          "lineCount": 58,
+          "textCount": 500
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 35,
+          "textCount": 972
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 22,
+          "textCount": 664
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 12,
+          "edgeableRectCount": 12,
+          "lineCount": 18,
+          "textCount": 485
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 2,
+          "edgeableRectCount": 2,
+          "lineCount": 10,
+          "textCount": 80
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 2,
+          "edgeableRectCount": 2,
+          "lineCount": 11,
+          "textCount": 77
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 23,
+          "textCount": 625
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 12,
+          "textCount": 650
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 2,
+          "edgeableRectCount": 2,
+          "lineCount": 13,
+          "textCount": 591
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 2,
+          "edgeableRectCount": 2,
+          "lineCount": 13,
+          "textCount": 591
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 2,
+          "edgeableRectCount": 2,
+          "lineCount": 10,
+          "textCount": 75
+        }
+      ],
+      "maxOverflowPx": 0,
+      "anyTableOverflow": false,
+      "roundTrip": {
+        "attempted": true,
+        "ok": true,
+        "pageCountBefore": 22,
+        "pageCountAfter": 22,
+        "targetExt": "hwpx"
+      },
+      "error": null,
+      "totalRects": 161,
+      "totalTextRuns": 10357
+    },
+    "doc-002": {
+      "sha256": "5e6d0eed3358355ca5cd1921eab26f4c0d127b2796dac302ace34dec7b85ebcb",
+      "byteSize": 15360,
+      "sourceExt": "hwp",
+      "parseOk": true,
+      "parseMs": 2,
+      "pageCount": 1,
+      "pages": [
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 2,
+          "edgeableRectCount": 2,
+          "lineCount": 10,
+          "textCount": 531
+        }
+      ],
+      "maxOverflowPx": 0,
+      "anyTableOverflow": false,
+      "roundTrip": {
+        "attempted": true,
+        "ok": true,
+        "pageCountBefore": 1,
+        "pageCountAfter": 1,
+        "targetExt": "hwpx"
+      },
+      "error": null,
+      "totalRects": 2,
+      "totalTextRuns": 531
+    },
+    "doc-003": {
+      "sha256": "8e284432fd79578f2af42310f7c94506c3a87450ea4054a61b26554828962dca",
+      "byteSize": 70144,
+      "sourceExt": "hwp",
+      "parseOk": true,
+      "parseMs": 13,
+      "pageCount": 5,
+      "pages": [
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 5,
+          "textCount": 876
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 8,
+          "edgeableRectCount": 8,
+          "lineCount": 10,
+          "textCount": 713
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 936
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 753
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 110
+        }
+      ],
+      "maxOverflowPx": 0,
+      "anyTableOverflow": false,
+      "roundTrip": {
+        "attempted": true,
+        "ok": true,
+        "pageCountBefore": 5,
+        "pageCountAfter": 5,
+        "targetExt": "hwpx"
+      },
+      "error": null,
+      "totalRects": 12,
+      "totalTextRuns": 3388
+    },
+    "doc-004": {
+      "sha256": "972b5a8838928f6cf6797d84e1c5cd21cdca3860600d607dcfd94a605692f69d",
+      "byteSize": 435200,
+      "sourceExt": "hwp",
+      "parseOk": true,
+      "parseMs": 10,
+      "pageCount": 4,
+      "pages": [
+        {
+          "pageWidth": 971.36,
+          "overflowPx": 0,
+          "rectCount": 37,
+          "edgeableRectCount": 37,
+          "lineCount": 23,
+          "textCount": 1749
+        },
+        {
+          "pageWidth": 971.36,
+          "overflowPx": 0,
+          "rectCount": 37,
+          "edgeableRectCount": 37,
+          "lineCount": 26,
+          "textCount": 1789
+        },
+        {
+          "pageWidth": 971.36,
+          "overflowPx": 0,
+          "rectCount": 37,
+          "edgeableRectCount": 37,
+          "lineCount": 22,
+          "textCount": 2210
+        },
+        {
+          "pageWidth": 971.36,
+          "overflowPx": 0,
+          "rectCount": 37,
+          "edgeableRectCount": 37,
+          "lineCount": 18,
+          "textCount": 740
+        }
+      ],
+      "maxOverflowPx": 0,
+      "anyTableOverflow": false,
+      "roundTrip": {
+        "attempted": true,
+        "ok": true,
+        "pageCountBefore": 4,
+        "pageCountAfter": 4,
+        "targetExt": "hwpx"
+      },
+      "error": null,
+      "totalRects": 148,
+      "totalTextRuns": 6488
+    },
+    "doc-005": {
+      "sha256": "276fa46e7935edde193e15dd106076169c1bd182489758064813821123d876f9",
+      "byteSize": 428544,
+      "sourceExt": "hwp",
+      "parseOk": true,
+      "parseMs": 4,
+      "pageCount": 2,
+      "pages": [
+        {
+          "pageWidth": 971.36,
+          "overflowPx": 0,
+          "rectCount": 37,
+          "edgeableRectCount": 37,
+          "lineCount": 43,
+          "textCount": 1401
+        },
+        {
+          "pageWidth": 971.36,
+          "overflowPx": 0,
+          "rectCount": 37,
+          "edgeableRectCount": 37,
+          "lineCount": 28,
+          "textCount": 1541
+        }
+      ],
+      "maxOverflowPx": 0,
+      "anyTableOverflow": false,
+      "roundTrip": {
+        "attempted": true,
+        "ok": true,
+        "pageCountBefore": 2,
+        "pageCountAfter": 2,
+        "targetExt": "hwpx"
+      },
+      "error": null,
+      "totalRects": 74,
+      "totalTextRuns": 2942
+    },
+    "doc-006": {
+      "sha256": "0eb28a32e05ae694f9a3e3b538ded58f032ab55da102c8c27ef7fc64311fd3b8",
+      "byteSize": 464896,
+      "sourceExt": "hwp",
+      "parseOk": true,
+      "parseMs": 27,
+      "pageCount": 7,
+      "pages": [
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 12,
+          "edgeableRectCount": 12,
+          "lineCount": 21,
+          "textCount": 539
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 9,
+          "textCount": 665
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 794
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 914
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 799
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 805
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 191
+        }
+      ],
+      "maxOverflowPx": 0,
+      "anyTableOverflow": false,
+      "roundTrip": {
+        "attempted": true,
+        "ok": true,
+        "pageCountBefore": 7,
+        "pageCountAfter": 7,
+        "targetExt": "hwpx"
+      },
+      "error": null,
+      "totalRects": 22,
+      "totalTextRuns": 4707
+    },
+    "doc-007": {
+      "sha256": "f16051c56c887de2619f5f0b7eedea3c22f51642299306cab73ac5f1bf222506",
+      "byteSize": 255488,
+      "sourceExt": "hwp",
+      "parseOk": true,
+      "parseMs": 42,
+      "pageCount": 7,
+      "pages": [
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 12,
+          "edgeableRectCount": 12,
+          "lineCount": 21,
+          "textCount": 487
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 9,
+          "textCount": 773
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 808
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 907
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 777
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 805
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 147
+        }
+      ],
+      "maxOverflowPx": 0,
+      "anyTableOverflow": false,
+      "roundTrip": {
+        "attempted": true,
+        "ok": true,
+        "pageCountBefore": 7,
+        "pageCountAfter": 7,
+        "targetExt": "hwpx"
+      },
+      "error": null,
+      "totalRects": 22,
+      "totalTextRuns": 4704
+    },
+    "doc-008": {
+      "sha256": "e1ddaae4e161178b2622a99b8a75b1bf72d5a64faf5dde97d2efe4acbb25b513",
+      "byteSize": 271872,
+      "sourceExt": "hwp",
+      "parseOk": true,
+      "parseMs": 36,
+      "pageCount": 7,
+      "pages": [
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 12,
+          "edgeableRectCount": 12,
+          "lineCount": 21,
+          "textCount": 540
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 7,
+          "textCount": 693
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 825
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 921
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 801
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 801
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 231
+        }
+      ],
+      "maxOverflowPx": 0,
+      "anyTableOverflow": false,
+      "roundTrip": {
+        "attempted": true,
+        "ok": true,
+        "pageCountBefore": 7,
+        "pageCountAfter": 7,
+        "targetExt": "hwpx"
+      },
+      "error": null,
+      "totalRects": 21,
+      "totalTextRuns": 4812
+    },
+    "doc-009": {
+      "sha256": "98798e60e20c96b545ca2ebee111fe0fccd37bef6174349bd01d8d368e2fb8f3",
+      "byteSize": 39424,
+      "sourceExt": "hwp",
+      "parseOk": true,
+      "parseMs": 30,
+      "pageCount": 11,
+      "pages": [
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 9
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 860
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 1099
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 1129
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 1033
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 1037
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 1014
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 1136
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 982
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 864
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 398
+        }
+      ],
+      "maxOverflowPx": 0,
+      "anyTableOverflow": false,
+      "roundTrip": {
+        "attempted": true,
+        "ok": true,
+        "pageCountBefore": 11,
+        "pageCountAfter": 11,
+        "targetExt": "hwpx"
+      },
+      "error": null,
+      "totalRects": 11,
+      "totalTextRuns": 9561
+    },
+    "doc-010": {
+      "sha256": "c0742e0dd4b3f6fd05a64f4682273466753bc01bf359d722eebf822e1c70fe04",
+      "byteSize": 48640,
+      "sourceExt": "hwp",
+      "parseOk": true,
+      "parseMs": 2,
+      "pageCount": 1,
+      "pages": [
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 32,
+          "textCount": 536
+        }
+      ],
+      "maxOverflowPx": 0,
+      "anyTableOverflow": false,
+      "roundTrip": {
+        "attempted": true,
+        "ok": true,
+        "pageCountBefore": 1,
+        "pageCountAfter": 1,
+        "targetExt": "hwpx"
+      },
+      "error": null,
+      "totalRects": 7,
+      "totalTextRuns": 536
+    },
+    "doc-011": {
+      "sha256": "33b62742f5fd7c311dd8a1d298925297d58280045f378408be7a0b095902a34f",
+      "byteSize": 90112,
+      "sourceExt": "hwp",
+      "parseOk": true,
+      "parseMs": 2,
+      "pageCount": 1,
+      "pages": [
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 92,
+          "textCount": 1019
+        }
+      ],
+      "maxOverflowPx": 0,
+      "anyTableOverflow": false,
+      "roundTrip": {
+        "attempted": true,
+        "ok": true,
+        "pageCountBefore": 1,
+        "pageCountAfter": 1,
+        "targetExt": "hwpx"
+      },
+      "error": null,
+      "totalRects": 7,
+      "totalTextRuns": 1019
+    },
+    "doc-012": {
+      "sha256": "d11dd1331083be4e8c989dfbd587777626b3d77686d3436c35a2c20da9494603",
+      "byteSize": 262144,
+      "sourceExt": "hwp",
+      "parseOk": true,
+      "parseMs": 88,
+      "pageCount": 105,
+      "pages": [
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 9
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 3,
+          "edgeableRectCount": 3,
+          "lineCount": 8,
+          "textCount": 403
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 16,
+          "textCount": 561
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 2,
+          "edgeableRectCount": 2,
+          "lineCount": 4,
+          "textCount": 372
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 2,
+          "edgeableRectCount": 2,
+          "lineCount": 4,
+          "textCount": 615
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 3,
+          "edgeableRectCount": 3,
+          "lineCount": 9,
+          "textCount": 867
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 6,
+          "edgeableRectCount": 6,
+          "lineCount": 30,
+          "textCount": 786
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 18,
+          "textCount": 552
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 3,
+          "edgeableRectCount": 3,
+          "lineCount": 8,
+          "textCount": 502
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 3,
+          "edgeableRectCount": 3,
+          "lineCount": 8,
+          "textCount": 488
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 30,
+          "edgeableRectCount": 30,
+          "lineCount": 13,
+          "textCount": 636
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 24,
+          "edgeableRectCount": 24,
+          "lineCount": 17,
+          "textCount": 526
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 47,
+          "edgeableRectCount": 47,
+          "lineCount": 18,
+          "textCount": 600
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 30,
+          "edgeableRectCount": 30,
+          "lineCount": 12,
+          "textCount": 717
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 15,
+          "edgeableRectCount": 15,
+          "lineCount": 9,
+          "textCount": 636
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 11,
+          "edgeableRectCount": 11,
+          "lineCount": 20,
+          "textCount": 587
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 38,
+          "edgeableRectCount": 38,
+          "lineCount": 29,
+          "textCount": 510
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 32,
+          "textCount": 823
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 49,
+          "edgeableRectCount": 49,
+          "lineCount": 21,
+          "textCount": 502
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 46,
+          "edgeableRectCount": 46,
+          "lineCount": 11,
+          "textCount": 516
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 117,
+          "edgeableRectCount": 117,
+          "lineCount": 26,
+          "textCount": 802
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 31,
+          "edgeableRectCount": 31,
+          "lineCount": 11,
+          "textCount": 696
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 152,
+          "edgeableRectCount": 152,
+          "lineCount": 17,
+          "textCount": 813
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 66
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 18,
+          "edgeableRectCount": 18,
+          "lineCount": 13,
+          "textCount": 471
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 96,
+          "edgeableRectCount": 96,
+          "lineCount": 13,
+          "textCount": 787
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 45,
+          "edgeableRectCount": 45,
+          "lineCount": 16,
+          "textCount": 580
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 41,
+          "edgeableRectCount": 41,
+          "lineCount": 14,
+          "textCount": 479
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 35,
+          "edgeableRectCount": 35,
+          "lineCount": 14,
+          "textCount": 464
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 12,
+          "textCount": 472
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 14,
+          "textCount": 470
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 168,
+          "edgeableRectCount": 168,
+          "lineCount": 4,
+          "textCount": 840
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 16,
+          "textCount": 400
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 34,
+          "edgeableRectCount": 34,
+          "lineCount": 15,
+          "textCount": 688
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 95,
+          "edgeableRectCount": 95,
+          "lineCount": 14,
+          "textCount": 845
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 6,
+          "textCount": 241
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 78,
+          "edgeableRectCount": 78,
+          "lineCount": 12,
+          "textCount": 448
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 55,
+          "edgeableRectCount": 55,
+          "lineCount": 12,
+          "textCount": 516
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 14,
+          "textCount": 462
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 15,
+          "edgeableRectCount": 15,
+          "lineCount": 12,
+          "textCount": 680
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 36,
+          "edgeableRectCount": 36,
+          "lineCount": 16,
+          "textCount": 636
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 124,
+          "edgeableRectCount": 124,
+          "lineCount": 18,
+          "textCount": 744
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 24,
+          "edgeableRectCount": 24,
+          "lineCount": 15,
+          "textCount": 573
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 32,
+          "edgeableRectCount": 32,
+          "lineCount": 22,
+          "textCount": 631
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 20,
+          "edgeableRectCount": 20,
+          "lineCount": 24,
+          "textCount": 485
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 13,
+          "textCount": 530
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 11,
+          "edgeableRectCount": 11,
+          "lineCount": 12,
+          "textCount": 622
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 14,
+          "textCount": 439
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 38,
+          "edgeableRectCount": 38,
+          "lineCount": 20,
+          "textCount": 673
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 22,
+          "textCount": 961
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 13,
+          "textCount": 696
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 121,
+          "edgeableRectCount": 121,
+          "lineCount": 34,
+          "textCount": 893
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 28,
+          "edgeableRectCount": 28,
+          "lineCount": 9,
+          "textCount": 360
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 80,
+          "edgeableRectCount": 80,
+          "lineCount": 10,
+          "textCount": 530
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 51,
+          "edgeableRectCount": 51,
+          "lineCount": 10,
+          "textCount": 781
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 71,
+          "edgeableRectCount": 71,
+          "lineCount": 11,
+          "textCount": 592
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 22,
+          "edgeableRectCount": 22,
+          "lineCount": 39,
+          "textCount": 457
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 11,
+          "edgeableRectCount": 11,
+          "lineCount": 11,
+          "textCount": 651
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 28,
+          "edgeableRectCount": 28,
+          "lineCount": 12,
+          "textCount": 696
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 19,
+          "textCount": 464
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 49,
+          "edgeableRectCount": 49,
+          "lineCount": 16,
+          "textCount": 462
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 53,
+          "edgeableRectCount": 53,
+          "lineCount": 31,
+          "textCount": 904
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 24,
+          "textCount": 896
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 10,
+          "edgeableRectCount": 10,
+          "lineCount": 13,
+          "textCount": 727
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 34,
+          "textCount": 692
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 94,
+          "edgeableRectCount": 94,
+          "lineCount": 13,
+          "textCount": 777
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 181,
+          "edgeableRectCount": 181,
+          "lineCount": 5,
+          "textCount": 657
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 28,
+          "edgeableRectCount": 28,
+          "lineCount": 14,
+          "textCount": 804
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 48,
+          "edgeableRectCount": 48,
+          "lineCount": 21,
+          "textCount": 745
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 40,
+          "edgeableRectCount": 40,
+          "lineCount": 13,
+          "textCount": 550
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 90,
+          "edgeableRectCount": 90,
+          "lineCount": 14,
+          "textCount": 603
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 134,
+          "edgeableRectCount": 134,
+          "lineCount": 18,
+          "textCount": 952
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 33,
+          "textCount": 947
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 23,
+          "textCount": 768
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 8,
+          "textCount": 670
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 25,
+          "edgeableRectCount": 25,
+          "lineCount": 12,
+          "textCount": 690
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 4,
+          "textCount": 764
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 981
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 10,
+          "edgeableRectCount": 10,
+          "lineCount": 9,
+          "textCount": 965
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 11,
+          "edgeableRectCount": 11,
+          "lineCount": 15,
+          "textCount": 490
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 13,
+          "edgeableRectCount": 13,
+          "lineCount": 8,
+          "textCount": 793
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 9,
+          "edgeableRectCount": 9,
+          "lineCount": 14,
+          "textCount": 607
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 16,
+          "textCount": 866
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 18,
+          "edgeableRectCount": 18,
+          "lineCount": 22,
+          "textCount": 580
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 8,
+          "edgeableRectCount": 8,
+          "lineCount": 26,
+          "textCount": 682
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 12,
+          "textCount": 386
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 21,
+          "textCount": 572
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 6,
+          "edgeableRectCount": 6,
+          "lineCount": 21,
+          "textCount": 530
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 23,
+          "edgeableRectCount": 23,
+          "lineCount": 16,
+          "textCount": 584
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 13,
+          "edgeableRectCount": 13,
+          "lineCount": 17,
+          "textCount": 432
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 12,
+          "edgeableRectCount": 12,
+          "lineCount": 13,
+          "textCount": 643
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 14,
+          "textCount": 482
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 6,
+          "edgeableRectCount": 6,
+          "lineCount": 9,
+          "textCount": 608
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 16,
+          "textCount": 432
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 92,
+          "edgeableRectCount": 92,
+          "lineCount": 19,
+          "textCount": 671
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 92,
+          "edgeableRectCount": 92,
+          "lineCount": 18,
+          "textCount": 662
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 26,
+          "edgeableRectCount": 26,
+          "lineCount": 9,
+          "textCount": 530
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 70,
+          "edgeableRectCount": 70,
+          "lineCount": 14,
+          "textCount": 650
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 53,
+          "edgeableRectCount": 53,
+          "lineCount": 17,
+          "textCount": 583
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 13,
+          "edgeableRectCount": 13,
+          "lineCount": 18,
+          "textCount": 417
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 8,
+          "textCount": 881
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 14,
+          "edgeableRectCount": 14,
+          "lineCount": 21,
+          "textCount": 486
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 29,
+          "edgeableRectCount": 29,
+          "lineCount": 17,
+          "textCount": 630
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 15,
+          "textCount": 453
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 7,
+          "textCount": 140
+        }
+      ],
+      "maxOverflowPx": 0,
+      "anyTableOverflow": false,
+      "roundTrip": {
+        "attempted": true,
+        "ok": true,
+        "pageCountBefore": 105,
+        "pageCountAfter": 105,
+        "targetExt": "hwpx"
+      },
+      "error": null,
+      "totalRects": 3340,
+      "totalTextRuns": 64186
+    },
+    "doc-013": {
+      "sha256": "7076cb9bf6660acad61840dead62a3baeba43b8cb4afe8501777637b2f82fc0e",
+      "byteSize": 131072,
+      "sourceExt": "hwp",
+      "parseOk": true,
+      "parseMs": 25,
+      "pageCount": 16,
+      "pages": [
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 3,
+          "textCount": 240
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 6,
+          "edgeableRectCount": 6,
+          "lineCount": 31,
+          "textCount": 847
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 6,
+          "edgeableRectCount": 6,
+          "lineCount": 31,
+          "textCount": 965
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 6,
+          "edgeableRectCount": 6,
+          "lineCount": 32,
+          "textCount": 826
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 6,
+          "edgeableRectCount": 6,
+          "lineCount": 22,
+          "textCount": 952
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 6,
+          "edgeableRectCount": 6,
+          "lineCount": 24,
+          "textCount": 980
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 6,
+          "edgeableRectCount": 6,
+          "lineCount": 31,
+          "textCount": 892
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 6,
+          "edgeableRectCount": 6,
+          "lineCount": 30,
+          "textCount": 901
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 6,
+          "edgeableRectCount": 6,
+          "lineCount": 23,
+          "textCount": 762
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 6,
+          "edgeableRectCount": 6,
+          "lineCount": 33,
+          "textCount": 791
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 6,
+          "edgeableRectCount": 6,
+          "lineCount": 34,
+          "textCount": 936
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 6,
+          "edgeableRectCount": 6,
+          "lineCount": 32,
+          "textCount": 858
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 6,
+          "edgeableRectCount": 6,
+          "lineCount": 25,
+          "textCount": 764
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 0,
+          "textCount": 722
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 6,
+          "edgeableRectCount": 6,
+          "lineCount": 0,
+          "textCount": 793
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 0,
+          "textCount": 416
+        }
+      ],
+      "maxOverflowPx": 0,
+      "anyTableOverflow": false,
+      "roundTrip": {
+        "attempted": true,
+        "ok": true,
+        "pageCountBefore": 16,
+        "pageCountAfter": 16,
+        "targetExt": "hwpx"
+      },
+      "error": null,
+      "totalRects": 91,
+      "totalTextRuns": 12645
+    },
+    "doc-014": {
+      "sha256": "76645c03f0372529bad746e9287cb04efc86c6b1aa57963caae4a1c3c004c39e",
+      "byteSize": 245760,
+      "sourceExt": "hwp",
+      "parseOk": true,
+      "parseMs": 41,
+      "pageCount": 73,
+      "pages": [
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 17,
+          "textCount": 729
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 18,
+          "textCount": 1026
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 0,
+          "textCount": 686
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 0,
+          "textCount": 722
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 10,
+          "textCount": 364
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 17,
+          "textCount": 516
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 8,
+          "textCount": 179
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 14,
+          "textCount": 384
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 11,
+          "textCount": 367
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 34,
+          "textCount": 1237
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 39,
+          "textCount": 1501
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 5,
+          "textCount": 63
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 4,
+          "textCount": 63
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 16,
+          "textCount": 633
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 4,
+          "textCount": 128
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 4,
+          "textCount": 121
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 21,
+          "textCount": 594
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 5,
+          "textCount": 137
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 8,
+          "edgeableRectCount": 8,
+          "lineCount": 16,
+          "textCount": 616
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 52,
+          "edgeableRectCount": 52,
+          "lineCount": 17,
+          "textCount": 676
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 8,
+          "edgeableRectCount": 8,
+          "lineCount": 15,
+          "textCount": 702
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 8,
+          "edgeableRectCount": 8,
+          "lineCount": 11,
+          "textCount": 424
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 6,
+          "textCount": 187
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 15,
+          "textCount": 361
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 10,
+          "textCount": 282
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 8,
+          "textCount": 230
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 5,
+          "textCount": 94
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 10,
+          "textCount": 306
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 6,
+          "textCount": 187
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 28,
+          "textCount": 830
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 22,
+          "textCount": 705
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 4,
+          "textCount": 124
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 6,
+          "textCount": 172
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 9,
+          "textCount": 221
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 9,
+          "textCount": 514
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 11,
+          "textCount": 303
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 4,
+          "textCount": 67
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 6,
+          "textCount": 174
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 10,
+          "textCount": 284
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 13,
+          "textCount": 255
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 17,
+          "textCount": 904
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 12,
+          "textCount": 406
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 8,
+          "edgeableRectCount": 8,
+          "lineCount": 18,
+          "textCount": 1183
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 4,
+          "textCount": 117
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 4,
+          "textCount": 119
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 9,
+          "textCount": 396
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 21,
+          "textCount": 701
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 23,
+          "textCount": 697
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 33,
+          "textCount": 995
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 13,
+          "textCount": 448
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 3,
+          "edgeableRectCount": 3,
+          "lineCount": 0,
+          "textCount": 394
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 15,
+          "textCount": 870
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 39,
+          "textCount": 1007
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 11,
+          "edgeableRectCount": 11,
+          "lineCount": 31,
+          "textCount": 665
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 5,
+          "textCount": 167
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 26,
+          "textCount": 626
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 6,
+          "textCount": 259
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 8,
+          "edgeableRectCount": 8,
+          "lineCount": 18,
+          "textCount": 739
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 19,
+          "textCount": 451
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 4,
+          "textCount": 74
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 5,
+          "textCount": 83
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 8,
+          "textCount": 179
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 8,
+          "textCount": 217
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 9,
+          "textCount": 389
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 19,
+          "textCount": 349
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 19,
+          "textCount": 150
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 18,
+          "textCount": 198
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 10,
+          "edgeableRectCount": 10,
+          "lineCount": 10,
+          "textCount": 964
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 8,
+          "textCount": 1009
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 0,
+          "textCount": 471
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 3,
+          "edgeableRectCount": 3,
+          "lineCount": 0,
+          "textCount": 497
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 24,
+          "textCount": 1007
+        },
+        {
+          "pageWidth": 1122.5066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 0,
+          "textCount": 342
+        }
+      ],
+      "maxOverflowPx": 0,
+      "anyTableOverflow": false,
+      "roundTrip": {
+        "attempted": true,
+        "ok": true,
+        "pageCountBefore": 73,
+        "pageCountAfter": 73,
+        "targetExt": "hwpx"
+      },
+      "error": null,
+      "totalRects": 542,
+      "totalTextRuns": 34237
+    },
+    "doc-015": {
+      "sha256": "64df877f3c4accda0111ecf39d837da889741bb821b220cf61b6c126dc88364d",
+      "byteSize": 2752512,
+      "sourceExt": "hwp",
+      "parseOk": true,
+      "parseMs": 132,
+      "pageCount": 178,
+      "pages": [
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 2,
+          "edgeableRectCount": 2,
+          "lineCount": 0,
+          "textCount": 92
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 0
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 24,
+          "textCount": 265
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 33,
+          "textCount": 497
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 30,
+          "textCount": 411
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 29,
+          "textCount": 442
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 32,
+          "textCount": 535
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 31,
+          "textCount": 457
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 30,
+          "textCount": 400
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 16,
+          "textCount": 205
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 776
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 190
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 2,
+          "edgeableRectCount": 2,
+          "lineCount": 0,
+          "textCount": 37
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 12
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 2,
+          "edgeableRectCount": 2,
+          "lineCount": 0,
+          "textCount": 659
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 23,
+          "textCount": 985
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 9,
+          "edgeableRectCount": 9,
+          "lineCount": 28,
+          "textCount": 930
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 11,
+          "edgeableRectCount": 11,
+          "lineCount": 61,
+          "textCount": 1058
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 11,
+          "edgeableRectCount": 11,
+          "lineCount": 56,
+          "textCount": 1089
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 8,
+          "textCount": 421
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 8,
+          "edgeableRectCount": 8,
+          "lineCount": 30,
+          "textCount": 606
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 2,
+          "edgeableRectCount": 2,
+          "lineCount": 9,
+          "textCount": 1050
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 9,
+          "edgeableRectCount": 9,
+          "lineCount": 33,
+          "textCount": 309
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 2,
+          "textCount": 766
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 18,
+          "edgeableRectCount": 18,
+          "lineCount": 60,
+          "textCount": 1042
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 14,
+          "edgeableRectCount": 14,
+          "lineCount": 65,
+          "textCount": 887
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 14,
+          "edgeableRectCount": 14,
+          "lineCount": 53,
+          "textCount": 496
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 15,
+          "edgeableRectCount": 15,
+          "lineCount": 67,
+          "textCount": 683
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 13,
+          "edgeableRectCount": 13,
+          "lineCount": 62,
+          "textCount": 531
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 17,
+          "edgeableRectCount": 17,
+          "lineCount": 70,
+          "textCount": 706
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 52,
+          "textCount": 397
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 21,
+          "edgeableRectCount": 21,
+          "lineCount": 56,
+          "textCount": 615
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 16,
+          "edgeableRectCount": 16,
+          "lineCount": 63,
+          "textCount": 551
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 12,
+          "edgeableRectCount": 12,
+          "lineCount": 72,
+          "textCount": 674
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 21,
+          "edgeableRectCount": 21,
+          "lineCount": 52,
+          "textCount": 526
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 23,
+          "edgeableRectCount": 23,
+          "lineCount": 58,
+          "textCount": 683
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 15,
+          "edgeableRectCount": 15,
+          "lineCount": 33,
+          "textCount": 283
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 10,
+          "edgeableRectCount": 10,
+          "lineCount": 55,
+          "textCount": 1540
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 21,
+          "edgeableRectCount": 21,
+          "lineCount": 45,
+          "textCount": 615
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 22,
+          "edgeableRectCount": 22,
+          "lineCount": 53,
+          "textCount": 630
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 21,
+          "edgeableRectCount": 21,
+          "lineCount": 54,
+          "textCount": 987
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 8,
+          "edgeableRectCount": 8,
+          "lineCount": 63,
+          "textCount": 961
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 33,
+          "edgeableRectCount": 33,
+          "lineCount": 83,
+          "textCount": 649
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 28,
+          "edgeableRectCount": 28,
+          "lineCount": 66,
+          "textCount": 701
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 31,
+          "edgeableRectCount": 31,
+          "lineCount": 75,
+          "textCount": 808
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 19,
+          "edgeableRectCount": 19,
+          "lineCount": 69,
+          "textCount": 609
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 31,
+          "edgeableRectCount": 31,
+          "lineCount": 62,
+          "textCount": 756
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 9,
+          "edgeableRectCount": 9,
+          "lineCount": 33,
+          "textCount": 410
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 31,
+          "edgeableRectCount": 31,
+          "lineCount": 64,
+          "textCount": 694
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 28,
+          "edgeableRectCount": 28,
+          "lineCount": 70,
+          "textCount": 956
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 28,
+          "edgeableRectCount": 28,
+          "lineCount": 63,
+          "textCount": 467
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 21,
+          "edgeableRectCount": 21,
+          "lineCount": 75,
+          "textCount": 570
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 18,
+          "edgeableRectCount": 18,
+          "lineCount": 69,
+          "textCount": 758
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 17,
+          "edgeableRectCount": 17,
+          "lineCount": 46,
+          "textCount": 793
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 9,
+          "edgeableRectCount": 9,
+          "lineCount": 62,
+          "textCount": 2035
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 13,
+          "edgeableRectCount": 13,
+          "lineCount": 50,
+          "textCount": 476
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 11,
+          "edgeableRectCount": 11,
+          "lineCount": 58,
+          "textCount": 760
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 23,
+          "edgeableRectCount": 23,
+          "lineCount": 61,
+          "textCount": 657
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 15,
+          "edgeableRectCount": 15,
+          "lineCount": 42,
+          "textCount": 404
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 25,
+          "edgeableRectCount": 25,
+          "lineCount": 63,
+          "textCount": 445
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 23,
+          "edgeableRectCount": 23,
+          "lineCount": 65,
+          "textCount": 484
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 15,
+          "edgeableRectCount": 15,
+          "lineCount": 48,
+          "textCount": 567
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 11,
+          "edgeableRectCount": 11,
+          "lineCount": 28,
+          "textCount": 291
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 9,
+          "edgeableRectCount": 9,
+          "lineCount": 30,
+          "textCount": 846
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 9,
+          "edgeableRectCount": 9,
+          "lineCount": 28,
+          "textCount": 409
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 13
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 2,
+          "edgeableRectCount": 2,
+          "lineCount": 0,
+          "textCount": 40
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 13
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 840
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 21,
+          "textCount": 1090
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 16,
+          "textCount": 455
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 10,
+          "edgeableRectCount": 10,
+          "lineCount": 60,
+          "textCount": 956
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 15,
+          "edgeableRectCount": 15,
+          "lineCount": 40,
+          "textCount": 990
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 12,
+          "edgeableRectCount": 12,
+          "lineCount": 20,
+          "textCount": 564
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 12,
+          "edgeableRectCount": 12,
+          "lineCount": 26,
+          "textCount": 704
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 10,
+          "edgeableRectCount": 10,
+          "lineCount": 23,
+          "textCount": 369
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 8,
+          "edgeableRectCount": 8,
+          "lineCount": 27,
+          "textCount": 942
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 8,
+          "edgeableRectCount": 8,
+          "lineCount": 15,
+          "textCount": 626
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 22,
+          "edgeableRectCount": 22,
+          "lineCount": 51,
+          "textCount": 554
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 9,
+          "edgeableRectCount": 9,
+          "lineCount": 19,
+          "textCount": 418
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 15,
+          "edgeableRectCount": 15,
+          "lineCount": 30,
+          "textCount": 377
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 22,
+          "edgeableRectCount": 22,
+          "lineCount": 47,
+          "textCount": 837
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 15,
+          "edgeableRectCount": 15,
+          "lineCount": 31,
+          "textCount": 574
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 22,
+          "edgeableRectCount": 22,
+          "lineCount": 56,
+          "textCount": 787
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 15,
+          "edgeableRectCount": 15,
+          "lineCount": 26,
+          "textCount": 517
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 15,
+          "edgeableRectCount": 15,
+          "lineCount": 26,
+          "textCount": 277
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 35,
+          "textCount": 785
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 8,
+          "edgeableRectCount": 8,
+          "lineCount": 14,
+          "textCount": 107
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 15,
+          "edgeableRectCount": 15,
+          "lineCount": 34,
+          "textCount": 978
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 24,
+          "textCount": 855
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 8,
+          "edgeableRectCount": 8,
+          "lineCount": 18,
+          "textCount": 257
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 23,
+          "edgeableRectCount": 23,
+          "lineCount": 75,
+          "textCount": 692
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 22,
+          "edgeableRectCount": 22,
+          "lineCount": 60,
+          "textCount": 1136
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 8,
+          "edgeableRectCount": 8,
+          "lineCount": 23,
+          "textCount": 568
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 18,
+          "edgeableRectCount": 18,
+          "lineCount": 52,
+          "textCount": 1154
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 22,
+          "edgeableRectCount": 22,
+          "lineCount": 52,
+          "textCount": 709
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 36,
+          "edgeableRectCount": 36,
+          "lineCount": 66,
+          "textCount": 541
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 29,
+          "edgeableRectCount": 29,
+          "lineCount": 56,
+          "textCount": 703
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 36,
+          "edgeableRectCount": 36,
+          "lineCount": 67,
+          "textCount": 573
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 16,
+          "edgeableRectCount": 16,
+          "lineCount": 38,
+          "textCount": 824
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 17,
+          "edgeableRectCount": 17,
+          "lineCount": 24,
+          "textCount": 196
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 15,
+          "edgeableRectCount": 15,
+          "lineCount": 30,
+          "textCount": 702
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 5,
+          "textCount": 790
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 16,
+          "edgeableRectCount": 16,
+          "lineCount": 39,
+          "textCount": 1187
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 36,
+          "edgeableRectCount": 36,
+          "lineCount": 70,
+          "textCount": 734
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 22,
+          "edgeableRectCount": 22,
+          "lineCount": 40,
+          "textCount": 526
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 22,
+          "edgeableRectCount": 22,
+          "lineCount": 42,
+          "textCount": 580
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 15,
+          "edgeableRectCount": 15,
+          "lineCount": 29,
+          "textCount": 883
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 8,
+          "edgeableRectCount": 8,
+          "lineCount": 19,
+          "textCount": 783
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 14
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 2,
+          "edgeableRectCount": 2,
+          "lineCount": 0,
+          "textCount": 11
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 8
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 8,
+          "edgeableRectCount": 8,
+          "lineCount": 39,
+          "textCount": 523
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 50,
+          "textCount": 471
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 56,
+          "textCount": 517
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 66,
+          "textCount": 792
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 6,
+          "edgeableRectCount": 6,
+          "lineCount": 76,
+          "textCount": 686
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 3,
+          "edgeableRectCount": 3,
+          "lineCount": 50,
+          "textCount": 599
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 2,
+          "edgeableRectCount": 2,
+          "lineCount": 17,
+          "textCount": 150
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 8,
+          "edgeableRectCount": 8,
+          "lineCount": 81,
+          "textCount": 552
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 37,
+          "textCount": 208
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 49,
+          "textCount": 413
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 45,
+          "textCount": 846
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 6,
+          "edgeableRectCount": 6,
+          "lineCount": 84,
+          "textCount": 585
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 55,
+          "textCount": 916
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 6,
+          "edgeableRectCount": 6,
+          "lineCount": 81,
+          "textCount": 669
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 2,
+          "edgeableRectCount": 2,
+          "lineCount": 19,
+          "textCount": 177
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 58,
+          "textCount": 1055
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 84,
+          "textCount": 1016
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 90,
+          "textCount": 651
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 44,
+          "textCount": 221
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 6,
+          "edgeableRectCount": 6,
+          "lineCount": 80,
+          "textCount": 590
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 2,
+          "edgeableRectCount": 2,
+          "lineCount": 23,
+          "textCount": 536
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 3,
+          "edgeableRectCount": 3,
+          "lineCount": 32,
+          "textCount": 225
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 3,
+          "edgeableRectCount": 3,
+          "lineCount": 48,
+          "textCount": 899
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 3,
+          "edgeableRectCount": 3,
+          "lineCount": 42,
+          "textCount": 747
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 3,
+          "edgeableRectCount": 3,
+          "lineCount": 38,
+          "textCount": 454
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 3,
+          "edgeableRectCount": 3,
+          "lineCount": 36,
+          "textCount": 272
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 60,
+          "textCount": 777
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 8,
+          "edgeableRectCount": 8,
+          "lineCount": 89,
+          "textCount": 503
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 3,
+          "edgeableRectCount": 3,
+          "lineCount": 22,
+          "textCount": 122
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 72,
+          "textCount": 1147
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 3,
+          "edgeableRectCount": 3,
+          "lineCount": 40,
+          "textCount": 585
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 69,
+          "textCount": 887
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 67,
+          "textCount": 918
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 3,
+          "edgeableRectCount": 3,
+          "lineCount": 38,
+          "textCount": 503
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 56,
+          "textCount": 758
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 63,
+          "textCount": 576
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 3,
+          "edgeableRectCount": 3,
+          "lineCount": 40,
+          "textCount": 827
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 2,
+          "edgeableRectCount": 2,
+          "lineCount": 19,
+          "textCount": 506
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 3,
+          "edgeableRectCount": 3,
+          "lineCount": 43,
+          "textCount": 1155
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 6,
+          "edgeableRectCount": 6,
+          "lineCount": 82,
+          "textCount": 679
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 56,
+          "textCount": 609
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 68,
+          "textCount": 813
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 69,
+          "textCount": 782
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 6,
+          "edgeableRectCount": 6,
+          "lineCount": 88,
+          "textCount": 573
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 75,
+          "textCount": 698
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 65,
+          "textCount": 723
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 3,
+          "edgeableRectCount": 3,
+          "lineCount": 57,
+          "textCount": 620
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 6,
+          "edgeableRectCount": 6,
+          "lineCount": 78,
+          "textCount": 601
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 3,
+          "edgeableRectCount": 3,
+          "lineCount": 53,
+          "textCount": 342
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 72,
+          "textCount": 713
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 6,
+          "edgeableRectCount": 6,
+          "lineCount": 73,
+          "textCount": 595
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 3,
+          "edgeableRectCount": 3,
+          "lineCount": 39,
+          "textCount": 235
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 62,
+          "textCount": 655
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 66,
+          "textCount": 478
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 4,
+          "edgeableRectCount": 4,
+          "lineCount": 53,
+          "textCount": 423
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 58,
+          "textCount": 548
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 3,
+          "edgeableRectCount": 3,
+          "lineCount": 37,
+          "textCount": 561
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 6,
+          "edgeableRectCount": 6,
+          "lineCount": 66,
+          "textCount": 456
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 52,
+          "textCount": 361
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 8,
+          "edgeableRectCount": 8,
+          "lineCount": 93,
+          "textCount": 739
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 6,
+          "edgeableRectCount": 6,
+          "lineCount": 59,
+          "textCount": 387
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 2,
+          "edgeableRectCount": 2,
+          "lineCount": 51,
+          "textCount": 1598
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 85
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 8
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 6,
+          "textCount": 86
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 0
+        }
+      ],
+      "maxOverflowPx": 0,
+      "anyTableOverflow": false,
+      "roundTrip": {
+        "attempted": true,
+        "ok": true,
+        "pageCountBefore": 178,
+        "pageCountAfter": 178,
+        "targetExt": "hwpx"
+      },
+      "error": null,
+      "totalRects": 1728,
+      "totalTextRuns": 107185
+    },
+    "doc-016": {
+      "sha256": "e17464a1514e3d83391d32a5db30f662f3d0db4b7c61bbaacf4450a729f70f20",
+      "byteSize": 484352,
+      "sourceExt": "hwp",
+      "parseOk": true,
+      "parseMs": 8,
+      "pageCount": 9,
+      "pages": [
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 28,
+          "edgeableRectCount": 28,
+          "lineCount": 48,
+          "textCount": 953
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 9,
+          "edgeableRectCount": 9,
+          "lineCount": 22,
+          "textCount": 591
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 151,
+          "edgeableRectCount": 151,
+          "lineCount": 70,
+          "textCount": 1262
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 140,
+          "edgeableRectCount": 140,
+          "lineCount": 60,
+          "textCount": 1212
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 99,
+          "edgeableRectCount": 99,
+          "lineCount": 42,
+          "textCount": 885
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 150,
+          "edgeableRectCount": 150,
+          "lineCount": 62,
+          "textCount": 1243
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 140,
+          "edgeableRectCount": 140,
+          "lineCount": 60,
+          "textCount": 1231
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 99,
+          "edgeableRectCount": 99,
+          "lineCount": 42,
+          "textCount": 878
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 11,
+          "edgeableRectCount": 11,
+          "lineCount": 18,
+          "textCount": 422
+        }
+      ],
+      "maxOverflowPx": 0,
+      "anyTableOverflow": false,
+      "roundTrip": {
+        "attempted": true,
+        "ok": true,
+        "pageCountBefore": 9,
+        "pageCountAfter": 9,
+        "targetExt": "hwpx"
+      },
+      "error": null,
+      "totalRects": 827,
+      "totalTextRuns": 8677
+    },
+    "doc-017": {
+      "sha256": "8be6e931347112bd04eb2d78e7fa1d7ab484deed181335cf02320d2f325165e4",
+      "byteSize": 561024,
+      "sourceExt": "hwpx",
+      "parseOk": true,
+      "parseMs": 20,
+      "pageCount": 9,
+      "pages": [
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 28,
+          "edgeableRectCount": 28,
+          "lineCount": 48,
+          "textCount": 953
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 9,
+          "edgeableRectCount": 9,
+          "lineCount": 22,
+          "textCount": 591
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 151,
+          "edgeableRectCount": 151,
+          "lineCount": 70,
+          "textCount": 1262
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 140,
+          "edgeableRectCount": 140,
+          "lineCount": 60,
+          "textCount": 1212
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 99,
+          "edgeableRectCount": 99,
+          "lineCount": 42,
+          "textCount": 885
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 150,
+          "edgeableRectCount": 150,
+          "lineCount": 62,
+          "textCount": 1243
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 140,
+          "edgeableRectCount": 140,
+          "lineCount": 60,
+          "textCount": 1231
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 99,
+          "edgeableRectCount": 99,
+          "lineCount": 42,
+          "textCount": 878
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 11,
+          "edgeableRectCount": 11,
+          "lineCount": 18,
+          "textCount": 422
+        }
+      ],
+      "maxOverflowPx": 0,
+      "anyTableOverflow": false,
+      "roundTrip": {
+        "attempted": true,
+        "ok": true,
+        "pageCountBefore": 9,
+        "pageCountAfter": 9,
+        "targetExt": "hwp"
+      },
+      "error": null,
+      "totalRects": 827,
+      "totalTextRuns": 8677
+    },
+    "doc-018": {
+      "sha256": "54f25292bdd370f3b170e36ad1368bdcb4dd4849a73afdf431939d08ac55bd13",
+      "byteSize": 560756,
+      "sourceExt": "hwpx",
+      "parseOk": true,
+      "parseMs": 21,
+      "pageCount": 9,
+      "pages": [
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 29,
+          "edgeableRectCount": 29,
+          "lineCount": 49,
+          "textCount": 905
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 9,
+          "edgeableRectCount": 9,
+          "lineCount": 22,
+          "textCount": 596
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 165,
+          "edgeableRectCount": 165,
+          "lineCount": 72,
+          "textCount": 1385
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 148,
+          "edgeableRectCount": 148,
+          "lineCount": 61,
+          "textCount": 1274
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 99,
+          "edgeableRectCount": 99,
+          "lineCount": 42,
+          "textCount": 887
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 164,
+          "edgeableRectCount": 164,
+          "lineCount": 64,
+          "textCount": 1357
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 148,
+          "edgeableRectCount": 148,
+          "lineCount": 61,
+          "textCount": 1302
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 99,
+          "edgeableRectCount": 99,
+          "lineCount": 42,
+          "textCount": 893
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 11,
+          "edgeableRectCount": 11,
+          "lineCount": 18,
+          "textCount": 424
+        }
+      ],
+      "maxOverflowPx": 0,
+      "anyTableOverflow": false,
+      "roundTrip": {
+        "attempted": true,
+        "ok": true,
+        "pageCountBefore": 9,
+        "pageCountAfter": 9,
+        "targetExt": "hwp"
+      },
+      "error": null,
+      "totalRects": 872,
+      "totalTextRuns": 9023
+    },
+    "doc-019": {
+      "sha256": "abae7aebecd5e71cd907b3417483f9842dfa648cd9fe05d98e34b6b8d856a3f5",
+      "byteSize": 564204,
+      "sourceExt": "hwpx",
+      "parseOk": true,
+      "parseMs": 21,
+      "pageCount": 9,
+      "pages": [
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 28,
+          "edgeableRectCount": 28,
+          "lineCount": 50,
+          "textCount": 893
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 20,
+          "textCount": 777
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 193,
+          "edgeableRectCount": 193,
+          "lineCount": 78,
+          "textCount": 1689
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 164,
+          "edgeableRectCount": 164,
+          "lineCount": 63,
+          "textCount": 1471
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 99,
+          "edgeableRectCount": 99,
+          "lineCount": 42,
+          "textCount": 912
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 192,
+          "edgeableRectCount": 192,
+          "lineCount": 70,
+          "textCount": 1652
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 164,
+          "edgeableRectCount": 164,
+          "lineCount": 63,
+          "textCount": 1498
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 99,
+          "edgeableRectCount": 99,
+          "lineCount": 42,
+          "textCount": 905
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 11,
+          "edgeableRectCount": 11,
+          "lineCount": 18,
+          "textCount": 424
+        }
+      ],
+      "maxOverflowPx": 0,
+      "anyTableOverflow": false,
+      "roundTrip": {
+        "attempted": true,
+        "ok": true,
+        "pageCountBefore": 9,
+        "pageCountAfter": 9,
+        "targetExt": "hwp"
+      },
+      "error": null,
+      "totalRects": 957,
+      "totalTextRuns": 10221
+    },
+    "doc-020": {
+      "sha256": "d2472827333e2e55027ae8968d993594f18a0e0e2cc23f3a4fa463f230812294",
+      "byteSize": 139568,
+      "sourceExt": "hwpx",
+      "parseOk": true,
+      "parseMs": 21,
+      "pageCount": 9,
+      "pages": [
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 30,
+          "edgeableRectCount": 30,
+          "lineCount": 50,
+          "textCount": 862
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 8,
+          "edgeableRectCount": 8,
+          "lineCount": 20,
+          "textCount": 745
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 151,
+          "edgeableRectCount": 151,
+          "lineCount": 70,
+          "textCount": 1274
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 140,
+          "edgeableRectCount": 140,
+          "lineCount": 60,
+          "textCount": 1198
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 99,
+          "edgeableRectCount": 99,
+          "lineCount": 42,
+          "textCount": 880
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 150,
+          "edgeableRectCount": 150,
+          "lineCount": 62,
+          "textCount": 1222
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 140,
+          "edgeableRectCount": 140,
+          "lineCount": 60,
+          "textCount": 1216
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 99,
+          "edgeableRectCount": 99,
+          "lineCount": 42,
+          "textCount": 871
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 11,
+          "edgeableRectCount": 11,
+          "lineCount": 18,
+          "textCount": 424
+        }
+      ],
+      "maxOverflowPx": 0,
+      "anyTableOverflow": false,
+      "roundTrip": {
+        "attempted": true,
+        "ok": true,
+        "pageCountBefore": 9,
+        "pageCountAfter": 9,
+        "targetExt": "hwp"
+      },
+      "error": null,
+      "totalRects": 828,
+      "totalTextRuns": 8692
+    },
+    "doc-021": {
+      "sha256": "e49c69c090fa7abe9d33971f2983839f30c3efd77068d6d24b99db93a3c2872f",
+      "byteSize": 134836,
+      "sourceExt": "hwpx",
+      "parseOk": true,
+      "parseMs": 20,
+      "pageCount": 9,
+      "pages": [
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 31,
+          "edgeableRectCount": 31,
+          "lineCount": 52,
+          "textCount": 898
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 7,
+          "edgeableRectCount": 7,
+          "lineCount": 20,
+          "textCount": 774
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 165,
+          "edgeableRectCount": 165,
+          "lineCount": 72,
+          "textCount": 1379
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 148,
+          "edgeableRectCount": 148,
+          "lineCount": 61,
+          "textCount": 1279
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 99,
+          "edgeableRectCount": 99,
+          "lineCount": 42,
+          "textCount": 880
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 164,
+          "edgeableRectCount": 164,
+          "lineCount": 64,
+          "textCount": 1338
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 148,
+          "edgeableRectCount": 148,
+          "lineCount": 61,
+          "textCount": 1306
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 99,
+          "edgeableRectCount": 99,
+          "lineCount": 42,
+          "textCount": 880
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 11,
+          "edgeableRectCount": 11,
+          "lineCount": 18,
+          "textCount": 424
+        }
+      ],
+      "maxOverflowPx": 0,
+      "anyTableOverflow": false,
+      "roundTrip": {
+        "attempted": true,
+        "ok": true,
+        "pageCountBefore": 9,
+        "pageCountAfter": 9,
+        "targetExt": "hwp"
+      },
+      "error": null,
+      "totalRects": 872,
+      "totalTextRuns": 9158
+    },
+    "doc-022": {
+      "sha256": "1b4d1169c8e622b7365e9029ced513b13206f5939cf12024438c38d30253c2b4",
+      "byteSize": 2686976,
+      "sourceExt": "hwp",
+      "parseOk": true,
+      "parseMs": 28,
+      "pageCount": 27,
+      "pages": [
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 3,
+          "edgeableRectCount": 3,
+          "lineCount": 0,
+          "textCount": 51
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 196
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 631
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 850
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 10,
+          "textCount": 739
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 12,
+          "textCount": 888
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 976
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 1,
+          "textCount": 856
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 863
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 7,
+          "textCount": 977
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 4,
+          "textCount": 914
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 623
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 14,
+          "edgeableRectCount": 14,
+          "lineCount": 120,
+          "textCount": 595
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 21,
+          "textCount": 1041
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 23,
+          "textCount": 1070
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 12,
+          "textCount": 50
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 15,
+          "textCount": 147
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 13,
+          "edgeableRectCount": 13,
+          "lineCount": 36,
+          "textCount": 515
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 845
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 69,
+          "edgeableRectCount": 69,
+          "lineCount": 71,
+          "textCount": 425
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 398
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 30
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 8,
+          "edgeableRectCount": 8,
+          "lineCount": 13,
+          "textCount": 580
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 5,
+          "edgeableRectCount": 5,
+          "lineCount": 31,
+          "textCount": 489
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 26
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 4
+        },
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 1,
+          "edgeableRectCount": 1,
+          "lineCount": 0,
+          "textCount": 4
+        }
+      ],
+      "maxOverflowPx": 0,
+      "anyTableOverflow": false,
+      "roundTrip": {
+        "attempted": true,
+        "ok": true,
+        "pageCountBefore": 27,
+        "pageCountAfter": 27,
+        "targetExt": "hwpx"
+      },
+      "error": null,
+      "totalRects": 145,
+      "totalTextRuns": 14783
+    },
+    "doc-023": {
+      "sha256": "d785f1ba522bd5350871c558f681153f7d6c1b9fa3423e6b178bd3f16af7bee1",
+      "byteSize": 47616,
+      "sourceExt": "hwp",
+      "parseOk": true,
+      "parseMs": 1,
+      "pageCount": 1,
+      "pages": [
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 8,
+          "edgeableRectCount": 8,
+          "lineCount": 24,
+          "textCount": 651
+        }
+      ],
+      "maxOverflowPx": 0,
+      "anyTableOverflow": false,
+      "roundTrip": {
+        "attempted": true,
+        "ok": true,
+        "pageCountBefore": 1,
+        "pageCountAfter": 1,
+        "targetExt": "hwpx"
+      },
+      "error": null,
+      "totalRects": 8,
+      "totalTextRuns": 651
+    },
+    "doc-024": {
+      "sha256": "18b094a33b8f1d4a00eb51bda774d2c5747f3db76d400862801f051cbbf1a02f",
+      "byteSize": 16384,
+      "sourceExt": "hwp",
+      "parseOk": true,
+      "parseMs": 2,
+      "pageCount": 1,
+      "pages": [
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 8,
+          "edgeableRectCount": 8,
+          "lineCount": 24,
+          "textCount": 658
+        }
+      ],
+      "maxOverflowPx": 0,
+      "anyTableOverflow": false,
+      "roundTrip": {
+        "attempted": true,
+        "ok": true,
+        "pageCountBefore": 1,
+        "pageCountAfter": 1,
+        "targetExt": "hwpx"
+      },
+      "error": null,
+      "totalRects": 8,
+      "totalTextRuns": 658
+    },
+    "doc-025": {
+      "sha256": "8e21dc8d513fd71818b08ae91dcd3edf1636e6f819afa80a90db83f81ab70920",
+      "byteSize": 17408,
+      "sourceExt": "hwp",
+      "parseOk": true,
+      "parseMs": 1,
+      "pageCount": 1,
+      "pages": [
+        {
+          "pageWidth": 793.7066666666667,
+          "overflowPx": 0,
+          "rectCount": 8,
+          "edgeableRectCount": 8,
+          "lineCount": 24,
+          "textCount": 724
+        }
+      ],
+      "maxOverflowPx": 0,
+      "anyTableOverflow": false,
+      "roundTrip": {
+        "attempted": true,
+        "ok": true,
+        "pageCountBefore": 1,
+        "pageCountAfter": 1,
+        "targetExt": "hwpx"
+      },
+      "error": null,
+      "totalRects": 8,
+      "totalTextRuns": 724
+    }
+  }
+}
